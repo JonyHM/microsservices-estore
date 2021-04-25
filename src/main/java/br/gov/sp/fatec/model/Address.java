@@ -1,8 +1,11 @@
-package br.gov.sp.fatec.model.entity;
+package br.gov.sp.fatec.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -23,7 +26,7 @@ public class Address {
 	@Column(length = 50)
 	private String street;
 	
-	@Column(name = "id_address")
+	@Column(name = "number")
 	private int number;
 	
 	@Column(length = 50)
@@ -37,4 +40,8 @@ public class Address {
 	
 	@Column(length = 40)
 	private String country;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_address_user")
+	private User user; 
 }

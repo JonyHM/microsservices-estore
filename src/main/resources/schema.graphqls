@@ -1,0 +1,31 @@
+type User {
+	id: ID!
+	name: String
+	addresses: [Address]
+	email: String
+	cpf: String
+	contacts: [Contact]
+}
+
+type Address {
+	id: ID!
+	street: String
+	number: Int
+	district: String
+	complement: String
+	city: String
+	country: String
+	user: User
+}
+
+type Contact {
+	id: ID!
+	title: String
+	type: String
+	value: String
+	user: User
+}
+
+type Query {
+	getUsers: [User]
+}

@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.model.entity;
+package br.gov.sp.fatec.model;
 
 import java.util.HashSet;
 import java.util.Set;
