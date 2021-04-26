@@ -11,16 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
 @Entity
-@Builder
-@NoArgsConstructor
 public class User {
 
 	@Id
@@ -50,4 +41,67 @@ public class User {
         fetch = FetchType.LAZY
     )
 	private Set<Contact> contacts = new HashSet<Contact>();
+	
+	public User() {}
+
+	public User(String name, Set<Address> addresses, String email, String cpf, Set<Contact> contacts) {
+		this.name = name;
+		this.addresses = addresses;
+		this.email = email;
+		this.cpf = cpf;
+		this.contacts = contacts;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(Set<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public Set<Contact> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(Set<Contact> contacts) {
+		this.contacts = contacts;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", cpf=" + cpf + "]";
+	}
 }

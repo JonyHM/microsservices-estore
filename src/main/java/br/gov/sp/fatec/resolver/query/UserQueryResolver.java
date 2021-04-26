@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.resolver;
+package br.gov.sp.fatec.resolver.query;
 
 import java.util.List;
 
@@ -7,17 +7,20 @@ import org.springframework.stereotype.Component;
 
 import br.gov.sp.fatec.model.User;
 import br.gov.sp.fatec.service.UserService;
+import graphql.kickstart.tools.GraphQLMutationResolver;
 import graphql.kickstart.tools.GraphQLQueryResolver;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
-public class UserResolver implements GraphQLQueryResolver {
+public class UserQueryResolver implements GraphQLQueryResolver, GraphQLMutationResolver {
 
 	@Autowired
 	private UserService service;
 	
 	public List<User> getUsers() {
 		return service.getAll();
+	}
+	
+	public User getUserById(Long id) {
+		return service.getById(id);
 	}
 }

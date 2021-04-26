@@ -46,7 +46,7 @@
 		</createTable>
 	</changeSet>
 	
-	<changeSet id="Insert Test Info" author="Jonathas H. Moraes"> 
+	<!-- <changeSet id="Insert Test Info" author="Jonathas H. Moraes"> 
     <insert tableName="User"> 
         <column name="cpf" value="449.168.998.71"/> 
         <column name="name" value="Usuário teste"/> 
@@ -69,5 +69,5 @@
 				<column name="type" type="TELEFONE"/>
 				<column name="value" type="(12) 98841-4207"/>
     </insert> 
-	</changeSet>
+	</changeSet> -->
 </databaseChangeLog>

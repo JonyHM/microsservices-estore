@@ -65,10 +65,11 @@
 			<artifactId>spring-kafka</artifactId>
 		</dependency>
 		
+		<!-- Lombok -->
 		<dependency>
 	  	<groupId>org.projectlombok</groupId>
 	    <artifactId>lombok</artifactId>
-	    <version>1.18.20</version>
+	    <version>1.18.20</version><!--$NO-MVN-MAN-VER$-->
 	    <scope>provided</scope>
 		</dependency>
 

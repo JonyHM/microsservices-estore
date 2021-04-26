@@ -3,9 +3,9 @@ package br.gov.sp.fatec.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.gov.sp.fatec.model.User;
+import br.gov.sp.fatec.model.Address;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface AddressRepository extends JpaRepository<Address, Long> {
 
 }
