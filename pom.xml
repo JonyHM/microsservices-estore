@@ -72,7 +72,6 @@
 	    <version>1.18.20</version><!--$NO-MVN-MAN-VER$-->
 	    <scope>provided</scope>
 		</dependency>
-
 		
 		<!-- GraphQL -->
 		<dependency>
