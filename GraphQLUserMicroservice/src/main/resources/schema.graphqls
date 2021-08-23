@@ -1,0 +1,67 @@
+type User {
+	id: ID!
+	name: String
+	addresses: [Address]
+	email: String
+	cpf: String
+	contacts: [Contact]
+}
+
+type Address {
+	id: ID!
+	street: String
+	number: Int
+	district: String
+	complement: String
+	city: String
+	country: String
+	user: User
+}
+
+type Contact {
+	id: ID!
+	title: String
+	type: String
+	value: String
+	user: User
+}
+
+type Query {
+	getUsers: [User]
+	getUserById(id: Int): User
+	
+	getContacts: [Contact]
+	getContactById(id: Int): Contact
+	getContactByUserId(userId: Int): Contact
+	
+	getAddresses: [Address]
+	getAddressById(id: Int): Address
+	getAddressByUserId(userId: Int): Address
+}
+
+input UserInput {
+	name: String
+	email: String
+	cpf: String
+}
+
+input AdressInput {
+	street: String
+	number: Int
+	district: String
+	complement: String
+	city: String
+	country: String
+}
+
+input ContactInput {
+	title: String
+	type: String
+	value: String
+}
+
+type Mutation {
+	createUser(user: UserInput!): User!
+	createAddress(address: AdressInput!, userId: Int!): Address!
+	createContact(contact: ContactInput!, userId: Int!): Contact!
+}
