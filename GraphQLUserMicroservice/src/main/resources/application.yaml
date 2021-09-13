@@ -19,18 +19,12 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-  liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yml
   kafka:
     producer:
       bootstrap-servers:
       - 127.0.0.1:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
-      group-id: group_id     
-topic:
-  name:
-    prodducer: topico.comando.teste
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
     
 auto:
   create:

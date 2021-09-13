@@ -1,37 +1,48 @@
 package br.gov.sp.fatec.model;
 
-import java.rmi.server.UID;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import br.gov.sp.fatec.model.dto.CreateCardDto;
 
 @Entity
 public class Card {
 
 	@Id
-	@Column(name = "id_card")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private UID id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "id_card", updatable = false, nullable = false)
+	@ColumnDefault("random_uuid()")
+	@Type(type = "uuid-char")
+	private UUID id;
 	
 	@Column(length = 50)
 	private String nickname;
 	
-	@Column(length = 50, name = "holder_name")
+	@Column(length = 100, name = "holder_name")
 	private String holderName;
 	
-	@Column(length = 50)
+	@Column(length = 16)
 	private Long number;
 	
-	@Column(length = 50)
+	@Column(length = 5)
 	private Long cvv;
 	
-	@Column(length = 50, name = "expiration_date")
+	@Column(length = 10, name = "expiration_date")
 	private String expirationDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -40,14 +51,11 @@ public class Card {
 	
 	public Card() {}
 
-	public Card(UID id, 
-			String nickname, 
+	public Card(String nickname, 
 			String holderName, 
 			Long number, 
 			Long cvv, 
 			String expirationDate) {
-		super();
-		this.id = id;
 		this.nickname = nickname;
 		this.holderName = holderName;
 		this.number = number;
@@ -55,11 +63,19 @@ public class Card {
 		this.expirationDate = expirationDate;
 	}
 
-	public UID getId() {
+	public Card(CreateCardDto dto) {
+		this.nickname = dto.getNickname();
+		this.holderName = dto.getHolderName();
+		this.number = dto.getNumber();
+		this.cvv = dto.getCvv();
+		this.expirationDate = dto.getExpirationDate();
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(UID id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

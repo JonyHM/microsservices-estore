@@ -1,23 +1,34 @@
 package br.gov.sp.fatec.model;
 
-import java.rmi.server.UID;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import br.gov.sp.fatec.model.dto.CreateContactDto;
 
 @Entity
 public class Contact {
 
 	@Id
-	@Column(name = "id_contact")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private UID id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "id_contact", updatable = false, nullable = false)
+	@ColumnDefault("random_uuid()")
+	@Type(type = "uuid-char")
+	private UUID id;
 	
 	@Column(length = 50)
 	private String title;
@@ -34,21 +45,26 @@ public class Contact {
 	
 	public Contact() {}
 
-	public Contact(String title, 
+	public Contact(
+			String title, 
 			String type, 
-			String value, 
-			Customer customer) {
+			String value) {
 		this.title = title;
 		this.type = type;
 		this.value = value;
-		this.customer = customer;
 	}
 
-	public UID getId() {
+	public Contact(CreateContactDto dto) {
+		this.title = dto.getTitle();
+		this.type = dto.getType();
+		this.value = dto.getValue();
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(UID id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

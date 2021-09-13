@@ -1,29 +1,40 @@
 package br.gov.sp.fatec.model;
 
-import java.rmi.server.UID;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import br.gov.sp.fatec.model.dto.CreateAddressDto;
 
 @Entity
 public class Address {
 	
 	@Id
-	@Column(name = "id_address")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private UID id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "id_address", updatable = false, nullable = false)
+	@ColumnDefault("random_uuid()")
+	@Type(type = "uuid-char")
+	private UUID id;
 	
 	@Column(length = 50)
 	private String street;
 	
 	@Column(name = "number")
-	private int number;
+	private Long number;
 	
 	@Column(length = 50)
 	private String district;
@@ -44,26 +55,33 @@ public class Address {
 	public Address() {}
 
 	public Address(String street, 
-			int number, 
+			Long number, 
 			String district, 
 			String complement, 
 			String city, 
-			String country,
-			Customer customer) {
+			String country) {
 		this.street = street;
 		this.number = number;
 		this.district = district;
 		this.complement = complement;
 		this.city = city;
 		this.country = country;
-		this.customer = customer;
 	}
 
-	public UID getId() {
+	public Address(CreateAddressDto dto) {
+		this.street = dto.getStreet();
+		this.number = dto.getNumber();
+		this.district = dto.getDistrict();
+		this.complement = dto.getComplement();
+		this.city = dto.getCity();
+		this.country = dto.getCountry();
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(UID id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -75,11 +93,11 @@ public class Address {
 		this.street = street;
 	}
 
-	public int getNumber() {
+	public Long getNumber() {
 		return number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(Long number) {
 		this.number = number;
 	}
 

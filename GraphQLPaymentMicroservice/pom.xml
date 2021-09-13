@@ -36,7 +36,7 @@
 		</dependency>
 		
 		<!-- Migration -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 		</dependency>
@@ -44,7 +44,7 @@
     	<groupId>org.liquibase</groupId>
     	<artifactId>liquibase-maven-plugin</artifactId>
     	<version>3.4.1</version>
-		</dependency>  -->
+		</dependency> 
 		
 		<!-- Database -->
 		<dependency>

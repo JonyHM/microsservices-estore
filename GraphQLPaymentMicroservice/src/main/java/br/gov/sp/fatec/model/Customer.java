@@ -1,30 +1,45 @@
 package br.gov.sp.fatec.model;
 
-import java.rmi.server.UID;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import br.gov.sp.fatec.model.dto.CreateCustomerDto;
 
 @Entity
 public class Customer {
 
 	@Id
-	@Column(name = "id_customer")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private UID id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "id_customer", updatable = false, nullable = false)
+	@ColumnDefault("random_uuid()")
+	@Type(type = "uuid-char")
+	private UUID id;
+	
+	@Column(unique = true, name = "id_user")
+	private UUID userId;
 	
 	@Column(length = 40)
 	private String name;
 	
-	@Column(length = 14)
+	
+	@Column(unique = true, length = 14)
     @Pattern(
     	regexp="([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})", 
     	message="formato de documento inválido"
@@ -52,23 +67,43 @@ public class Customer {
     )
 	private Set<Card> cards = new HashSet<Card>();
 	
+	@OneToMany(
+    	mappedBy = "customer",
+		orphanRemoval = true,
+        fetch = FetchType.EAGER
+    )
+	private Set<Order> orders = new HashSet<Order>();
+	
 	public Customer() {}
 
-	public Customer(UID id, String name,
+	public Customer(UUID userId, String name,
 			@Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})", 
 			message = "formato de documento inválido") String cpf) {
-		super();
-		this.id = id;
+		this.userId = userId;
 		this.name = name;
 		this.cpf = cpf;
 	}
+	
+	public Customer(CreateCustomerDto dto) {
+		this.userId = dto.getUserId();
+		this.name = dto.getName();
+		this.cpf = dto.getCpf();
+	}
 
-	public UID getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(UID id) {
+	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
 	}
 
 	public String getName() {
@@ -111,9 +146,18 @@ public class Customer {
 		this.cards = cards;
 	}
 
+	public Set<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + 
+		return "Customer [id=" + id +
+				", user id=" + userId +
 				", name=" + name + 
 				", cpf=" + cpf + "]";
 	}

@@ -1,16 +1,17 @@
 package br.gov.sp.fatec.repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import br.gov.sp.fatec.model.Customer;
+import br.gov.sp.fatec.model.Address;
 
 @Repository
-public interface CustomerRepository extends JpaRepository<Customer, UUID> {
+public interface AddressRepository extends JpaRepository<Address, UUID> {
 
-	Optional<Customer> findByCpf(String cpf);
-	Optional<Customer> findByUserId(UUID userId);
+	Optional<List<Address>> findByCustomerId(UUID customerId);
+
 }
