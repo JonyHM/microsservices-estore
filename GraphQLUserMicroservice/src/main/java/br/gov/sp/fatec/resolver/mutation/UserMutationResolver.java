@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import br.gov.sp.fatec.kafka.producer.KafkaTopicProducer;
-import br.gov.sp.fatec.model.MessageTest;
 import br.gov.sp.fatec.model.User;
-import br.gov.sp.fatec.service.UserService;
+import br.gov.sp.fatec.model.dto.CrateUserDto;
+import br.gov.sp.fatec.model.dto.CreateCustomerDto;
+import br.gov.sp.fatec.service.user.UserService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 
 @Component
@@ -18,10 +19,10 @@ public class UserMutationResolver implements GraphQLMutationResolver {
 	@Autowired
 	private KafkaTopicProducer producer;
 	
-	public User createUser(User user) {
+	public User createUser(CrateUserDto user) {
 		User newUser = service.createUser(user);
-		MessageTest message = new MessageTest(user.getName(), 1, user.getEmail());
-		producer.sendMessage(message);
+		CreateCustomerDto dto = new CreateCustomerDto(newUser.getName(), newUser.getId(), newUser.getCpf());
+		producer.sendUserCreated(dto);
 		return newUser;
 	}
 }

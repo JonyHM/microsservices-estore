@@ -8,25 +8,25 @@
 	
 	<changeSet id="Create Schema" author="Jonathas H. Moraes">
 		<createTable tableName="User">
-			<column autoIncrement="true" name="id_user" type="bigint">
+			<column name="id_user" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="user_id_pk" />
 			</column>
-			<column name="cpf" type="varchar(20)">
-				<constraints nullable="false" unique="true" uniqueConstraintName="cpf_unq" />
+			<column name="cpf" type="varchar(14)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="cpf_uk" />
 			</column>
 			<column name="name" type="varchar(40)"></column>
 			<column name="email" type="varchar(50)"></column>
 		</createTable>
 		
 		<createTable tableName="Address">
-			<column autoIncrement="true" name="id_address" type="bigint">
+			<column name="id_address" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="address_id_pk" />
 			</column>
-			<column name="id_address_user" type="bigint">
+			<column name="id_address_user" type="varchar(255)">
 				<constraints nullable="false" foreignKeyName="address_user_fk" references="User(id_user)"/>
 			</column>
 			<column name="street" type="varchar(50)"/>
-			<column name="number" type="int"/>
+			<column name="number" type="bigint"/>
 			<column name="district" type="varchar(50)"/>
 			<column name="complement" type="varchar(200)"/>
 			<column name="city" type="varchar(40)"/>
@@ -34,10 +34,10 @@
 		</createTable>
 		
 		<createTable tableName="Contact">
-			<column autoIncrement="true" name="id_contact" type="bigint">
+			<column name="id_contact" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="contact_id_pk" />
 			</column>
-			<column name="id_contact_user" type="bigint">
+			<column name="id_contact_user" type="varchar(255)">
 				<constraints nullable="false" foreignKeyName="contact_user_fk" references="User(id_user)"/>
 			</column>
 			<column name="title" type="varchar(50)"/>

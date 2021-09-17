@@ -8,12 +8,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Contact;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.dto.CreateContactDto;
 import br.gov.sp.fatec.repository.ContactRepository;
 import br.gov.sp.fatec.repository.CustomerRepository;
-import javassist.NotFoundException;
 
 @Service
 public class ContactServiceImplement implements ContactService {

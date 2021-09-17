@@ -8,12 +8,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.Order;
 import br.gov.sp.fatec.model.dto.CreateOrderDto;
 import br.gov.sp.fatec.repository.CustomerRepository;
 import br.gov.sp.fatec.repository.OrderRepository;
-import javassist.NotFoundException;
 
 @Service
 public class OrderServiceImplement implements OrderService {

@@ -28,15 +28,15 @@ type Contact {
 
 type Query {
 	getUsers: [User]
-	getUserById(id: Int): User
+	getUserById(id: ID): User
 	
 	getContacts: [Contact]
-	getContactById(id: Int): Contact
-	getContactByUserId(userId: Int): Contact
+	getContactById(id: ID): Contact
+	getContactByUserId(userId: ID): Contact
 	
 	getAddresses: [Address]
-	getAddressById(id: Int): Address
-	getAddressByUserId(userId: Int): Address
+	getAddressById(id: ID): Address
+	getAddressByUserId(userId: ID): Address
 }
 
 input UserInput {
@@ -52,16 +52,18 @@ input AdressInput {
 	complement: String
 	city: String
 	country: String
+	userId: ID!
 }
 
 input ContactInput {
 	title: String
 	type: String
 	value: String
+	userId: ID!
 }
 
 type Mutation {
 	createUser(user: UserInput!): User!
-	createAddress(address: AdressInput!, userId: Int!): Address!
-	createContact(contact: ContactInput!, userId: Int!): Contact!
+	createAddress(address: AdressInput!): Address!
+	createContact(contact: ContactInput!): Contact!
 }

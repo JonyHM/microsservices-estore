@@ -33,7 +33,7 @@ public class Address {
 	@Column(length = 50)
 	private String street;
 	
-	@Column(name = "number")
+	@Column()
 	private Long number;
 	
 	@Column(length = 50)

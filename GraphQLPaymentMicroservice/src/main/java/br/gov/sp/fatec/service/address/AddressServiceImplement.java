@@ -8,12 +8,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Address;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.dto.CreateAddressDto;
 import br.gov.sp.fatec.repository.AddressRepository;
 import br.gov.sp.fatec.repository.CustomerRepository;
-import javassist.NotFoundException;
 
 @Service
 public class AddressServiceImplement implements AddressService {
@@ -45,7 +45,7 @@ public class AddressServiceImplement implements AddressService {
 			customerRepo.save(customer);
 			return newAddress;
 		}		
-		throw new NotFoundException(String.format("Customer with id %s does not exists!", dto.getCustomerId()));
+		throw new NotFoundException(String.format("Customer with id %s does not exist!", dto.getCustomerId()));
 	}
 
 	@Override

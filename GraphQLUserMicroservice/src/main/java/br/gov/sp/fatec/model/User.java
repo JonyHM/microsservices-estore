@@ -2,22 +2,34 @@ package br.gov.sp.fatec.model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import br.gov.sp.fatec.model.dto.CrateUserDto;
 
 @Entity
 public class User {
 
 	@Id
-	@Column(name = "id_user")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "id_user", updatable = false, nullable = false)
+	@ColumnDefault("random_uuid()")
+	@Type(type = "uuid-char")
+	private UUID id;
 	
 	@Column(length = 40)
 	private String name;
@@ -32,7 +44,7 @@ public class User {
 	@Column(length = 50)
 	private String email;
 	
-	@Column(unique = true, length = 20)
+	@Column(unique = true, length = 14)
 	private String cpf;
 	
 	@OneToMany(
@@ -43,8 +55,19 @@ public class User {
 	private Set<Contact> contacts = new HashSet<Contact>();
 	
 	public User() {}
+	
+	public User(CrateUserDto dto) {
+		this.name = dto.getName();
+		this.email = dto.getEmail();
+		this.cpf = dto.getCpf();
+	}
 
-	public User(String name, Set<Address> addresses, String email, String cpf, Set<Contact> contacts) {
+	public User(
+			String name, 
+			Set<Address> addresses, 
+			String email, 
+			String cpf, 
+			Set<Contact> contacts) {
 		this.name = name;
 		this.addresses = addresses;
 		this.email = email;
@@ -52,11 +75,11 @@ public class User {
 		this.contacts = contacts;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 

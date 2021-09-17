@@ -8,12 +8,12 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Card;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.dto.CreateCardDto;
 import br.gov.sp.fatec.repository.CardRepository;
 import br.gov.sp.fatec.repository.CustomerRepository;
-import javassist.NotFoundException;
 
 @Service
 public class CardServiceImplement implements CardService {
@@ -45,7 +45,7 @@ public class CardServiceImplement implements CardService {
 			customerRepo.save(customer);
 			return newCard;
 		}
-		throw new NotFoundException(String.format("Customer with id %s does not exists!", dto.getHolderId()));
+		throw new NotFoundException(String.format("Customer with id %s does not exist!", dto.getHolderId()));
 	}
 
 	@Override
