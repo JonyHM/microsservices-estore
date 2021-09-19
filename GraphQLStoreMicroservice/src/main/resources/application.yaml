@@ -1,0 +1,27 @@
+server:
+  port: 8082
+graphql:
+  servlet:
+    mapping: /graphql
+    enabled: true
+    corsEnabled: true
+    exception-handlers-enabled: true
+graphql.playground:
+  mapping: /playground
+  endpoint: /graphql
+  enabled: true
+  pageTitle: Playground
+spring:
+  datasource:
+    url: jdbc:h2:mem:qlStore
+    username: sa
+    password: 
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  kafka:
+    producer:
+      bootstrap-servers:
+      - 127.0.0.1:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

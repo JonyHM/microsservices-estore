@@ -14,7 +14,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CreateOrderDto;
+import br.gov.sp.fatec.model.dto.order.CreateOrderDto;
+import br.gov.sp.fatec.model.dto.order.UpdateOrderDto;
 
 @Entity
 public class Order {
@@ -97,6 +98,11 @@ public class Order {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	public Order updateEntity(UpdateOrderDto dto) {
+		this.description = dto.getDescription() != "" ? dto.getDescription() : this.description;
+		return this;
 	}
 
 	@Override

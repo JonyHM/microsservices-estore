@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
-import br.gov.sp.fatec.kafka.dto.Topic;
+import br.gov.sp.fatec.kafka.model.Topic;
 import br.gov.sp.fatec.model.dto.CreateCustomerDto;
 
 @Service

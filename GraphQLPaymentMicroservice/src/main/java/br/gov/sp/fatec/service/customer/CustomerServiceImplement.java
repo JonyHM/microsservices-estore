@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 
 import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Customer;
-import br.gov.sp.fatec.model.dto.CreateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.UpdateCustomerDto;
 import br.gov.sp.fatec.repository.CustomerRepository;
 
 @Service
@@ -30,17 +31,17 @@ public class CustomerServiceImplement implements CustomerService {
 	}
 
 	@Override
-	public Customer getById(UUID id) throws NotFoundException {
+	public Customer getById(UUID id) {
 		Optional<Customer> optionalCustomer = repository.findById(id);
 		
 		if(optionalCustomer.isPresent()) {
 			return optionalCustomer.get();
 		}
-		throw new NotFoundException(String.format("Customer with id %s does not exists!", id));
+		throw new NotFoundException(String.format("Could not find Customer with id '%s'!", id));
 	}
 
 	@Override
-	public Customer getByCPF(String cpf) throws NotFoundException {
+	public Customer getByCPF(String cpf) {
 		Optional<Customer> optionalCustomer = repository.findByCpf(cpf);
 		
 		if(optionalCustomer.isPresent()) {
@@ -50,13 +51,39 @@ public class CustomerServiceImplement implements CustomerService {
 	}
 
 	@Override
-	public Customer getByUserId(UUID userId) throws NotFoundException {
+	public Customer getByUserId(UUID userId) {
 		Optional<Customer> optionalCustomer = repository.findByUserId(userId);
 		
 		if(optionalCustomer.isPresent()) {
 			return optionalCustomer.get();
 		}
-		throw new NotFoundException(String.format("Customer with user id '%s' does not exists!", userId));
+		throw new NotFoundException(String.format("Could not find Customer with user id '%s'!", userId));
+	}
+
+	@Override
+	public Customer updateCustomer(UpdateCustomerDto dto) {
+		UUID id = dto.getCustomerId();
+		Optional<Customer> optionalCustomer = repository.findById(id);
+		
+		if(optionalCustomer.isPresent()) {
+			Customer customer = optionalCustomer.get(); 
+			return repository.save(customer.updateEntity(dto));
+		}
+		
+		throw new NotFoundException(String.format("Could not find Customer with id '%s'!", id));
+	}
+
+	@Override
+	public String deleteCustomer(UUID id) {
+		Optional<Customer> optionalCustomer = repository.findById(id);
+		
+		if(optionalCustomer.isPresent()) {
+			Customer customer = optionalCustomer.get();
+			repository.delete(customer);
+			
+			return String.format("Customer '%s' deleted successfully!", customer.getName());
+		}
+		throw new NotFoundException(String.format("Could not find Customer with id '%s'!", id));
 	}
 
 }

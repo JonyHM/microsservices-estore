@@ -14,7 +14,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CreateCardDto;
+import br.gov.sp.fatec.model.dto.card.CreateCardDto;
+import br.gov.sp.fatec.model.dto.card.UpdateCardDto;
 
 @Entity
 public class Card {
@@ -125,6 +126,15 @@ public class Card {
 
 	public void setHolder(Customer holder) {
 		this.holder = holder;
+	}
+	
+	public Card updateEntity(UpdateCardDto dto) {
+		this.nickname = dto.getNickname() != "" ? dto.getNickname() : this.nickname;
+		this.holderName = dto.getHolderName() != "" ? dto.getHolderName() : this.holderName;
+		this.number = dto.getNumber();
+		this.cvv = dto.getCvv();
+		this.expirationDate = dto.getExpirationDate() != "" ? dto.getExpirationDate() : this.expirationDate;
+		return this;
 	}
 
 	@Override

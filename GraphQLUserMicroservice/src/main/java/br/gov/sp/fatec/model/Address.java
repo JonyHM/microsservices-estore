@@ -14,7 +14,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CreateAddressDto;
+import br.gov.sp.fatec.model.dto.address.CreateAddressDto;
+import br.gov.sp.fatec.model.dto.address.UpdateAddressDto;
 
 @Entity
 public class Address {
@@ -143,10 +144,25 @@ public class Address {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public Address updateEntity(UpdateAddressDto dto) {
+		this.street = dto.getStreet() != "" ? dto.getStreet() : this.street;
+		this.number = dto.getNumber();
+		this.district = dto.getDistrict() != "" ? dto.getDistrict() : this.district;
+		this.complement = dto.getComplement() != "" ? dto.getComplement() : this.complement;
+		this.city = dto.getCity() != "" ? dto.getCity() : this.city;
+		this.country = dto.getCountry() != "" ? dto.getCountry() : this.country;
+		return this;
+	}
 
 	@Override
 	public String toString() {
-		return "Address [id=" + id + ", street=" + street + ", number=" + number + ", district=" + district
-				+ ", complement=" + complement + ", city=" + city + ", country=" + country + "]";
+		return "Address [id=" + id + 
+				", street=" + street + 
+				", number=" + number + 
+				", district=" + district + 
+				", complement=" + complement + 
+				", city=" + city + 
+				", country=" + country + "]";
 	}
 }

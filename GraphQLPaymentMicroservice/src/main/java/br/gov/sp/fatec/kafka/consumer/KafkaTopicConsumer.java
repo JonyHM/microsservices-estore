@@ -8,8 +8,8 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import br.gov.sp.fatec.kafka.model.Topic;
-import br.gov.sp.fatec.model.dto.CreateCustomerDto;
-import br.gov.sp.fatec.model.dto.StartOrderDto;
+import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
+import br.gov.sp.fatec.model.dto.order.StartOrderDto;
 import br.gov.sp.fatec.service.customer.CustomerService;
 
 @Service

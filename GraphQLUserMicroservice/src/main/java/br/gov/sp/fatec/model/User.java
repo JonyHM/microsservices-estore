@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,7 +16,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CrateUserDto;
+import br.gov.sp.fatec.model.dto.user.CrateUserDto;
+import br.gov.sp.fatec.model.dto.user.UpdateUserDto;
 
 @Entity
 public class User {
@@ -35,6 +37,7 @@ public class User {
 	private String name;
 	
 	@OneToMany(
+		cascade = CascadeType.REMOVE,
     	mappedBy = "user",
 		orphanRemoval = true,
         fetch = FetchType.EAGER
@@ -48,6 +51,7 @@ public class User {
 	private String cpf;
 	
 	@OneToMany(
+		cascade = CascadeType.REMOVE,
     	mappedBy = "user",
 		orphanRemoval = true,
         fetch = FetchType.EAGER
@@ -121,6 +125,13 @@ public class User {
 
 	public void setContacts(Set<Contact> contacts) {
 		this.contacts = contacts;
+	}
+	
+	public User updateEntity(UpdateUserDto dto) {
+		this.name = dto.getName();
+		this.email = dto.getEmail();
+		this.cpf = dto.getCpf();
+		return this;
 	}
 
 	@Override

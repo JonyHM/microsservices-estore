@@ -39,13 +39,20 @@ type Query {
 	getAddressByUserId(userId: ID): Address
 }
 
-input UserInput {
+input CreateUserInput {
 	name: String
 	email: String
 	cpf: String
 }
 
-input AdressInput {
+input UpdateUserInput {
+	userId: ID!
+	name: String
+	email: String
+	cpf: String
+}
+
+input CreateAdressInput {
 	street: String
 	number: Int
 	district: String
@@ -55,15 +62,42 @@ input AdressInput {
 	userId: ID!
 }
 
-input ContactInput {
+input UpdateAdressInput {
+	addressId: ID!
+	street: String
+	number: Int
+	district: String
+	complement: String
+	city: String
+	country: String
+	userId: ID
+}
+
+input CreateContactInput {
 	title: String
 	type: String
 	value: String
 	userId: ID!
 }
 
+input UpdateContactInput {
+	contactId: ID!
+	title: String
+	type: String
+	value: String
+	userId: ID
+}
+
 type Mutation {
-	createUser(user: UserInput!): User!
-	createAddress(address: AdressInput!): Address!
-	createContact(contact: ContactInput!): Contact!
+	createUser(user: CreateUserInput!): User!
+	updateUser(user: UpdateUserInput!): User!
+	deleteUser(userId: ID!): String!
+	
+	createAddress(address: CreateAdressInput!): Address!
+	updateAddress(address: UpdateAdressInput!): Address!
+	deleteAddress(addressId: ID!): String!
+	
+	createContact(contact: CreateContactInput!): Contact!
+	updateContact(contact: UpdateContactInput!): Contact!
+	deleteContact(contactId: ID!): String!
 }

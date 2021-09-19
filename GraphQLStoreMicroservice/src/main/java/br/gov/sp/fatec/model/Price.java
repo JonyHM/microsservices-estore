@@ -12,6 +12,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
+import br.gov.sp.fatec.model.dto.price.UpdatePriceDto;
+
 @Entity
 public class Price {
 
@@ -26,14 +29,68 @@ public class Price {
 	@Type(type = "uuid-char")
 	private UUID id;
 	
-	@Column()
+	@Column(length = 3)
 	private String currency;
 	
 	@Column()
-	private Long amount;
+	private Double amount;
 	
 	@OneToOne(mappedBy = "price")
 	private Product product;
+
+	public Price() {}
 	
+	public Price(CreatePriceDto dto) {
+		this.currency = dto.getCurrency();
+		this.amount = dto.getAmount();
+	}
+	
+	public Price(String currency, Double amount) {
+		this.currency = currency;
+		this.amount = amount;
+	}
+
+	public UUID getId() {
+		return id;
+	}
+
+	public void setId(UUID id) {
+		this.id = id;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+	
+	public Price updateEntity(UpdatePriceDto dto) {
+		this.currency = dto.getCurrency();
+		this.amount = dto.getAmount();
+		return this;
+	}
+
+	@Override
+	public String toString() {
+		return "Price [id=" + id + ", currency=" + currency + ", amount=" + amount + "]";
+	}
 	
 }

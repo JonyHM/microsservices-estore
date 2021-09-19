@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import javax.validation.constraints.Pattern;
 
+import br.gov.sp.fatec.model.User;
+
 public class CreateCustomerDto {
 	
 	private String name;
@@ -16,6 +18,12 @@ public class CreateCustomerDto {
 	private String cpf;
 	
 	public CreateCustomerDto() {}
+	
+	public CreateCustomerDto(User user) {
+		this.name = user.getName();
+		this.userId = user.getId();
+		this.cpf = user.getCpf();
+	}
 
 	public CreateCustomerDto(String name, UUID userId, String cpf) {
 		this.name = name;

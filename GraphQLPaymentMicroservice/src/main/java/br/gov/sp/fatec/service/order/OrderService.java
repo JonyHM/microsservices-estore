@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.UUID;
 
 import br.gov.sp.fatec.model.Order;
-import br.gov.sp.fatec.model.dto.CreateOrderDto;
-import javassist.NotFoundException;
+import br.gov.sp.fatec.model.dto.order.CreateOrderDto;
+import br.gov.sp.fatec.model.dto.order.UpdateOrderDto;
 
 public interface OrderService {
 
 	public List<Order> getAll();
-	public Order createOrder(CreateOrderDto dto) throws NotFoundException;
-	public Order getById(UUID id) throws NotFoundException;
-	public List<Order> getByCustomerId(UUID customerId) throws NotFoundException;
+	public Order getById(UUID id);
+	public List<Order> getByCustomerId(UUID customerId);
+	public Order createOrder(CreateOrderDto dto);
+	public Order updateOrder(UpdateOrderDto dto);
+	public String deleteOrder(UUID id);
 }

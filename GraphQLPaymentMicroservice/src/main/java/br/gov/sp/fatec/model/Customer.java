@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +17,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CreateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.UpdateCustomerDto;
 
 @Entity
 public class Customer {
@@ -47,6 +49,7 @@ public class Customer {
 	private String cpf;
 	
 	@OneToMany(
+		cascade = CascadeType.REMOVE,
     	mappedBy = "customer",
 		orphanRemoval = true,
         fetch = FetchType.EAGER
@@ -54,6 +57,7 @@ public class Customer {
 	private Set<Contact> contacts = new HashSet<Contact>();
 	
 	@OneToMany(
+		cascade = CascadeType.REMOVE,
     	mappedBy = "customer",
 		orphanRemoval = true,
         fetch = FetchType.EAGER
@@ -61,6 +65,7 @@ public class Customer {
 	private Set<Address> addresses = new HashSet<Address>();
 	
 	@OneToMany(
+		cascade = CascadeType.REMOVE,
     	mappedBy = "holder",
 		orphanRemoval = true,
         fetch = FetchType.EAGER
@@ -68,6 +73,7 @@ public class Customer {
 	private Set<Card> cards = new HashSet<Card>();
 	
 	@OneToMany(
+		cascade = CascadeType.REMOVE,
     	mappedBy = "customer",
 		orphanRemoval = true,
         fetch = FetchType.EAGER
@@ -152,6 +158,12 @@ public class Customer {
 
 	public void setOrders(Set<Order> orders) {
 		this.orders = orders;
+	}
+	
+	public Customer updateEntity(UpdateCustomerDto dto) {
+		this.name = dto.getName() != "" ? dto.getName() : this.name;
+		this.cpf = dto.getCpf() != "" ? dto.getCpf() : this.cpf;
+		return this;
 	}
 
 	@Override

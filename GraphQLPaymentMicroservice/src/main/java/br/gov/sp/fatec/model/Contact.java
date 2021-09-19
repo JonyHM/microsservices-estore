@@ -14,7 +14,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
 
 @Entity
 public class Contact {
@@ -98,6 +99,13 @@ public class Contact {
 
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
+	}
+	
+	public Contact updateEntity(UpdateContactDto dto) {
+		this.title = dto.getTitle() != "" ? dto.getTitle() : this.title;
+		this.type = dto.getType() != "" ? dto.getType() : this.type;
+		this.value = dto.getValue() != "" ? dto.getValue() : this.value;
+		return this;
 	}
 
 	@Override
