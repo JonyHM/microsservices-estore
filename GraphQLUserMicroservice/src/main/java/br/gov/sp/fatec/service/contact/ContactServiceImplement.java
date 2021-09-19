@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Contact;
 import br.gov.sp.fatec.model.User;
-import br.gov.sp.fatec.model.dto.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
 import br.gov.sp.fatec.repository.ContactRepository;
 import br.gov.sp.fatec.repository.UserRepository;
 
@@ -30,12 +32,12 @@ public class ContactServiceImplement implements ContactService {
 
 	@Override
 	@Transactional
-	public Contact createContact(CreateContactDto contactDto) {
-		Optional<User> user = userRepo.findById(contactDto.getUserId());
-		Contact contact = new Contact(contactDto);
+	public Contact createContact(CreateContactDto dto) {
+		Optional<User> user = userRepo.findById(dto.getUserId());
+		Contact contact = new Contact(dto);
 		
 		if(!user.isPresent()) {
-			throw new RuntimeException(String.format("User with id %s does not exist!", contactDto.getUserId()));
+			throw new NotFoundException(String.format("User with id %s does not exist!", dto.getUserId()));
 		}
 		
 		User foundUser = user.get();
@@ -51,7 +53,7 @@ public class ContactServiceImplement implements ContactService {
 		Optional<Contact> contact = repository.findById(id);
 		
 		if(!contact.isPresent()) {
-			throw new RuntimeException(String.format("Could not find Contact with id %s", id));
+			throw new NotFoundException(String.format("Could not find Contact with id %s", id));
 		}
 		return contact.get();
 	}
@@ -62,8 +64,34 @@ public class ContactServiceImplement implements ContactService {
 		Optional<Contact> contact = repository.findByUserId(userId);
 		
 		if(!contact.isPresent()) {
-			throw new RuntimeException(String.format("Could not find Contact for user with id %s", userId));
+			throw new NotFoundException(String.format("Could not find Contact for user with id %s", userId));
 		}
 		return contact.get();
+	}
+
+	@Override
+	public Contact updateContact(UpdateContactDto dto) {
+		UUID id = dto.getContactId();
+		Optional<Contact> optionalContact = repository.findById(id);
+		
+		if(!optionalContact.isPresent()) {
+			throw new NotFoundException(String.format("Could not find Contact with id %s", id));
+		}		
+		Contact contact = optionalContact.get();
+		return contact.updateEntity(dto);
+	}
+
+	@Override
+	public String deleteContact(UUID id) {
+		Optional<Contact> optionalContact = repository.findById(id);
+		
+		if(!optionalContact.isPresent()) {
+			throw new NotFoundException(String.format("Could not find Contact with id %s", id));
+		}	
+		
+		Contact contact = optionalContact.get();
+		repository.delete(contact);
+		
+		return String.format("Contact '%s' deleted successfully!", contact.getTitle());
 	}
 }

@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Card;
 import br.gov.sp.fatec.model.Customer;
-import br.gov.sp.fatec.model.dto.CreateCardDto;
+import br.gov.sp.fatec.model.dto.card.CreateCardDto;
+import br.gov.sp.fatec.model.dto.card.UpdateCardDto;
 import br.gov.sp.fatec.repository.CardRepository;
 import br.gov.sp.fatec.repository.CustomerRepository;
 
@@ -30,7 +31,7 @@ public class CardServiceImplement implements CardService {
 	}
 
 	@Override
-	public Card createCard(CreateCardDto dto) throws NotFoundException {
+	public Card createCard(CreateCardDto dto) {
 		Optional<Customer> optionalCustomer = customerRepo.findById(dto.getHolderId());
 		Card card = new Card(dto);
 		
@@ -49,7 +50,7 @@ public class CardServiceImplement implements CardService {
 	}
 
 	@Override
-	public Card getById(UUID id) throws NotFoundException {
+	public Card getById(UUID id) {
 		Optional<Card> optionalCard = repository.findById(id);
 		
 		if(optionalCard.isPresent()) {
@@ -59,13 +60,38 @@ public class CardServiceImplement implements CardService {
 	}
 
 	@Override
-	public List<Card> getByCustomerId(UUID customerId) throws NotFoundException {
+	public List<Card> getByCustomerId(UUID customerId) {
 		Optional<List<Card>> optionalCards = repository.findByHolderId(customerId);
 		
 		if(optionalCards.isPresent()) {
 			return optionalCards.get();
 		}
 		throw new NotFoundException(String.format("Could not find Cards for customer with id %s!", customerId));
+	}
+
+	@Override
+	public Card updateCard(UpdateCardDto dto) {
+		UUID id = dto.getCardId();
+		Optional<Card> optionalCard = repository.findById(id);
+		
+		if(optionalCard.isPresent()) {
+			Card card = optionalCard.get(); 
+			return repository.save(card.updateEntity(dto));
+		}
+		throw new NotFoundException(String.format("Could not find Card with id %s!", id));
+	}
+
+	@Override
+	public String deleteCard(UUID id) {
+		Optional<Card> optionalCard = repository.findById(id);
+		
+		if(optionalCard.isPresent()) {
+			Card card = optionalCard.get();
+			repository.delete(card);
+			
+			return String.format("Card '%s' deleted successfully!", card.getNickname());
+		}
+		throw new NotFoundException(String.format("Could not find Card with id %s!", id));
 	}
 
 }

@@ -11,7 +11,8 @@ import org.springframework.stereotype.Service;
 import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.Order;
-import br.gov.sp.fatec.model.dto.CreateOrderDto;
+import br.gov.sp.fatec.model.dto.order.CreateOrderDto;
+import br.gov.sp.fatec.model.dto.order.UpdateOrderDto;
 import br.gov.sp.fatec.repository.CustomerRepository;
 import br.gov.sp.fatec.repository.OrderRepository;
 
@@ -30,7 +31,7 @@ public class OrderServiceImplement implements OrderService {
 	}
 
 	@Override
-	public Order createOrder(CreateOrderDto dto) throws NotFoundException {
+	public Order createOrder(CreateOrderDto dto) {
 		Optional<Customer> optionalCustomer = customerRepo.findByUserId(dto.getUserId());
 		Order order = new Order(dto);
 		
@@ -45,27 +46,51 @@ public class OrderServiceImplement implements OrderService {
 			customerRepo.save(customer);
 			return newOrder;
 		}
-		throw new NotFoundException(String.format("Customer with user id %s does not exists!", dto.getUserId()));
+		throw new NotFoundException(String.format("Could not find Customer with userId '%s'!", dto.getUserId()));
 	}
 
 	@Override
-	public Order getById(UUID id) throws NotFoundException {
+	public Order getById(UUID id) {
 		Optional<Order> optionalOrder = repository.findById(id);
 		
 		if(optionalOrder.isPresent()) {
 			return optionalOrder.get();
 		}
-		throw new NotFoundException(String.format("Order with id %s does not exists!", id));
+		throw new NotFoundException(String.format("Could not find Order with id '%s'!", id));
 	}
 
 	@Override
-	public List<Order> getByCustomerId(UUID customerId) throws NotFoundException {
+	public List<Order> getByCustomerId(UUID customerId) {
 		Optional<List<Order>> optionalOrders = repository.findByCustomerId(customerId);
 		
 		if(optionalOrders.isPresent()) {
 			return optionalOrders.get();
 		}
-		throw new NotFoundException(String.format("Customer Order with id %s does not exists!", customerId));
+		throw new NotFoundException(String.format("Could not find Customer Order with id '%s'!", customerId));
+	}
+
+	@Override
+	public Order updateOrder(UpdateOrderDto dto) {
+		UUID id = dto.getOrderId();
+		Optional<Order> optionalOrder = repository.findById(id);
+		
+		if(optionalOrder.isPresent()) {
+			Order order = optionalOrder.get();
+			return repository.save(order.updateEntity(dto));
+		}
+		throw new NotFoundException(String.format("Could not find Order with id '%s'!", id));
+	}
+
+	@Override
+	public String deleteOrder(UUID id) {
+		Optional<Order> optionalOrder = repository.findById(id);
+		
+		if(optionalOrder.isPresent()) {
+			Order order = optionalOrder.get();
+			repository.delete(order);
+			return String.format("Order with id '%s' deleted successfully!", id);
+		}
+		throw new NotFoundException(String.format("Could not find Order with id '%s'!", id));
 	}
 
 }

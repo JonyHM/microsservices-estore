@@ -1,15 +1,15 @@
 type Customer {
 	id: ID!
-  	userId: ID!
+  userId: ID!
 	name: String
 	cpf: String
 	contacts: [Contact]
 	addresses: [Address]
-  	cards: [Card]
+  cards: [Card]
 }
 
 type Card {
-  	id: ID!
+  id: ID!
 	nickname: String
 	holderName: String
 	number: Int
@@ -48,8 +48,8 @@ type Order {
 type Query {
 	getCustomers: [Customer]
 	getCustomerById(id: ID): Customer
-  	getCustomerByCPF(cpf: String): Customer
-  	getCustomerByUserId(userId: ID): Customer
+  getCustomerByCPF(cpf: String): Customer
+  getCustomerByUserId(userId: ID): Customer
 	
 	getContacts: [Contact]
 	getContactById(id: ID): Contact
@@ -59,7 +59,7 @@ type Query {
 	getAddressById(id: ID): Address
 	getAddressesByCustomerId(customerId: ID): [Address]
 
-  	getCards: [Card]
+  getCards: [Card]
 	getCardById(id: ID): Card
 	getCardsByCustomerId(customerId: ID): [Card]
 
@@ -68,48 +68,99 @@ type Query {
 	getOrdersByCustomerId(customerId: ID): [Order]
 }
 
-input CustomerInput {
-  	userId: ID
+input CreateCustomerInput {
+  userId: ID!
 	name: String
 	cpf: String
 }
 
-input CardInput {
+input UpdateCustomerInput {
+	customerId: ID
+	name: String
+	cpf: String
+}
+
+input CreateCardInput {
 	nickname: String
  	holderName: String
-  	number: Int
-  	cvv: Int
-  	expirationDate: String
+  number: Int
+  cvv: Int
+  expirationDate: String
 	holderId: ID!
 }
 
-input AdressInput {
+input UpdateCardInput {
+	cardId: ID!
+	nickname: String
+ 	holderName: String
+  number: Int
+  cvv: Int
+  expirationDate: String
+}
+
+input CreateAdressInput {
 	street: String
 	number: Int
 	district: String
 	complement: String
 	city: String
 	country: String
-  	customerId: ID!
+  customerId: ID!
 }
 
-input ContactInput {
+input UpdateAdressInput {
+	addressId: ID!
+	street: String
+	number: Int
+	district: String
+	complement: String
+	city: String
+	country: String
+}
+
+input CreateContactInput {
 	title: String
 	type: String
 	value: String
-  	customerId: ID!
+  customerId: ID!
 }
 
-input OrderInput {
+input UpdateContactInput {
+	contactId: ID!
+	title: String
+	type: String
+	value: String
+}
+
+input CreateOrderInput {
 	cartId: String!
 	userId: String!
 	description: String
 }
 
+input UpdateOrderInput {
+	orderId: ID!
+	description: String
+}
+
 type Mutation {
-	createCustomer(customer: CustomerInput!): Customer!
-  	createCard(card: CardInput!): Card!
-	createAddress(address: AdressInput!): Address!
-	createContact(contact: ContactInput!): Contact!
-	createOrder(order: OrderInput!): Order!
+	createCustomer(customer: CreateCustomerInput!): Customer!
+	updateCustomer(customer: UpdateCustomerInput!): Customer!
+	deleteCustomer(customerId: ID!): Customer!
+	
+  createCard(card: CreateCardInput!): Card!
+  updateCard(card: UpdateCardInput!): Card!
+  deleteCard(cardId: ID!): Card!
+  
+	createAddress(address: CreateAdressInput!): Address!
+	updateAddress(address: UpdateAdressInput!): Address!
+	deleteAddress(addressId: ID!): Address!
+	
+	createContact(contact: CreateContactInput!): Contact!
+	updateContact(contact: UpdateContactInput!): Contact!
+	deleteContact(contactId: ID!): Contact!
+	
+	createOrder(order: CreateOrderInput!): Order!
+	updateOrder(order: UpdateOrderInput!): Order!
+	deleteOrder(orderId: ID!): Order!
 }

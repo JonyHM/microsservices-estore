@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.UUID;
 
 import br.gov.sp.fatec.model.Contact;
-import br.gov.sp.fatec.model.dto.CreateContactDto;
-import javassist.NotFoundException;
+import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
 
 public interface ContactService {
 
 	public List<Contact> getAll();
-	public Contact createContact(CreateContactDto dto) throws NotFoundException;
-	public Contact getById(UUID id) throws NotFoundException;
-	public List<Contact> getByCustomerId(UUID customerId) throws NotFoundException;
+	public Contact getById(UUID id);
+	public List<Contact> getByCustomerId(UUID customerId);
+	public Contact createContact(CreateContactDto dto);
+	public Contact updateContact(UpdateContactDto dto);
+	public String deleteContact(UUID id);
 }

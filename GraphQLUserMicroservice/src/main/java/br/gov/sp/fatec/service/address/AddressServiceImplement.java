@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Address;
 import br.gov.sp.fatec.model.User;
-import br.gov.sp.fatec.model.dto.CreateAddressDto;
+import br.gov.sp.fatec.model.dto.address.CreateAddressDto;
+import br.gov.sp.fatec.model.dto.address.UpdateAddressDto;
 import br.gov.sp.fatec.repository.AddressRepository;
 import br.gov.sp.fatec.repository.UserRepository;
 
@@ -36,7 +37,7 @@ public class AddressServiceImplement implements AddressService {
 		Address newAddress = new Address(address);
 		
 		if(!user.isPresent()) {
-			throw new NotFoundException(String.format("User with id %s does not exists!", address.getUserId()));
+			throw new NotFoundException(String.format("Could not find User with id '%s'!", address.getUserId()));
 		}
 		
 		User foundUser = user.get();
@@ -53,7 +54,7 @@ public class AddressServiceImplement implements AddressService {
 		Optional<Address> address = repository.findById(id);
 		
 		if(!address.isPresent()) {
-			throw new NotFoundException(String.format("Address with id %s does not exists!", id));
+			throw new NotFoundException(String.format("Could not find Address with id '%s'!", id));
 		}
 		
 		return address.get();
@@ -64,9 +65,36 @@ public class AddressServiceImplement implements AddressService {
 		Optional<Address> address = repository.findByUserId(userId);
 		
 		if(!address.isPresent()) {
-			throw new NotFoundException(String.format("Address for user with id %s does not exists!", userId));
+			throw new NotFoundException(String.format("Could not find User with id '%s'!", userId));
 		}
 		
 		return address.get();
+	}
+
+	@Override
+	public Address updateAddress(UpdateAddressDto dto) {
+		UUID id = dto.getAddressId();
+		Optional<Address> optionalAddress = repository.findById(id);
+		
+		if(!optionalAddress.isPresent()) {
+			throw new NotFoundException(String.format("Could not find Address with id '%s'!", id));
+		}
+		
+		Address address = optionalAddress.get();
+		return address;
+	}
+
+	@Override
+	public String deleteAddress(UUID id) {
+		Optional<Address> optionalAddress = repository.findById(id);
+		
+		if(!optionalAddress.isPresent()) {
+			throw new NotFoundException(String.format("Address with id %s does not exists!", id));
+		}
+		
+		Address address = optionalAddress.get();
+		repository.delete(address);
+		
+		return String.format("Address with id '%s' deleted successfully!", address.getId());
 	}
 }

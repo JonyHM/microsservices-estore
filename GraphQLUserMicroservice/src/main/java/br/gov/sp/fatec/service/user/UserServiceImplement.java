@@ -10,7 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.User;
-import br.gov.sp.fatec.model.dto.CrateUserDto;
+import br.gov.sp.fatec.model.dto.user.CrateUserDto;
+import br.gov.sp.fatec.model.dto.user.UpdateUserDto;
 import br.gov.sp.fatec.repository.UserRepository;
 
 @Service
@@ -32,12 +33,39 @@ public class UserServiceImplement implements UserService {
 	@Override
 	@Transactional
 	public User getById(UUID id) {
-		Optional<User> user = repository.findById(id);
+		Optional<User> optionalUser = repository.findById(id);
 		
-		if(!user.isPresent()) {
-			throw new NotFoundException(String.format("User with id %s does not exists!", id));
+		if(!optionalUser.isPresent()) {
+			throw new NotFoundException(String.format("Could not find User with id '%s'!", id));
 		}
 		
-		return user.get();
+		return optionalUser.get();
+	}
+
+	@Override
+	public User updateUser(UpdateUserDto dto) {
+		UUID id = dto.getUserId();
+		Optional<User> optionalUser = repository.findById(id);
+		
+		if(!optionalUser.isPresent()) {
+			throw new NotFoundException(String.format("Could not find User with id '%s'!", id));
+		}
+		
+		User user = optionalUser.get();
+		return user.updateEntity(dto);
+	}
+
+	@Override
+	public String deleteUser(UUID id) {
+		Optional<User> optionalUser = repository.findById(id);
+		
+		if(!optionalUser.isPresent()) {
+			throw new NotFoundException(String.format("Could not find User with id '%s'!", id));
+		}
+		
+		User user = optionalUser.get();
+		repository.delete(user);
+		
+		return String.format("User '%s' delete successfully!", user.getName());
 	}
 }
