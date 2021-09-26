@@ -1,22 +1,29 @@
 package br.gov.sp.fatec.model;
 
+import java.util.Set;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CreateOrderProductDto;
+import com.fasterxml.jackson.annotation.JsonView;
 
-@Entity
+import br.gov.sp.fatec.model.dto.orderProduct.CreateOrderProductDto;
+import br.gov.sp.fatec.model.dto.orderProduct.UpdateOrderProductDto;
+import br.gov.sp.fatec.model.view.View;
+
+@Entity(name = "order_product")
 public class OrderProduct {
 
 	@Id
@@ -28,23 +35,51 @@ public class OrderProduct {
 	@Column(name = "id_order_product", updatable = false, nullable = false)
 	@ColumnDefault("random_uuid()")
 	@Type(type = "uuid-char")
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private UUID id;
 	
 	@Column(name = "id_product", nullable = false)
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private UUID productId;
 	
 	@Column(length = 50, nullable = false)
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private String name;
 	
 	@Column(length = 100)
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private String description;
 	
 	@Column(nullable = false)
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private Long quantity;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "id_product_price", referencedColumnName = "id")
+	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_product_price")
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private Price price;
+	
+	@ManyToMany(mappedBy = "products")
+	@JsonView(value = View.Product.class)
+	private Set<Cart> carts;
 	
 	public OrderProduct() {}
 	
@@ -114,6 +149,21 @@ public class OrderProduct {
 
 	public void setPrice(Price price) {
 		this.price = price;
+	}
+	
+	public Set<Cart> getCarts() {
+		return carts;
+	}
+
+	public void setCarts(Set<Cart> carts) {
+		this.carts = carts;
+	}
+
+	public OrderProduct updateEntity(UpdateOrderProductDto dto) {
+		this.name = dto.getName();
+		this.description = dto.getDescription();
+		this.quantity = dto.getQuantity();
+		return this;
 	}
 
 	@Override

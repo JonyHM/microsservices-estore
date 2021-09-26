@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.model;
+package br.gov.sp.fatec.model.enums;
 
 public enum CartStatus {
 	OPENED,

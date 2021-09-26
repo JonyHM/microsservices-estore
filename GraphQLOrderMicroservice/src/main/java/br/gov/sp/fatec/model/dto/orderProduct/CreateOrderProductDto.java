@@ -1,6 +1,8 @@
-package br.gov.sp.fatec.model.dto;
+package br.gov.sp.fatec.model.dto.orderProduct;
 
 import java.util.UUID;
+
+import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
 
 public class CreateOrderProductDto {
 

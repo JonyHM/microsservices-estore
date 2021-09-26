@@ -2,9 +2,10 @@ package br.gov.sp.fatec.model.dto.cart;
 
 import java.sql.Timestamp;
 import java.util.Set;
+import java.util.UUID;
 
-import br.gov.sp.fatec.model.dto.CreateOrderProductDto;
-import br.gov.sp.fatec.model.dto.CreatePriceDto;
+import br.gov.sp.fatec.model.dto.orderProduct.CreateOrderProductDto;
+import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
 
 public class CreateCartDto {
 
@@ -12,6 +13,7 @@ public class CreateCartDto {
 	private Timestamp createdDate;
 	private Timestamp updatedDate;
 	private CreatePriceDto totalValue;
+	private UUID userId;
 	
 	public CreateCartDto() {}
 
@@ -19,11 +21,13 @@ public class CreateCartDto {
 			Set<CreateOrderProductDto> products, 
 			Timestamp createdDate, 
 			Timestamp updatedDate,
-			CreatePriceDto totalValue) {
+			CreatePriceDto totalValue,
+			UUID userId) {
 		this.products = products;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
 		this.totalValue = totalValue;
+		this.userId = userId;
 	}
 
 	public Set<CreateOrderProductDto> getProducts() {
@@ -58,12 +62,21 @@ public class CreateCartDto {
 		this.totalValue = totalValue;
 	}
 
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
 		return "CreateCartDto [products=" + products + 
 				", createdDate=" + createdDate + 
 				", updatedDate=" + updatedDate + 
-				", totalValue=" + totalValue + "]";
+				", totalValue=" + totalValue + 
+				", userId=" + userId + "]";
 	}
 		
 }

@@ -6,13 +6,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import br.gov.sp.fatec.model.dto.CreatePriceDto;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
+import br.gov.sp.fatec.model.dto.price.UpdatePriceDto;
+import br.gov.sp.fatec.model.view.View;
 
 @Entity
 public class Price {
@@ -26,24 +29,30 @@ public class Price {
 	@Column(name = "id_price", updatable = false, nullable = false)
 	@ColumnDefault("random_uuid()")
 	@Type(type = "uuid-char")
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private UUID id;
 	
-	@Column(length = 3)
+	@Column(length = 3, nullable = false)
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private String currency;
 	
-	@Column()
+	@Column(nullable = false)
+	@JsonView(value = {
+		View.Cart.class,
+		View.Product.class
+	})
 	private Double amount;
-	
-	@OneToOne(mappedBy = "price")
-	private OrderProduct product;
-	
-	@OneToOne(mappedBy = "price")
-	private Cart cart;
-	
-	@OneToOne(mappedBy = "price")
-	private Discount discount;
 
-	public Price() {}
+	public Price() {
+		this.currency = "";
+		this.amount = new Double(0);
+	}
 	
 	public Price(CreatePriceDto dto) {
 		this.currency = dto.getCurrency();
@@ -80,30 +89,6 @@ public class Price {
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-
-	public OrderProduct getProduct() {
-		return product;
-	}
-
-	public void setProduct(OrderProduct product) {
-		this.product = product;
-	}
-
-	public Cart getCart() {
-		return cart;
-	}
-
-	public void setCart(Cart cart) {
-		this.cart = cart;
-	}
-
-	public Discount getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(Discount discount) {
-		this.discount = discount;
-	}
 	
 	public Boolean isEqualTo(Price price) {
 		return Double.compare(price.getAmount(), this.amount) == 0 && 
@@ -112,6 +97,18 @@ public class Price {
 	
 	public void addAmount(Double amount) {
 		this.amount = Double.sum(amount, this.amount);
+	}
+	
+	public Price updateEntity(CreatePriceDto dto) {
+		this.currency = dto.getCurrency();
+		this.amount = dto.getAmount();
+		return this;
+	}
+	
+	public Price updateEntity(UpdatePriceDto dto) {
+		this.currency = dto.getCurrency();
+		this.amount = dto.getAmount();
+		return this;
 	}
 
 	@Override
