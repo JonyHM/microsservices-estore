@@ -8,6 +8,7 @@ public class CreateContactDto {
 	private String type;
 	private String value;
 	private UUID customerId;
+	private UUID userId;
 	
 	public CreateContactDto() {}
 
@@ -54,10 +55,21 @@ public class CreateContactDto {
 		this.customerId = customerId;
 	}
 
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
-		return "CreateContactDto [title=" + title + ", type=" + type + ", value=" + value + ", customerId=" + customerId
-				+ "]";
+		return "CreateContactDto [title=" + title + 
+				", type=" + type + 
+				", value=" + value + 
+				", customerId=" + customerId + 
+				", userId=" + userId + "]";
 	}
 	
 }

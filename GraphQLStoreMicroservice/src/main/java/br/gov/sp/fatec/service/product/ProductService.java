@@ -4,6 +4,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import br.gov.sp.fatec.model.Product;
+import br.gov.sp.fatec.model.dto.StartOrderDto;
 import br.gov.sp.fatec.model.dto.product.CreateProductDto;
 import br.gov.sp.fatec.model.dto.product.UpdateProductDto;
 
@@ -12,6 +13,7 @@ public interface ProductService {
 	public Set<Product> getProducts();
 	public Product getProductById(UUID id); 
 	public Product createProduct(CreateProductDto dto);
+	public void preCreateProduct(StartOrderDto dto);
 	public Product updateProduct(UpdateProductDto dto);
 	public String deleteProduct(UUID id);
 }

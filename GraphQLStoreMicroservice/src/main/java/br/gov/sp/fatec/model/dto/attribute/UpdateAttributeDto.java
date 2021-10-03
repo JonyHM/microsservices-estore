@@ -7,19 +7,16 @@ public class UpdateAttributeDto {
 	private UUID attributeId;
 	private String name;
 	private String value;
-	private UUID productId;
 	
 	public UpdateAttributeDto() {}
 
 	public UpdateAttributeDto(
 			UUID attributeId, 
 			String name, 
-			String value, 
-			UUID productId) {
+			String value) {
 		this.attributeId = attributeId;
 		this.name = name;
 		this.value = value;
-		this.productId = productId;
 	}
 
 	public UUID getAttributeId() {
@@ -46,20 +43,11 @@ public class UpdateAttributeDto {
 		this.value = value;
 	}
 
-	public UUID getProductId() {
-		return productId;
-	}
-
-	public void setProductId(UUID productId) {
-		this.productId = productId;
-	}
-
 	@Override
 	public String toString() {
 		return "UpdateAttributeDto [attributeId=" + attributeId + 
 				", name=" + name + 
-				", value=" + value + 
-				", productId=" + productId + "]";
+				", value=" + value + "]";
 	}
 	
 }

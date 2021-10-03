@@ -1,6 +1,7 @@
 package br.gov.sp.fatec.resolver.query;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class ContactQueryResolver implements GraphQLQueryResolver {
 		return service.getById(id);
 	}
 	
-	public Contact getContactByUserId(UUID userId) {
+	public Set<Contact> getContactsByUserId(UUID userId) {
 		return service.getByUserId(userId);
 	}
 }

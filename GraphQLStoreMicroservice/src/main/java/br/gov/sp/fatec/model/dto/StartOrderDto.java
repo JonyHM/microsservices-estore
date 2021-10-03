@@ -2,9 +2,8 @@ package br.gov.sp.fatec.model.dto;
 
 import java.util.Set;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
-import br.gov.sp.fatec.model.Cart;
+import br.gov.sp.fatec.model.dto.product.ProductDto;
 
 public class StartOrderDto {
 
@@ -13,12 +12,6 @@ public class StartOrderDto {
 	private String description;
 	
 	public StartOrderDto() {}
-	
-	public StartOrderDto(Cart cart) {
-		this.userId = cart.getUserId();
-		this.description = String.format("Cart created at %s", cart.getCreatedDate());
-		this.products = cart.getProducts().stream().map(ProductDto::new).collect(Collectors.toSet());
-	}
 
 	public StartOrderDto(
 			UUID userId, 

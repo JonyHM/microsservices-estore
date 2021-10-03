@@ -7,6 +7,15 @@
 	http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 	
 	<changeSet id="Create Schema" author="Jonathas H. Moraes">
+	
+		<createTable tableName="Price">
+			<column name="id_price" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="price_id_pk" />
+			</column>
+			<column name="currency" type="varchar(3)"/>
+			<column name="amount" type="DOUBLE"/>
+		</createTable>
+		
 		<createTable tableName="Product">
 			<column name="id_product" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="product_id_pk" />
@@ -17,14 +26,7 @@
 			<column name="name" type="varchar(50)"></column>
 			<column name="description" type="varchar(100)"></column>
 			<column name="quantity" type="bigint"></column>
-		</createTable>
-		
-		<createTable tableName="Price">
-			<column name="id_price" type="varchar(255)">
-				<constraints nullable="false" primaryKey="true" primaryKeyName="price_id_pk" />
-			</column>
-			<column name="currency" type="varchar(3)"/>
-			<column name="amount" type="DOUBLE"/>
+			<column name="unavailable_quantity" type="bigint"></column>
 		</createTable>
 		
 		<createTable tableName="Attribute">

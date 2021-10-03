@@ -3,6 +3,7 @@ package br.gov.sp.fatec.resolver.mutation;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.gov.sp.fatec.model.Product;
 import br.gov.sp.fatec.model.dto.product.CreateProductDto;
@@ -10,6 +11,7 @@ import br.gov.sp.fatec.model.dto.product.UpdateProductDto;
 import br.gov.sp.fatec.service.product.ProductService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
 
+@Component
 public class ProductMutationResolver implements GraphQLMutationResolver {
 
 	@Autowired

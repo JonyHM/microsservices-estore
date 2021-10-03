@@ -1,15 +1,22 @@
 package br.gov.sp.fatec.model.dto.product;
 
+import br.gov.sp.fatec.model.dto.price.CreateItemPriceDto;
+
 public class CreateProductDto {
 
 	private String name;
 	private String description;
 	private Long quantity;
 	private Long unavailableQuantity;
+	private CreateItemPriceDto price;
 	
 	public CreateProductDto() {}
 	
-	public CreateProductDto(String name, String description, Long quantity, Long unavailableQuantity) {
+	public CreateProductDto(
+			String name, 
+			String description, 
+			Long quantity, 
+			Long unavailableQuantity) {
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
@@ -48,11 +55,20 @@ public class CreateProductDto {
 		this.unavailableQuantity = unavailableQuantity;
 	}
 
+	public CreateItemPriceDto getPrice() {
+		return price;
+	}
+
+	public void setPrice(CreateItemPriceDto price) {
+		this.price = price;
+	}
+
 	@Override
 	public String toString() {
 		return "CreateProductDto [name=" + name + 
 				", description=" + description +
 				", unavailableQuantity=" + unavailableQuantity +
-				", quantity=" + quantity + "]";
+				", quantity=" + quantity + 
+				", price=" + price + "]";
 	}
 }

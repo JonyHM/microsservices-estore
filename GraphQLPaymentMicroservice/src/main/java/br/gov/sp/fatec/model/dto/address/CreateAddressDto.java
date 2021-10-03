@@ -5,21 +5,24 @@ import java.util.UUID;
 public class CreateAddressDto {
 
 	private String street;
-	private Long number;
+	private String number;
 	private String district;
 	private String complement;
 	private String city;
+	private String state;
 	private String country;
 	private UUID customerId;
+	private UUID userId;
 
 	public CreateAddressDto() {}
 
 	public CreateAddressDto(
 			String street, 
-			Long number, 
+			String number, 
 			String district, 
 			String complement, 
-			String city, 
+			String city,
+			String state,
 			String country,
 			UUID customerId) {
 		this.street = street;
@@ -27,6 +30,7 @@ public class CreateAddressDto {
 		this.district = district;
 		this.complement = complement;
 		this.city = city;
+		this.state = state;
 		this.country = country;
 		this.customerId = customerId;
 	}
@@ -39,11 +43,11 @@ public class CreateAddressDto {
 		this.street = street;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
@@ -71,6 +75,14 @@ public class CreateAddressDto {
 		this.city = city;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getCountry() {
 		return country;
 	}
@@ -87,10 +99,25 @@ public class CreateAddressDto {
 		this.customerId = customerId;
 	}
 
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
+		this.userId = userId;
+	}
+
 	@Override
 	public String toString() {
-		return "AddressDto [street=" + street + ", number=" + number + ", district=" + district + ", complement="
-				+ complement + ", city=" + city + ", country=" + country + ", customerId=" + customerId + "]";
+		return "AddressDto [street=" + street + 
+				", number=" + number + 
+				", district=" + district + 
+				", complement=" + complement + 
+				", city=" + city +
+				", state=" + state + 
+				", country=" + country + 
+				", customerId=" + customerId + 
+				", userId=" + userId + "]";
 	}
 
 }

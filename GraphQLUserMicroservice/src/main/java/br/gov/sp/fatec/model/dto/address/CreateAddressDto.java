@@ -2,6 +2,8 @@ package br.gov.sp.fatec.model.dto.address;
 
 import java.util.UUID;
 
+import br.gov.sp.fatec.model.Address;
+
 public class CreateAddressDto {
 
 	private String street; 
@@ -9,10 +11,22 @@ public class CreateAddressDto {
 	private String district;
 	private String complement;
 	private String city;
+	private String state;
 	private String country;
 	private UUID userId;
 
 	public CreateAddressDto() {}
+	
+	public CreateAddressDto(Address address) {
+		this.street = address.getStreet();
+		this.number = address.getNumber();
+		this.district = address.getDistrict();
+		this.complement = address.getComplement();
+		this.city = address.getCity();
+		this.state = address.getState();
+		this.country = address.getCountry();
+		this.userId = address.getUser().getId();
+	}
 
 	public CreateAddressDto(
 			String street, 
@@ -20,6 +34,7 @@ public class CreateAddressDto {
 			String district, 
 			String complement, 
 			String city,
+			String state,
 			String country,
 			UUID userId) {
 		this.street = street;
@@ -27,6 +42,7 @@ public class CreateAddressDto {
 		this.district = district;
 		this.complement = complement;
 		this.city = city;
+		this.state = state;
 		this.country = country;
 		this.userId = userId;
 	}
@@ -71,6 +87,14 @@ public class CreateAddressDto {
 		this.city = city;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getCountry() {
 		return country;
 	}
@@ -89,8 +113,14 @@ public class CreateAddressDto {
 
 	@Override
 	public String toString() {
-		return "CreateAddressDto [street=" + street + ", number=" + number + ", district=" + district + ", complement="
-				+ complement + ", city=" + city + ", country=" + country + ", userId=" + userId + "]";
+		return "CreateAddressDto [street=" + street + 
+				", number=" + number + 
+				", district=" + district + 
+				", complement=" + complement + 
+				", city=" + city +
+				", state=" + state +
+				", country=" + country + 
+				", userId=" + userId + "]";
 	}
 	
 }

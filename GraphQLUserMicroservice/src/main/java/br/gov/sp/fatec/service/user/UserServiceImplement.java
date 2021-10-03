@@ -52,7 +52,8 @@ public class UserServiceImplement implements UserService {
 		}
 		
 		User user = optionalUser.get();
-		return user.updateEntity(dto);
+		user = user.updateEntity(dto);
+		return repository.save(user);
 	}
 
 	@Override

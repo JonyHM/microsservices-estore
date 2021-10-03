@@ -1,30 +1,15 @@
 package br.gov.sp.fatec.model.dto.price;
 
-import java.util.UUID;
+public class CreateItemPriceDto {
 
-public class UpdatePriceDto {
-
-	private UUID priceId;
 	private String currency;
 	private Double amount;
 	
-	public UpdatePriceDto() {}
+	public CreateItemPriceDto() {}
 
-	public UpdatePriceDto(
-			UUID priceId, 
-			String currency, 
-			Double amount) {
-		this.priceId = priceId;
+	public CreateItemPriceDto(String currency, Double amount) {
 		this.currency = currency;
 		this.amount = amount;
-	}
-
-	public UUID getPriceId() {
-		return priceId;
-	}
-
-	public void setPriceId(UUID priceId) {
-		this.priceId = priceId;
 	}
 
 	public String getCurrency() {
@@ -45,9 +30,8 @@ public class UpdatePriceDto {
 
 	@Override
 	public String toString() {
-		return "UpdatePriceDto [priceId=" + priceId + 
-				", currency=" + currency + 
+		return "CreateItemPriceDto [currency=" + currency + 
 				", amount=" + amount + "]";
 	}
-
+	
 }

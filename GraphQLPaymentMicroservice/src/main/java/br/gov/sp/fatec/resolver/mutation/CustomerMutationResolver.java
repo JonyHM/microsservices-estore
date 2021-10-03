@@ -10,7 +10,6 @@ import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
 import br.gov.sp.fatec.model.dto.customer.UpdateCustomerDto;
 import br.gov.sp.fatec.service.customer.CustomerService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
-import javassist.NotFoundException;
 
 @Component
 public class CustomerMutationResolver implements GraphQLMutationResolver {
@@ -18,7 +17,7 @@ public class CustomerMutationResolver implements GraphQLMutationResolver {
 	@Autowired
 	private CustomerService service;
 
-	public Customer createCustomer(CreateCustomerDto customer) throws NotFoundException {
+	public Customer createCustomer(CreateCustomerDto customer) {
 		return service.createCustomer(customer);
 	}
 	

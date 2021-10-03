@@ -64,6 +64,11 @@ public class PriceServiceImplement implements PriceService {
 		
 		if(optionalProduct.isPresent()) {
 			Product product = optionalProduct.get();
+			
+			if(product.getPrice() != null) {
+				price = product.getPrice();
+				price = price.updateEntity(dto);
+			}
 			price.setProduct(product);
 			price = repository.save(price);
 			
@@ -82,7 +87,8 @@ public class PriceServiceImplement implements PriceService {
 
 		if(optionalPrice.isPresent()) {
 			Price price = optionalPrice.get(); 
-			return price.updateEntity(dto);
+			price = price.updateEntity(dto);
+			return repository.save(price);
 		}
 		
 		throw new NotFoundException(String.format("Could not find Price with id '%s'", id));

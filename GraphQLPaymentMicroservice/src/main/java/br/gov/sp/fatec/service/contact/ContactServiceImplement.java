@@ -32,7 +32,14 @@ public class ContactServiceImplement implements ContactService {
 
 	@Override
 	public Contact createContact(CreateContactDto dto) {
-		Optional<Customer> optionalCustomer = customerRepo.findById(dto.getCustomerId());
+		Optional<Customer> optionalCustomer = Optional.of(new Customer());
+		
+		if(dto.getCustomerId() != null) {			
+			optionalCustomer = customerRepo.findById(dto.getCustomerId());
+		} else {
+			optionalCustomer = customerRepo.findByUserId(dto.getUserId());
+		}
+		
 		Contact contact = new Contact(dto);
 		
 		if(optionalCustomer.isPresent()) {

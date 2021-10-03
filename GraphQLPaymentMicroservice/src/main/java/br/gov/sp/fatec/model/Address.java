@@ -34,8 +34,8 @@ public class Address {
 	@Column(length = 50)
 	private String street;
 	
-	@Column()
-	private Long number;
+	@Column(length = 5)
+	private String number;
 	
 	@Column(length = 50)
 	private String district;
@@ -45,6 +45,9 @@ public class Address {
 	
 	@Column(length = 40)
 	private String city;
+	
+	@Column(length = 2)
+	private String state;
 	
 	@Column(length = 40)
 	private String country;
@@ -56,16 +59,18 @@ public class Address {
 	public Address() {}
 
 	public Address(String street, 
-			Long number, 
+			String number, 
 			String district, 
 			String complement, 
 			String city, 
+			String state,
 			String country) {
 		this.street = street;
 		this.number = number;
 		this.district = district;
 		this.complement = complement;
 		this.city = city;
+		this.state = state;
 		this.country = country;
 	}
 
@@ -75,6 +80,7 @@ public class Address {
 		this.district = dto.getDistrict();
 		this.complement = dto.getComplement();
 		this.city = dto.getCity();
+		this.state = dto.getState();
 		this.country = dto.getCountry();
 	}
 
@@ -94,11 +100,11 @@ public class Address {
 		this.street = street;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
@@ -126,6 +132,14 @@ public class Address {
 		this.city = city;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getCountry() {
 		return country;
 	}
@@ -148,6 +162,7 @@ public class Address {
 		this.district = dto.getDistrict() != "" ? dto.getDistrict() : this.district;
 		this.complement = dto.getComplement() != "" ? dto.getComplement() : this.complement;
 		this.city = dto.getCity() != "" ? dto.getCity() : this.city;
+		this.state = dto.getState() != "" ? dto.getState() : this.state;
 		this.country = dto.getCountry() != "" ? dto.getCountry() : this.country;
 		return this;
 	}
@@ -159,7 +174,8 @@ public class Address {
 				", number=" + number + 
 				", district=" + district + 
 				", complement=" + complement + 
-				", city=" + city + 
+				", city=" + city +
+				", state=" + state + 
 				", country=" + country + "]";
 	}
 }

@@ -8,7 +8,6 @@ public class UpdateContactDto {
 	private String title;
 	private String type;
 	private String value;
-	private UUID userId;
 	
 	public UpdateContactDto() {}
 	
@@ -16,13 +15,11 @@ public class UpdateContactDto {
 			UUID contactId, 
 			String title, 
 			String type, 
-			String value, 
-			UUID userId) {
+			String value) {
 		this.contactId = contactId;
 		this.title = title;
 		this.type = type;
 		this.value = value;
-		this.userId = userId;
 	}
 
 	public UUID getContactId() {
@@ -57,21 +54,12 @@ public class UpdateContactDto {
 		this.value = value;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
 	@Override
 	public String toString() {
 		return "UpdateContactDto [contactId=" + contactId + 
 				", title=" + title + 
 				", type=" + type + 
-				", value=" + value + 
-				", userId=" + userId + "]";
+				", value=" + value + "]";
 	}
 	
 }

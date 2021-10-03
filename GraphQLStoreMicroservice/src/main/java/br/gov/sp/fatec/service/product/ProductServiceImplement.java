@@ -8,11 +8,16 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.exception.NotFoundException;
+import br.gov.sp.fatec.model.Price;
 import br.gov.sp.fatec.model.Product;
+import br.gov.sp.fatec.model.dto.StartOrderDto;
 import br.gov.sp.fatec.model.dto.product.CreateProductDto;
+import br.gov.sp.fatec.model.dto.product.ProductDto;
 import br.gov.sp.fatec.model.dto.product.UpdateProductDto;
+import br.gov.sp.fatec.repository.PriceRepository;
 import br.gov.sp.fatec.repository.ProductRepository;
 
 @Service
@@ -20,6 +25,9 @@ public class ProductServiceImplement implements ProductService {
 	
 	@Autowired
 	private ProductRepository repository;
+	
+	@Autowired
+	private PriceRepository priceRepository;
 
 	@Override
 	public Set<Product> getProducts() {
@@ -40,8 +48,11 @@ public class ProductServiceImplement implements ProductService {
 
 	@Override
 	public Product createProduct(CreateProductDto dto) {
-		Product newProduct = new Product(dto);
-		return repository.save(newProduct);
+		Product product = new Product(dto);
+		Price price = new Price(dto.getPrice());
+		price = priceRepository.save(price);
+		product.setPrice(price);
+		return repository.save(product);
 	}
 
 	@Override
@@ -51,6 +62,9 @@ public class ProductServiceImplement implements ProductService {
 		
 		if(optionalProduct.isPresent()) {
 			Product foundProduct = optionalProduct.get();
+			Price price = foundProduct.getPrice();
+			price = priceRepository.save(price.updateEntity(dto.getPrice()));
+			foundProduct.setPrice(price);
 						
 			return repository.save(foundProduct.updateEntity(dto));
 		}
@@ -70,6 +84,17 @@ public class ProductServiceImplement implements ProductService {
 		}
 		
 		throw new NotFoundException(String.format("Could not find product with id '%s'", id));
+	}
+
+	@Override
+	@Transactional
+	public void preCreateProduct(StartOrderDto dto) {
+		for(ProductDto productDto : dto.getProducts()) {
+			UUID productId = productDto.getProductId();
+			Product product = repository.getById(productId);
+			product.addUnavailableQuantity(productDto.getQuantity());
+			repository.save(product);
+		}
 	}
 
 }

@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.gov.sp.fatec.kafka.producer.KafkaTopicProducer;
 import br.gov.sp.fatec.model.Address;
 import br.gov.sp.fatec.model.dto.address.CreateAddressDto;
 import br.gov.sp.fatec.model.dto.address.UpdateAddressDto;
@@ -16,9 +17,14 @@ public class AddressMutationResolver implements GraphQLMutationResolver {
 
 	@Autowired
 	private AddressService service;
+	
+	@Autowired
+	private KafkaTopicProducer producer;
 
 	public Address createAddress(CreateAddressDto address) {
-		return service.createAddress(address);
+		Address addressModel = service.createAddress(address);
+		this.sendAddressCreatedEvent(addressModel);
+		return addressModel;
 	}
 	
 	public Address updateAddress(UpdateAddressDto address) {
@@ -27,5 +33,10 @@ public class AddressMutationResolver implements GraphQLMutationResolver {
 	
 	public String deleteAddress(UUID addressId) {
 		return service.deleteAddress(addressId);
+	}
+	
+	private void sendAddressCreatedEvent(Address address) {
+		CreateAddressDto dto = new CreateAddressDto(address);
+		producer.sendAddressCreated(dto);
 	}
 }

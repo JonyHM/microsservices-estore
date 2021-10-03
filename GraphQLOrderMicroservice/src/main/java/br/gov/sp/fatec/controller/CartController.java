@@ -20,7 +20,9 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import br.gov.sp.fatec.kafka.producer.KafkaTopicProducer;
 import br.gov.sp.fatec.model.Cart;
+import br.gov.sp.fatec.model.dto.StartOrderDto;
 import br.gov.sp.fatec.model.dto.cart.AddProductDto;
 import br.gov.sp.fatec.model.dto.cart.CreateCartDto;
 import br.gov.sp.fatec.model.dto.cart.RemoveProductDto;
@@ -35,6 +37,9 @@ public class CartController {
 
 	@Autowired
 	private CartService service;
+	
+	@Autowired
+	private KafkaTopicProducer producer;
 	
 	@GetMapping
 	@JsonView(value = View.Cart.class)
@@ -68,6 +73,8 @@ public class CartController {
     		builder.path(MessageFormat.format("/cart/{0}", cart.getId())).build().toUri()
     	);
     	
+    	this.sendOrderStarted(cart);
+    	
 		return ResponseEntity.created(headers.getLocation()).body(cart);
 	}
 	
@@ -96,5 +103,10 @@ public class CartController {
 	public ResponseEntity<Cart> removeOrderProductFromCart(@RequestBody RemoveProductDto dto) {
 		Cart cart = service.removeOrderProductFromCart(dto);
 		return ResponseEntity.ok(cart);
+	}
+	
+	private void sendOrderStarted(Cart cart) {
+		StartOrderDto dto = new StartOrderDto(cart);
+		producer.sendOrderStarted(dto);
 	}
 }

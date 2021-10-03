@@ -2,6 +2,8 @@ package br.gov.sp.fatec.model.dto.contact;
 
 import java.util.UUID;
 
+import br.gov.sp.fatec.model.Contact;
+
 public class CreateContactDto {
 
 	private String title;
@@ -10,6 +12,13 @@ public class CreateContactDto {
 	private UUID userId;
 	
 	public CreateContactDto() {}
+	
+	public CreateContactDto(Contact contact) {
+		this.title = contact.getTitle();
+		this.type = contact.getType();
+		this.value = contact.getValue();
+		this.userId = contact.getUser().getId();
+	}
 
 	public CreateContactDto(
 			String title, 
