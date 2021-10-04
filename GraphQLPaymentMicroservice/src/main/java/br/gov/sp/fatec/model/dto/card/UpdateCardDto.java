@@ -7,8 +7,8 @@ public class UpdateCardDto {
 	private UUID cardId;
 	private String nickname;
 	private String holderName;
-	private Long number;
-	private Long cvv;
+	private String number;
+	private String cvv;
 	private String expirationDate;
 	
 	public UpdateCardDto() {}
@@ -17,8 +17,8 @@ public class UpdateCardDto {
 			UUID cardId, 
 			String nickname, 
 			String holderName, 
-			Long number, 
-			Long cvv, 
+			String number, 
+			String cvv, 
 			String expirationDate) {
 		this.cardId = cardId;
 		this.nickname = nickname;
@@ -52,19 +52,19 @@ public class UpdateCardDto {
 		this.holderName = holderName;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
-	public Long getCvv() {
+	public String getCvv() {
 		return cvv;
 	}
 
-	public void setCvv(Long cvv) {
+	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
 

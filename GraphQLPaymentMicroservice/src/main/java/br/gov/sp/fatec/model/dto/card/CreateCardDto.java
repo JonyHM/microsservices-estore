@@ -6,14 +6,14 @@ public class CreateCardDto {
 
 	private String nickname;
 	private String holderName;
-	private Long number;
-	private Long cvv;
+	private String number;
+	private String cvv;
 	private String expirationDate;
 	private UUID holderId;
 	
 	public CreateCardDto() {}
 
-	public CreateCardDto(String nickname, String holderName, Long number, Long cvv, String expirationDate,
+	public CreateCardDto(String nickname, String holderName, String number, String cvv, String expirationDate,
 			UUID holderId) {
 		this.nickname = nickname;
 		this.holderName = holderName;
@@ -39,19 +39,19 @@ public class CreateCardDto {
 		this.holderName = holderName;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
-	public Long getCvv() {
+	public String getCvv() {
 		return cvv;
 	}
 
-	public void setCvv(Long cvv) {
+	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
 

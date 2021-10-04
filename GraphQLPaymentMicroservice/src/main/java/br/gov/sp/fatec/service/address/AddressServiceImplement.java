@@ -32,7 +32,14 @@ public class AddressServiceImplement implements AddressService {
 
 	@Override
 	public Address createAddress(CreateAddressDto dto) {
-		Optional<Customer> optionalCustomer = customerRepo.findById(dto.getCustomerId());
+		Optional<Customer> optionalCustomer = Optional.of(new Customer());
+		
+		if(dto.getCustomerId() != null) {			
+			optionalCustomer = customerRepo.findById(dto.getCustomerId());
+		} else {
+			optionalCustomer = customerRepo.findByUserId(dto.getUserId());
+		}
+		
 		Address address = new Address(dto);
 		
 		if(optionalCustomer.isPresent()) {

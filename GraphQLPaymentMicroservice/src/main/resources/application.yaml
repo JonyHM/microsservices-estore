@@ -13,20 +13,20 @@ graphql.playground:
   pageTitle: Playground
 spring:
   datasource:
-    url: jdbc:h2:mem:qlUser
+    url: jdbc:h2:mem:qlPayment
     username: sa
     password: 
     driver-class-name: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-  kafka:    consumer:      bootstrap-servers:      - 127.0.0.1:9092
-      group-id: group_id
+  kafka:    consumer:
+      group-id: "test"      bootstrap-servers:      - 127.0.0.1:9092
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:        spring.json.trusted.packages: "br.gov.sp.fatec.model"
-    
-auto:
-  create:
-    topics:
-      enable: true       
+      properties:        spring.json.trusted.packages: "*"
+    producer:
+      bootstrap-servers:
+      - 127.0.0.1:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

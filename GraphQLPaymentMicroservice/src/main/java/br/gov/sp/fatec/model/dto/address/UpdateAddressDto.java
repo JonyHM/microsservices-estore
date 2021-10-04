@@ -6,10 +6,11 @@ public class UpdateAddressDto {
 
 	private UUID addressId;
 	private String street;
-	private Long number;
+	private String number;
 	private String district;
 	private String complement;
 	private String city;
+	private String state;
 	private String country;
 
 	public UpdateAddressDto() {}
@@ -17,10 +18,11 @@ public class UpdateAddressDto {
 	public UpdateAddressDto(
 			UUID addressId,
 			String street, 
-			Long number, 
+			String number, 
 			String district, 
 			String complement, 
 			String city, 
+			String state,
 			String country
 			) {
 		this.addressId = addressId;
@@ -29,6 +31,7 @@ public class UpdateAddressDto {
 		this.district = district;
 		this.complement = complement;
 		this.city = city;
+		this.state = state;
 		this.country = country;
 	}
 
@@ -40,11 +43,11 @@ public class UpdateAddressDto {
 		this.street = street;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
@@ -72,6 +75,14 @@ public class UpdateAddressDto {
 		this.city = city;
 	}
 
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
 	public String getCountry() {
 		return country;
 	}
@@ -95,7 +106,8 @@ public class UpdateAddressDto {
 				", number=" + number + 
 				", district=" + district + 
 				", complement=" + complement + 
-				", city=" + city + 
+				", city=" + city +
+				", state=" + state + 
 				", country=" + country + "]";
 	}
 	

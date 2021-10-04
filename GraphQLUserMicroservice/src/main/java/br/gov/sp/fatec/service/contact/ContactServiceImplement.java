@@ -2,6 +2,7 @@ package br.gov.sp.fatec.service.contact;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,8 @@ public class ContactServiceImplement implements ContactService {
 	
 
 	@Override
-	public Contact getByUserId(UUID userId) {
-		Optional<Contact> contact = repository.findByUserId(userId);
+	public Set<Contact> getByUserId(UUID userId) {
+		Optional<Set<Contact>> contact = repository.findByUserId(userId);
 		
 		if(!contact.isPresent()) {
 			throw new NotFoundException(String.format("Could not find Contact for user with id %s", userId));
@@ -78,7 +79,8 @@ public class ContactServiceImplement implements ContactService {
 			throw new NotFoundException(String.format("Could not find Contact with id %s", id));
 		}		
 		Contact contact = optionalContact.get();
-		return contact.updateEntity(dto);
+		contact = contact.updateEntity(dto);
+		return repository.save(contact); 
 	}
 
 	@Override

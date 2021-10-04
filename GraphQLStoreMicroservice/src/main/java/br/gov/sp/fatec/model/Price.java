@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
@@ -12,6 +13,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import br.gov.sp.fatec.model.dto.price.CreateItemPriceDto;
 import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
 import br.gov.sp.fatec.model.dto.price.UpdatePriceDto;
 
@@ -35,10 +37,18 @@ public class Price {
 	@Column()
 	private Double amount;
 	
-	@OneToOne(mappedBy = "price")
+	@OneToOne(
+		mappedBy = "price", 
+		fetch = FetchType.EAGER
+	)
 	private Product product;
 
 	public Price() {}
+	
+	public Price(CreateItemPriceDto dto) {
+		this.currency = dto.getCurrency();
+		this.amount = dto.getAmount();
+	}
 	
 	public Price(CreatePriceDto dto) {
 		this.currency = dto.getCurrency();
@@ -83,6 +93,18 @@ public class Price {
 	}
 	
 	public Price updateEntity(UpdatePriceDto dto) {
+		this.currency = dto.getCurrency();
+		this.amount = dto.getAmount();
+		return this;
+	}
+	
+	public Price updateEntity(CreateItemPriceDto dto) {
+		this.currency = dto.getCurrency();
+		this.amount = dto.getAmount();
+		return this;
+	}
+	
+	public Price updateEntity(CreatePriceDto dto) {
 		this.currency = dto.getCurrency();
 		this.amount = dto.getAmount();
 		return this;

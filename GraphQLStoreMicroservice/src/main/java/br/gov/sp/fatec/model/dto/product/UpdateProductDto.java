@@ -2,6 +2,8 @@ package br.gov.sp.fatec.model.dto.product;
 
 import java.util.UUID;
 
+import br.gov.sp.fatec.model.dto.price.CreateItemPriceDto;
+
 public class UpdateProductDto {
 
 	private UUID id;
@@ -9,6 +11,7 @@ public class UpdateProductDto {
 	private String description;
 	private Long quantity;
 	private Long unavailableQuantity;
+	private CreateItemPriceDto price;
 		
 	public UpdateProductDto() {}
 
@@ -63,6 +66,14 @@ public class UpdateProductDto {
 
 	public void setUnavailableQuantity(Long unavailableQuantity) {
 		this.unavailableQuantity = unavailableQuantity;
+	}
+
+	public CreateItemPriceDto getPrice() {
+		return price;
+	}
+
+	public void setPrice(CreateItemPriceDto price) {
+		this.price = price;
 	}
 
 	@Override

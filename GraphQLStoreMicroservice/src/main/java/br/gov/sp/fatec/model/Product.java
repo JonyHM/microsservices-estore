@@ -46,8 +46,11 @@ public class Product {
 	@Column(name = "unavailable_quantity", nullable = false)
 	private Long unavailableQuantity;
 	
-	@OneToOne(cascade = CascadeType.REMOVE)
-	@JoinColumn(name = "id_product_price", referencedColumnName = "id")
+	@OneToOne(
+		cascade = CascadeType.REMOVE, 
+		fetch = FetchType.EAGER
+	)
+	@JoinColumn(name = "id_product_price")
 	private Price price;
 	
 	@OneToMany(
@@ -132,6 +135,12 @@ public class Product {
 
 	public void setAttributes(Set<Attribute> attributes) {
 		this.attributes = attributes;
+	}
+	
+	public void addUnavailableQuantity(Long unavailableQuantity) {
+		this.unavailableQuantity = this.unavailableQuantity != null 
+				? this.unavailableQuantity + unavailableQuantity 
+				: unavailableQuantity;
 	}
 	
 	public Product updateEntity(UpdateProductDto dto) {

@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.model.dto;
+package br.gov.sp.fatec.model.dto.customer;
 
 import java.util.UUID;
 
@@ -8,14 +8,14 @@ import br.gov.sp.fatec.model.User;
 
 public class CreateCustomerDto {
 	
-	private String name;
-	private UUID userId;
 	
 	@Pattern(
 		regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})", 
 		message = "formato de documento inválido"
 	)
 	private String cpf;
+	private String name;
+	private UUID userId;
 	
 	public CreateCustomerDto() {}
 	
@@ -34,7 +34,7 @@ public class CreateCustomerDto {
 	public String getName() {
 		return name;
 	}
-
+	
 	public void setName(String name) {
 		this.name = name;
 	}

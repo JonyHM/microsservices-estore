@@ -4,11 +4,13 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import br.gov.sp.fatec.model.Product;
 import br.gov.sp.fatec.service.product.ProductService;
 import graphql.kickstart.tools.GraphQLQueryResolver;
 
+@Component
 public class ProductQueryResolver implements GraphQLQueryResolver {
 
 	@Autowired

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 import br.gov.sp.fatec.kafka.producer.KafkaTopicProducer;
 import br.gov.sp.fatec.model.User;
-import br.gov.sp.fatec.model.dto.CreateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
 import br.gov.sp.fatec.model.dto.user.CrateUserDto;
 import br.gov.sp.fatec.model.dto.user.UpdateUserDto;
 import br.gov.sp.fatec.service.user.UserService;

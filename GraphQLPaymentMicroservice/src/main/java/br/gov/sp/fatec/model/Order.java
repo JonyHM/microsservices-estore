@@ -17,7 +17,7 @@ import org.hibernate.annotations.Type;
 import br.gov.sp.fatec.model.dto.order.CreateOrderDto;
 import br.gov.sp.fatec.model.dto.order.UpdateOrderDto;
 
-@Entity
+@Entity(name = "Order_Cart")
 public class Order {
 
 	@Id
@@ -58,6 +58,7 @@ public class Order {
 	public Order(CreateOrderDto dto) {
 		this.cartId = dto.getCartId();
 		this.description = dto.getDescription();
+		this.userId = dto.getUserId();
 	}
 
 	public UUID getId() {

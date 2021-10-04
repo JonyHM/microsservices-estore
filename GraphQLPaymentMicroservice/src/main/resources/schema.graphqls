@@ -6,14 +6,15 @@ type Customer {
 	contacts: [Contact]
 	addresses: [Address]
   cards: [Card]
+  orders: [Order]
 }
 
 type Card {
   id: ID!
 	nickname: String
 	holderName: String
-	number: Int
-	cvv: Int
+	number: String
+	cvv: String
 	expirationDate: String
 	holder: Customer!
 }
@@ -21,10 +22,11 @@ type Card {
 type Address {
 	id: ID!
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String
+	state: String
 	country: String
 	customer: Customer
 }
@@ -82,28 +84,29 @@ input UpdateCustomerInput {
 
 input CreateCardInput {
 	nickname: String
- 	holderName: String
-  number: Int
-  cvv: Int
-  expirationDate: String
+ 	holderName: String!
+  number: String!
+  cvv: String!
+  expirationDate: String!
 	holderId: ID!
 }
 
 input UpdateCardInput {
 	cardId: ID!
 	nickname: String
- 	holderName: String
-  number: Int
-  cvv: Int
-  expirationDate: String
+ 	holderName: String!
+  number: String!
+  cvv: String!
+  expirationDate: String!
 }
 
 input CreateAdressInput {
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String
+	state: String
 	country: String
   customerId: ID!
 }
@@ -111,10 +114,11 @@ input CreateAdressInput {
 input UpdateAdressInput {
 	addressId: ID!
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String
+	state: String
 	country: String
 }
 
@@ -146,21 +150,21 @@ input UpdateOrderInput {
 type Mutation {
 	createCustomer(customer: CreateCustomerInput!): Customer!
 	updateCustomer(customer: UpdateCustomerInput!): Customer!
-	deleteCustomer(customerId: ID!): Customer!
+	deleteCustomer(customerId: ID!): String!
 	
   createCard(card: CreateCardInput!): Card!
   updateCard(card: UpdateCardInput!): Card!
-  deleteCard(cardId: ID!): Card!
+  deleteCard(cardId: ID!): String!
   
 	createAddress(address: CreateAdressInput!): Address!
 	updateAddress(address: UpdateAdressInput!): Address!
-	deleteAddress(addressId: ID!): Address!
+	deleteAddress(addressId: ID!): String!
 	
 	createContact(contact: CreateContactInput!): Contact!
 	updateContact(contact: UpdateContactInput!): Contact!
-	deleteContact(contactId: ID!): Contact!
+	deleteContact(contactId: ID!): String!
 	
 	createOrder(order: CreateOrderInput!): Order!
 	updateOrder(order: UpdateOrderInput!): Order!
-	deleteOrder(orderId: ID!): Order!
+	deleteOrder(orderId: ID!): String!
 }

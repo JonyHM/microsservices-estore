@@ -28,10 +28,11 @@
 				<constraints nullable="false" foreignKeyName="address_customer_fk" references="Customer(id_customer)"/>
 			</column>
 			<column name="street" type="varchar(50)"/>
-			<column name="number" type="bigint"/>
+			<column name="number" type="varchar(5)"/>
 			<column name="district" type="varchar(50)"/>
 			<column name="complement" type="varchar(200)"/>
 			<column name="city" type="varchar(40)"/>
+			<column name="state" type="varchar(2)"/>
 			<column name="country" type="varchar(40)"/>
 		</createTable>
 		
@@ -61,7 +62,7 @@
 			<column name="expiration_date" type="varchar(10)"/>
 		</createTable>
 		
-		<createTable tableName="Order">
+		<createTable tableName="Order_Cart">
 			<column name="id_order" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="order_id_pk" />
 			</column>
@@ -72,7 +73,7 @@
 				<constraints nullable="false" unique="true" uniqueConstraintName="order_cart_id_uk" />
 			</column>
 			<column name="id_user" type="varchar(255)">
-				<constraints nullable="false" unique="true" uniqueConstraintName="order_user_id_uk" />
+				<constraints nullable="false"/>
 			</column>
 			<column name="description" type="varchar(255)"/>
 		</createTable>

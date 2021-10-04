@@ -14,6 +14,7 @@ type Address {
 	district: String
 	complement: String
 	city: String
+	state: String
 	country: String
 	user: User
 }
@@ -32,11 +33,11 @@ type Query {
 	
 	getContacts: [Contact]
 	getContactById(id: ID): Contact
-	getContactByUserId(userId: ID): Contact
+	getContactsByUserId(userId: ID): [Contact]
 	
 	getAddresses: [Address]
 	getAddressById(id: ID): Address
-	getAddressByUserId(userId: ID): Address
+	getAddressesByUserId(userId: ID): [Address]
 }
 
 input CreateUserInput {
@@ -58,6 +59,7 @@ input CreateAdressInput {
 	district: String
 	complement: String
 	city: String
+	state: String
 	country: String
 	userId: ID!
 }
@@ -69,8 +71,8 @@ input UpdateAdressInput {
 	district: String
 	complement: String
 	city: String
+	state: String
 	country: String
-	userId: ID
 }
 
 input CreateContactInput {
@@ -85,7 +87,6 @@ input UpdateContactInput {
 	title: String
 	type: String
 	value: String
-	userId: ID
 }
 
 type Mutation {

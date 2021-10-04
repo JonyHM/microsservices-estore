@@ -1,7 +1,9 @@
 package br.gov.sp.fatec.service.address;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,9 @@ public class AddressServiceImplement implements AddressService {
 	private UserRepository userRepo;
 
 	@Override
-	public List<Address> getAll() {
-		return repository.findAll();
+	public Set<Address> getAll() {
+		List<Address> addresses = repository.findAll(); 
+		return new HashSet<Address>(addresses);
 	}
 
 	@Override
@@ -61,14 +64,14 @@ public class AddressServiceImplement implements AddressService {
 	}
 
 	@Override
-	public Address getByUserId(UUID userId) {
-		Optional<Address> address = repository.findByUserId(userId);
+	public Set<Address> getByUserId(UUID userId) {
+		Optional<Set<Address>> addresses = repository.findByUserId(userId);
 		
-		if(!address.isPresent()) {
+		if(!addresses.isPresent()) {
 			throw new NotFoundException(String.format("Could not find User with id '%s'!", userId));
 		}
 		
-		return address.get();
+		return addresses.get();
 	}
 
 	@Override
@@ -81,6 +84,8 @@ public class AddressServiceImplement implements AddressService {
 		}
 		
 		Address address = optionalAddress.get();
+		address = address.updateEntity(dto);
+		address = repository.save(address);
 		return address;
 	}
 

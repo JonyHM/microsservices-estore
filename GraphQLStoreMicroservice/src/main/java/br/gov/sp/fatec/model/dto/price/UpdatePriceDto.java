@@ -7,19 +7,16 @@ public class UpdatePriceDto {
 	private UUID priceId;
 	private String currency;
 	private Double amount;
-	private UUID productId;
 	
 	public UpdatePriceDto() {}
 
 	public UpdatePriceDto(
 			UUID priceId, 
 			String currency, 
-			Double amount, 
-			UUID productId) {
+			Double amount) {
 		this.priceId = priceId;
 		this.currency = currency;
 		this.amount = amount;
-		this.productId = productId;
 	}
 
 	public UUID getPriceId() {
@@ -46,18 +43,11 @@ public class UpdatePriceDto {
 		this.amount = amount;
 	}
 
-	public UUID getProductId() {
-		return productId;
-	}
-
-	public void setProductId(UUID productId) {
-		this.productId = productId;
-	}
-
 	@Override
 	public String toString() {
-		return "UpdatePriceDto [priceId=" + priceId + ", currency=" + currency + ", amount=" + amount + ", productId="
-				+ productId + "]";
+		return "UpdatePriceDto [priceId=" + priceId + 
+				", currency=" + currency + 
+				", amount=" + amount + "]";
 	}
 
 }

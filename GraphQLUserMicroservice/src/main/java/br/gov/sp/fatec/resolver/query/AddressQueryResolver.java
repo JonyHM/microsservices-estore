@@ -1,6 +1,6 @@
 package br.gov.sp.fatec.resolver.query;
 
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class AddressQueryResolver implements GraphQLQueryResolver {
 	@Autowired
 	private AddressService service;
 	
-	public List<Address> getAddresses() {
+	public Set<Address> getAddresses() {
 		return service.getAll();
 	}
 	
@@ -24,7 +24,7 @@ public class AddressQueryResolver implements GraphQLQueryResolver {
 		return service.getById(id);
 	}
 	
-	public Address getAddressByUserId(UUID userId) {
+	public Set<Address> getAddressesByUserId(UUID userId) {
 		return service.getByUserId(userId);
 	}
 }

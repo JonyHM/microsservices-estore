@@ -38,10 +38,10 @@ public class Card {
 	private String holderName;
 	
 	@Column(length = 16)
-	private Long number;
+	private String number;
 	
 	@Column(length = 5)
-	private Long cvv;
+	private String cvv;
 	
 	@Column(length = 10, name = "expiration_date")
 	private String expirationDate;
@@ -54,8 +54,8 @@ public class Card {
 
 	public Card(String nickname, 
 			String holderName, 
-			Long number, 
-			Long cvv, 
+			String number, 
+			String cvv, 
 			String expirationDate) {
 		this.nickname = nickname;
 		this.holderName = holderName;
@@ -96,19 +96,19 @@ public class Card {
 		this.holderName = holderName;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
-	public Long getCvv() {
+	public String getCvv() {
 		return cvv;
 	}
 
-	public void setCvv(Long cvv) {
+	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
 
