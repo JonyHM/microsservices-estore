@@ -13,7 +13,7 @@
 				<constraints nullable="false" primaryKey="true" primaryKeyName="price_id_pk" />
 			</column>
 			<column name="currency" type="varchar(3)"/>
-			<column name="amount" type="DOUBLE"/>
+			<column name="amount" type="DECIMAL(10,2)"/>
 		</createTable>
 		
 		<createTable tableName="Product">

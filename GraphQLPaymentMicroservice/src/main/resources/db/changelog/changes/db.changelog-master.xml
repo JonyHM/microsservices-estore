@@ -7,6 +7,18 @@
 	http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 	
 	<changeSet id="Create Schema" author="Jonathas H. Moraes">
+		<createTable tableName="Price">
+			<column name="id_price" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="price_id_pk" />
+			</column>
+			<column name="currency" type="varchar(3)">
+				<constraints nullable="false" />
+			</column>
+			<column name="amount" type="DECIMAL(10,2)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	
 		<createTable tableName="Customer">
 			<column name="id_customer" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="customer_id_pk" />
@@ -68,6 +80,9 @@
 			</column>
 			<column name="id_order_customer" type="varchar(255)">
 				<constraints nullable="false" foreignKeyName="order_customer_fk" references="Customer(id_customer)"/>
+			</column>
+			<column name="id_order_price" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="order_price_fk" references="Price(id_price)"/>
 			</column>
 			<column name="id_cart" type="varchar(255)">
 				<constraints nullable="false" unique="true" uniqueConstraintName="order_cart_id_uk" />

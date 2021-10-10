@@ -2,6 +2,7 @@ package br.gov.sp.fatec.model;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -43,6 +45,10 @@ public class Order {
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_order_customer")
 	private Customer customer;
+	
+	@OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_order_price")
+	private Price price;
 	
 	public Order() {}
 
@@ -100,7 +106,15 @@ public class Order {
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
+	 
+	public Price getPrice() {
+		return price;
+	}
+
+	public void setPrice(Price price) {
+		this.price = price;
+	}
+
 	public Order updateEntity(UpdateOrderDto dto) {
 		this.description = dto.getDescription() != "" ? dto.getDescription() : this.description;
 		return this;

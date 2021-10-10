@@ -15,7 +15,7 @@
 			<column name="currency" type="varchar(3)">
 				<constraints nullable="false" />
 			</column>
-			<column name="amount" type="bigint">
+			<column name="amount" type="DECIMAL(10,2)">
 				<constraints nullable="false" />
 			</column>
 		</createTable>
