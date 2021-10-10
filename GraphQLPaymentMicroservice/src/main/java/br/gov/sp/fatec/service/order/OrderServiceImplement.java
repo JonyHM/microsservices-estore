@@ -5,16 +5,20 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.Order;
+import br.gov.sp.fatec.model.Price;
 import br.gov.sp.fatec.model.dto.order.CreateOrderDto;
 import br.gov.sp.fatec.model.dto.order.UpdateOrderDto;
 import br.gov.sp.fatec.repository.CustomerRepository;
 import br.gov.sp.fatec.repository.OrderRepository;
+import br.gov.sp.fatec.repository.PriceRepository;
 
 @Service
 public class OrderServiceImplement implements OrderService {
@@ -24,6 +28,9 @@ public class OrderServiceImplement implements OrderService {
 	
 	@Autowired
 	private CustomerRepository customerRepo;
+	
+	@Autowired
+	private PriceRepository priceRepo;
 
 	@Override
 	public List<Order> getAll() {
@@ -31,13 +38,17 @@ public class OrderServiceImplement implements OrderService {
 	}
 
 	@Override
+	@Transactional
 	public Order createOrder(CreateOrderDto dto) {
 		Optional<Customer> optionalCustomer = customerRepo.findByUserId(dto.getUserId());
 		Order order = new Order(dto);
+		Price price = new Price(dto.getPrice());
+		price = priceRepo.save(price);
 		
 		if(optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
 			order.setCustomer(customer);
+			order.setPrice(price);
 			Order newOrder = repository.save(order);
 			
 			Set<Order> orders = customer.getOrders();

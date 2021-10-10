@@ -39,12 +39,19 @@ type Contact {
 	customer: Customer
 }
 
+type Price {
+	id: ID!
+	currency: String!
+	amount: Float!
+}
+
 type Order {
 	id: ID!
 	cartId: String
 	userId: String
 	description: String
 	customer: Customer
+	price: Price
 }
 
 type Query {
@@ -65,6 +72,10 @@ type Query {
 	getCardById(id: ID): Card
 	getCardsByCustomerId(customerId: ID): [Card]
 
+	getPrices: [Price]
+	getPriceById(id: ID): Price
+	getPriceByOrderId(orderId: ID): Price
+	
 	getOrders: [Order]
 	getOrderById(id: ID): Order
 	getOrdersByCustomerId(customerId: ID): [Order]
@@ -136,10 +147,28 @@ input UpdateContactInput {
 	value: String
 }
 
+input CreatePriceInput {
+	currency: String!
+	amount: Float!
+	orderId: ID!
+}
+
+input UpdatePriceInput {
+	priceId: ID!
+	currency: String!
+	amount: Float!
+}
+
+input CreateOrderPriceInput {
+	currency: String!
+	amount: Float!
+}
+
 input CreateOrderInput {
 	cartId: String!
 	userId: String!
 	description: String
+	price: CreateOrderPriceInput!
 }
 
 input UpdateOrderInput {
@@ -163,6 +192,10 @@ type Mutation {
 	createContact(contact: CreateContactInput!): Contact!
 	updateContact(contact: UpdateContactInput!): Contact!
 	deleteContact(contactId: ID!): String!
+	
+	createPrice(price: CreatePriceInput!): Price!
+	updatePrice(price: UpdatePriceInput!): Price!
+	deletePrice(priceId: ID!): String!
 	
 	createOrder(order: CreateOrderInput!): Order!
 	updateOrder(order: UpdateOrderInput!): Order!
