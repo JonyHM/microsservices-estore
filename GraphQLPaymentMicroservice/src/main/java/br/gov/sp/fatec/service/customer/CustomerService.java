@@ -6,6 +6,7 @@ import java.util.UUID;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
 import br.gov.sp.fatec.model.dto.customer.UpdateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.UpdateKafkaCustomerDto;
 
 public interface CustomerService {
 
@@ -14,6 +15,9 @@ public interface CustomerService {
 	public Customer getByCPF(String cpf);
 	public Customer getByUserId(UUID userId);
 	public Customer createCustomer(CreateCustomerDto dto);
+	public Customer updateCustomer(UpdateKafkaCustomerDto dto);
 	public Customer updateCustomer(UpdateCustomerDto dto);
 	public String deleteCustomer(UUID id);
+	public String deleteCustomerByUserId(UUID id);
 }
+

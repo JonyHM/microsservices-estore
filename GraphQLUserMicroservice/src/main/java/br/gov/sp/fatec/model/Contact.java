@@ -112,7 +112,7 @@ public class Contact {
 
 	@Override
 	public String toString() {
-		return "Contact [id=" + id + 
+		return "Contact [id=" + id +
 				", title=" + title + 
 				", type=" + type + 
 				", value=" + value + "]";

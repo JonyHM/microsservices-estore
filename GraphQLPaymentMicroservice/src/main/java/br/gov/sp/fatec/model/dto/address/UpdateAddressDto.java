@@ -101,7 +101,7 @@ public class UpdateAddressDto {
 
 	@Override
 	public String toString() {
-		return "UpdateAddress [addressId=" + addressId + 
+		return "UpdateAddress [addressId=" + addressId +
 				", street=" + street + 
 				", number=" + number + 
 				", district=" + district + 

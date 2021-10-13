@@ -26,10 +26,11 @@
 				<constraints nullable="false" foreignKeyName="address_user_fk" references="User(id_user)"/>
 			</column>
 			<column name="street" type="varchar(50)"/>
-			<column name="number" type="bigint"/>
+			<column name="number" type="varchar(5)"/>
 			<column name="district" type="varchar(50)"/>
 			<column name="complement" type="varchar(200)"/>
 			<column name="city" type="varchar(40)"/>
+			<column name="state" type="varchar(2)"/>
 			<column name="country" type="varchar(40)"/>
 		</createTable>
 		

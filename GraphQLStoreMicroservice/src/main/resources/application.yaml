@@ -21,7 +21,7 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
   kafka:
     consumer:
-      group-id: "test"
+      group-id: "ECOMMERCE-STORE"
       bootstrap-servers:
       - 127.0.0.1:9092
       auto-offset-reset: earliest

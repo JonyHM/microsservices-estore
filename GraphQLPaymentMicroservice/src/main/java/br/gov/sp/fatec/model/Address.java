@@ -15,7 +15,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import br.gov.sp.fatec.model.dto.address.CreateAddressDto;
+import br.gov.sp.fatec.model.dto.address.CreateKafkaAddressDto;
 import br.gov.sp.fatec.model.dto.address.UpdateAddressDto;
+import br.gov.sp.fatec.model.dto.address.UpdateKafkaAddressDto;
 
 @Entity
 public class Address {
@@ -30,6 +32,10 @@ public class Address {
 	@ColumnDefault("random_uuid()")
 	@Type(type = "uuid-char")
 	private UUID id;
+	
+	@Type(type = "uuid-char")
+	@Column(name = "id_user_address")
+	private UUID userAddressId;
 	
 	@Column(length = 50)
 	private String street;
@@ -58,13 +64,16 @@ public class Address {
 	
 	public Address() {}
 
-	public Address(String street, 
+	public Address(
+			UUID userAddressId,
+			String street, 
 			String number, 
 			String district, 
 			String complement, 
 			String city, 
 			String state,
 			String country) {
+		this.userAddressId = userAddressId;
 		this.street = street;
 		this.number = number;
 		this.district = district;
@@ -83,6 +92,17 @@ public class Address {
 		this.state = dto.getState();
 		this.country = dto.getCountry();
 	}
+	
+	public Address(CreateKafkaAddressDto dto) {
+		this.userAddressId = dto.getUserAddressId();
+		this.street = dto.getStreet();
+		this.number = dto.getNumber();
+		this.district = dto.getDistrict();
+		this.complement = dto.getComplement();
+		this.city = dto.getCity();
+		this.state = dto.getState();
+		this.country = dto.getCountry();
+	}
 
 	public UUID getId() {
 		return id;
@@ -90,6 +110,14 @@ public class Address {
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public UUID getUserAddressId() {
+		return userAddressId;
+	}
+
+	public void setUserAddressId(UUID userId) {
+		this.userAddressId = userId;
 	}
 
 	public String getStreet() {
@@ -166,10 +194,23 @@ public class Address {
 		this.country = dto.getCountry() != "" ? dto.getCountry() : this.country;
 		return this;
 	}
+	
+	public Address updateEntity(UpdateKafkaAddressDto dto) {
+		this.userAddressId = dto.getUserAddressId();
+		this.street = dto.getStreet() != "" ? dto.getStreet() : this.street;
+		this.number = dto.getNumber();
+		this.district = dto.getDistrict() != "" ? dto.getDistrict() : this.district;
+		this.complement = dto.getComplement() != "" ? dto.getComplement() : this.complement;
+		this.city = dto.getCity() != "" ? dto.getCity() : this.city;
+		this.state = dto.getState() != "" ? dto.getState() : this.state;
+		this.country = dto.getCountry() != "" ? dto.getCountry() : this.country;
+		return this;
+	}
 
 	@Override
 	public String toString() {
 		return "Address [id=" + id + 
+				", userAddressId=" + userAddressId + 
 				", street=" + street + 
 				", number=" + number + 
 				", district=" + district + 

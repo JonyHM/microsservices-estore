@@ -95,5 +95,4 @@ public class Attribute {
 	public String toString() {
 		return "Attribute [id=" + id + ", name=" + name + ", value=" + value + "]";
 	}
-	
 }

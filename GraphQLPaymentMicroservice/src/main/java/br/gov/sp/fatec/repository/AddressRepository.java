@@ -13,5 +13,5 @@ import br.gov.sp.fatec.model.Address;
 public interface AddressRepository extends JpaRepository<Address, UUID> {
 
 	Optional<List<Address>> findByCustomerId(UUID customerId);
-
+	Optional<Address> findByUserAddressId(UUID userAddressId);
 }

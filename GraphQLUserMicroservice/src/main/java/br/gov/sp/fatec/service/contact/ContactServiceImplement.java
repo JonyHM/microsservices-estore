@@ -10,10 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.exception.NotFoundException;
+import br.gov.sp.fatec.kafka.producer.UserKafkaTopicProducer;
 import br.gov.sp.fatec.model.Contact;
 import br.gov.sp.fatec.model.User;
 import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.CreatekafkaContactDto;
 import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
+import br.gov.sp.fatec.model.dto.contact.UpdateKafkaContactDto;
 import br.gov.sp.fatec.repository.ContactRepository;
 import br.gov.sp.fatec.repository.UserRepository;
 
@@ -25,6 +28,9 @@ public class ContactServiceImplement implements ContactService {
 	
 	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private UserKafkaTopicProducer producer;
 	
 	@Override
 	public List<Contact> getAll() {
@@ -46,7 +52,10 @@ public class ContactServiceImplement implements ContactService {
 		userRepo.save(foundUser);
 		
 		contact.setUser(foundUser);
-		return repository.save(contact);
+		contact = repository.save(contact);
+		this.sendContactCreatedEvent(contact);
+		
+		return contact;
 	}
 	
 	@Override
@@ -80,7 +89,10 @@ public class ContactServiceImplement implements ContactService {
 		}		
 		Contact contact = optionalContact.get();
 		contact = contact.updateEntity(dto);
-		return repository.save(contact); 
+		contact = repository.save(contact);
+		this.sendContactUpdatedEvent(contact);
+		
+		return contact;
 	}
 
 	@Override
@@ -93,7 +105,22 @@ public class ContactServiceImplement implements ContactService {
 		
 		Contact contact = optionalContact.get();
 		repository.delete(contact);
+		this.sendContactDeletedEvent(contact);
 		
 		return String.format("Contact '%s' deleted successfully!", contact.getTitle());
+	}
+	
+	private void sendContactCreatedEvent(Contact contact) {
+		CreatekafkaContactDto dto = new CreatekafkaContactDto(contact);
+		producer.sendContactCreated(dto);
+	}
+	
+	private void sendContactUpdatedEvent(Contact contact) {
+		UpdateKafkaContactDto dto = new UpdateKafkaContactDto(contact);
+		producer.sendContactUpdated(dto);
+	}
+	
+	private void sendContactDeletedEvent(Contact contact) {
+		producer.sendContactDeleted(contact.getId());
 	}
 }

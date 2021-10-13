@@ -13,7 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Price;
 import br.gov.sp.fatec.model.Product;
-import br.gov.sp.fatec.model.dto.StartOrderDto;
+import br.gov.sp.fatec.model.dto.cart.BaseCartDto;
+import br.gov.sp.fatec.model.dto.order.StartOrderDto;
 import br.gov.sp.fatec.model.dto.product.CreateProductDto;
 import br.gov.sp.fatec.model.dto.product.ProductDto;
 import br.gov.sp.fatec.model.dto.product.UpdateProductDto;
@@ -88,13 +89,50 @@ public class ProductServiceImplement implements ProductService {
 
 	@Override
 	@Transactional
-	public void preCreateProduct(StartOrderDto dto) {
+	public void reserveProduct(StartOrderDto dto) {
 		for(ProductDto productDto : dto.getProducts()) {
 			UUID productId = productDto.getProductId();
-			Product product = repository.getById(productId);
+			Optional<Product> optionalProduct = repository.findById(productId);
+			
+			Product product = optionalProduct.orElseThrow(
+				() -> new NotFoundException(String.format("Could not find product with id '%s'", productId))
+			);
 			product.addUnavailableQuantity(productDto.getQuantity());
 			repository.save(product);
 		}
 	}
 
+	@Override
+	public void updatePaidProducts(BaseCartDto dto) {
+		if(dto.getProducts().size() > 0) {
+			for (ProductDto product : dto.getProducts()) {
+				UUID id = product.getProductId();
+				Optional<Product> optionalProduct = repository.findById(id);
+				
+				Product foundProduct = optionalProduct.orElseThrow(
+					() -> new NotFoundException(String.format("Could not find product with id '%s'", id))
+				);
+				
+				foundProduct.updatePaidCartProduct(product.getQuantity());
+				repository.save(foundProduct);
+			}
+		}
+	}
+	
+	@Override
+	public void updateCanceledProducts(BaseCartDto dto) {
+		if(dto.getProducts().size() > 0) {
+			for (ProductDto product : dto.getProducts()) {
+				UUID id = product.getProductId();
+				Optional<Product> optionalProduct = repository.findById(id);
+				
+				Product foundProduct = optionalProduct.orElseThrow(
+					() -> new NotFoundException(String.format("Could not find product with id '%s'", id))
+				);
+				
+				foundProduct.updateCanceledCartProduct(product.getQuantity());
+				repository.save(foundProduct);
+			}
+		}
+	}
 }

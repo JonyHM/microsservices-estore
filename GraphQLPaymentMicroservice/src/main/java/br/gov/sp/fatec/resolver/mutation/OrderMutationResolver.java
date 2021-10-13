@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import br.gov.sp.fatec.model.Order;
 import br.gov.sp.fatec.model.dto.order.CreateOrderDto;
+import br.gov.sp.fatec.model.dto.order.OrderManagementDto;
 import br.gov.sp.fatec.model.dto.order.UpdateOrderDto;
 import br.gov.sp.fatec.service.order.OrderService;
 import graphql.kickstart.tools.GraphQLMutationResolver;
@@ -27,5 +28,13 @@ public class OrderMutationResolver implements GraphQLMutationResolver {
 	
 	public String deleteOrder(UUID orderId) {
 		return service.deleteOrder(orderId);
+	}
+	
+	public String payOrder(OrderManagementDto dto) {
+		return service.payOrder(dto);
+	}
+	
+	public String cancelOrder(OrderManagementDto dto) {
+		return service.cancelOrder(dto);
 	}
 }

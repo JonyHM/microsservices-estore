@@ -12,7 +12,9 @@ import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Address;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.dto.address.CreateAddressDto;
+import br.gov.sp.fatec.model.dto.address.CreateKafkaAddressDto;
 import br.gov.sp.fatec.model.dto.address.UpdateAddressDto;
+import br.gov.sp.fatec.model.dto.address.UpdateKafkaAddressDto;
 import br.gov.sp.fatec.repository.AddressRepository;
 import br.gov.sp.fatec.repository.CustomerRepository;
 
@@ -55,6 +57,26 @@ public class AddressServiceImplement implements AddressService {
 		}		
 		throw new NotFoundException(String.format("Customer with id %s does not exist!", dto.getCustomerId()));
 	}
+	
+	@Override
+	public Address createkafkaAddress(CreateKafkaAddressDto dto) {
+		Optional<Customer> optionalCustomer = customerRepo.findByUserId(dto.getUserId());
+		
+		Address address = new Address(dto);
+		
+		if(optionalCustomer.isPresent()) {
+			Customer customer = optionalCustomer.get();
+			address.setCustomer(customer);
+			Address newAddress = repository.save(address);
+			
+			Set<Address> addresses = customer.getAddresses();
+			addresses.add(newAddress);
+			customer.setAddresses(addresses);
+			customerRepo.save(customer);
+			return newAddress;
+		}		
+		throw new NotFoundException(String.format("Customer with id %s does not exist!", dto.getUserId()));
+	}
 
 	@Override
 	public Address getById(UUID id) {
@@ -87,7 +109,19 @@ public class AddressServiceImplement implements AddressService {
 		}
 		throw new NotFoundException(String.format("Could not find address with id %s!", id));
 	}
-
+	
+	@Override
+	public Address updateKafkaAddress(UpdateKafkaAddressDto dto) {
+		UUID id = dto.getUserAddressId();
+		Optional<Address> optionalAddress = repository.findByUserAddressId(id);
+		
+		if(optionalAddress.isPresent()) {
+			Address address = optionalAddress.get(); 
+			return repository.save(address.updateEntity(dto));
+		}
+		throw new NotFoundException(String.format("Could not find address with id %s!", id));
+	}
+	
 	@Override
 	public String deleteAddress(UUID id) {
 		Optional<Address> optionalAddress = repository.findById(id);
@@ -100,4 +134,15 @@ public class AddressServiceImplement implements AddressService {
 		throw new NotFoundException(String.format("Could not find address with id %s!", id));
 	}
 
+	@Override
+	public String deleteByUserAddressId(UUID id) {
+		Optional<Address> optionalAddress = repository.findByUserAddressId(id);
+		
+		if(optionalAddress.isPresent()) {
+			Address address = optionalAddress.get();
+			repository.delete(address);
+			return String.format("Address '%s' deleted successfully!", id);
+		}
+		throw new NotFoundException(String.format("Could not find address with id %s!", id));
+	}
 }
