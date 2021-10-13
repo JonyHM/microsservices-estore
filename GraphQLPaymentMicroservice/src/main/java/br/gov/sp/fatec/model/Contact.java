@@ -15,7 +15,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.CreatekafkaContactDto;
 import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
+import br.gov.sp.fatec.model.dto.contact.UpdateKafkaContactDto;
 
 @Entity
 public class Contact {
@@ -30,6 +32,10 @@ public class Contact {
 	@ColumnDefault("random_uuid()")
 	@Type(type = "uuid-char")
 	private UUID id;
+	
+	@Type(type = "uuid-char")
+	@Column(name = "id_user_contact")
+	private UUID userContactId;
 	
 	@Column(length = 50)
 	private String title;
@@ -49,13 +55,22 @@ public class Contact {
 	public Contact(
 			String title, 
 			String type, 
-			String value) {
+			String value,
+			UUID userContactId) {
 		this.title = title;
 		this.type = type;
 		this.value = value;
+		this.userContactId = userContactId;
 	}
 
 	public Contact(CreateContactDto dto) {
+		this.title = dto.getTitle();
+		this.type = dto.getType();
+		this.value = dto.getValue();
+	}
+
+	public Contact(CreatekafkaContactDto dto) {
+		this.userContactId = dto.getUserContactId();
 		this.title = dto.getTitle();
 		this.type = dto.getType();
 		this.value = dto.getValue();
@@ -67,6 +82,14 @@ public class Contact {
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+
+	public UUID getUserContactId() {
+		return userContactId;
+	}
+
+	public void setUserContactId(UUID userContactId) {
+		this.userContactId = userContactId;
 	}
 
 	public String getTitle() {
@@ -107,10 +130,19 @@ public class Contact {
 		this.value = dto.getValue() != "" ? dto.getValue() : this.value;
 		return this;
 	}
+	
+	public Contact updateEntity(UpdateKafkaContactDto dto) {
+		this.userContactId = dto.getUserContactId();
+		this.title = dto.getTitle() != "" ? dto.getTitle() : this.title;
+		this.type = dto.getType() != "" ? dto.getType() : this.type;
+		this.value = dto.getValue() != "" ? dto.getValue() : this.value;
+		return this;
+	}
 
 	@Override
 	public String toString() {
-		return "Contact [id=" + id + 
+		return "Contact [id=" + id +
+				", userContactId=" + userContactId +
 				", title=" + title + 
 				", type=" + type + 
 				", value=" + value + "]";

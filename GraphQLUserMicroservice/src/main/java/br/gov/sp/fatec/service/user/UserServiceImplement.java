@@ -9,7 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.exception.NotFoundException;
+import br.gov.sp.fatec.kafka.producer.UserKafkaTopicProducer;
 import br.gov.sp.fatec.model.User;
+import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.UpdateKafkaCustomerDto;
 import br.gov.sp.fatec.model.dto.user.CrateUserDto;
 import br.gov.sp.fatec.model.dto.user.UpdateUserDto;
 import br.gov.sp.fatec.repository.UserRepository;
@@ -19,6 +22,9 @@ public class UserServiceImplement implements UserService {
 	
 	@Autowired
 	private UserRepository repository;
+	
+	@Autowired
+	private UserKafkaTopicProducer producer;
 
 	@Override
 	public List<User> getAll() {
@@ -27,7 +33,9 @@ public class UserServiceImplement implements UserService {
 	
 	@Override
 	public User createUser(CrateUserDto user) {
-		return repository.save(new User(user));
+		User newUser = repository.save(new User(user)); 
+		this.sendUserCreatedEvent(newUser);
+		return newUser;
 	}
 	
 	@Override
@@ -53,7 +61,9 @@ public class UserServiceImplement implements UserService {
 		
 		User user = optionalUser.get();
 		user = user.updateEntity(dto);
-		return repository.save(user);
+		user = repository.save(user);
+		this.sendUserUpdatedEvent(user);
+		return user;
 	}
 
 	@Override
@@ -66,7 +76,23 @@ public class UserServiceImplement implements UserService {
 		
 		User user = optionalUser.get();
 		repository.delete(user);
+		this.sendUserDeletedEvent(user);
 		
-		return String.format("User '%s' delete successfully!", user.getName());
+		return String.format("User '%s' deleted successfully!", user.getName());
+	}
+	
+	
+	private void sendUserCreatedEvent(User user) {
+		CreateCustomerDto dto = new CreateCustomerDto(user);
+		producer.sendUserCreated(dto);
+	}
+	
+	private void sendUserUpdatedEvent(User user) {
+		UpdateKafkaCustomerDto dto = new UpdateKafkaCustomerDto(user);
+		producer.sendUserUpdated(dto);
+	}
+	
+	private void sendUserDeletedEvent(User user) {
+		producer.sendUserDeleted(user.getId());
 	}
 }

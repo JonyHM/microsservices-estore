@@ -5,6 +5,8 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -17,7 +19,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import br.gov.sp.fatec.model.dto.order.CreateOrderDto;
+import br.gov.sp.fatec.model.dto.order.StartOrderDto;
 import br.gov.sp.fatec.model.dto.order.UpdateOrderDto;
+import br.gov.sp.fatec.model.enums.OrderStatus;
 
 @Entity(name = "Order_Cart")
 public class Order {
@@ -42,6 +46,10 @@ public class Order {
 	@Column(length = 255)
 	private String description;
 	
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private OrderStatus status;
+	
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_order_customer")
 	private Customer customer;
@@ -59,12 +67,21 @@ public class Order {
 		this.cartId = cartId;
 		this.userId = userId;
 		this.description = description;
+		this.status = OrderStatus.OPENED;
 	}
 	
 	public Order(CreateOrderDto dto) {
 		this.cartId = dto.getCartId();
 		this.description = dto.getDescription();
 		this.userId = dto.getUserId();
+		this.status = OrderStatus.OPENED;
+	}
+	
+	public Order(StartOrderDto dto) {
+		this.cartId = dto.getCartId();
+		this.description = dto.getDescription();
+		this.userId = dto.getUserId();
+		this.status = OrderStatus.OPENED;
 	}
 
 	public UUID getId() {
@@ -99,6 +116,14 @@ public class Order {
 		this.description = description;
 	}
 
+	public OrderStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -123,7 +148,8 @@ public class Order {
 	@Override
 	public String toString() {
 		return "Order [id=" + id + 
-				", cartId=" + cartId + 
+				", cartId=" + cartId +
+				", status=" + status + 
 				", user id=" + userId + 
 				", description=" + description + "]";
 	}

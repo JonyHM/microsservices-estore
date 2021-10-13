@@ -24,7 +24,8 @@ public class CreateAddressDto {
 			String city,
 			String state,
 			String country,
-			UUID customerId) {
+			UUID customerId,
+			UUID userId) {
 		this.street = street;
 		this.number = number;
 		this.district = district;
@@ -33,6 +34,7 @@ public class CreateAddressDto {
 		this.state = state;
 		this.country = country;
 		this.customerId = customerId;
+		this.userId = userId;
 	}
 
 	public String getStreet() {

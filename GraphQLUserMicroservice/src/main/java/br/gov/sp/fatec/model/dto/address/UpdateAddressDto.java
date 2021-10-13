@@ -2,11 +2,13 @@ package br.gov.sp.fatec.model.dto.address;
 
 import java.util.UUID;
 
+import br.gov.sp.fatec.model.Address;
+
 public class UpdateAddressDto {
 
 	private UUID addressId;
 	private String street; 
-	private Long number;
+	private String number;
 	private String district;
 	private String complement;
 	private String city;
@@ -18,7 +20,7 @@ public class UpdateAddressDto {
 	public UpdateAddressDto(
 			UUID addressId, 
 			String street, 
-			Long number, 
+			String number, 
 			String district, 
 			String complement, 
 			String city,
@@ -32,6 +34,17 @@ public class UpdateAddressDto {
 		this.city = city;
 		this.state = state;
 		this.country = country;
+	}
+
+	public UpdateAddressDto(Address address) {
+		this.addressId = address.getId();
+		this.street = address.getStreet();
+		this.number = address.getNumber();
+		this.district = address.getDistrict();
+		this.complement = address.getComplement();
+		this.city = address.getCity();
+		this.state = address.getState();
+		this.country = address.getCountry();
 	}
 
 	public UUID getAddressId() {
@@ -50,11 +63,11 @@ public class UpdateAddressDto {
 		this.street = street;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

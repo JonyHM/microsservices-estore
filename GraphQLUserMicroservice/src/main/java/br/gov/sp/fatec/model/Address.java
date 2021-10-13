@@ -35,7 +35,7 @@ public class Address {
 	private String street;
 	
 	@Column(name = "number")
-	private Long number;
+	private String number;
 	
 	@Column(length = 50)
 	private String district;
@@ -70,7 +70,7 @@ public class Address {
 
 	public Address(
 			String street, 
-			Long number, 
+			String number, 
 			String district, 
 			String complement, 
 			String city,
@@ -103,11 +103,11 @@ public class Address {
 		this.street = street;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 

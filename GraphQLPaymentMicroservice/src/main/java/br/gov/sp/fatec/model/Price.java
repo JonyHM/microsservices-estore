@@ -50,7 +50,7 @@ public class Price {
 		this.currency = dto.getCurrency();
 		this.amount = dto.getAmount();
 	}
-	
+	 
 	public Price(
 			String currency, 
 			Double amount) {

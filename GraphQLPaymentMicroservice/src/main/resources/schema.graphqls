@@ -21,6 +21,7 @@ type Card {
 
 type Address {
 	id: ID!
+	userAddressId: String
 	street: String
 	number: String
 	district: String
@@ -33,6 +34,7 @@ type Address {
 
 type Contact {
 	id: ID!
+	userContactId: String
 	title: String
 	type: String
 	value: String
@@ -50,6 +52,7 @@ type Order {
 	cartId: String
 	userId: String
 	description: String
+	status: String
 	customer: Customer
 	price: Price
 }
@@ -176,6 +179,12 @@ input UpdateOrderInput {
 	description: String
 }
 
+input OrderManagementInput {
+	orderId: ID!
+	cardId: ID!
+	cartId: String!
+}
+
 type Mutation {
 	createCustomer(customer: CreateCustomerInput!): Customer!
 	updateCustomer(customer: UpdateCustomerInput!): Customer!
@@ -200,4 +209,6 @@ type Mutation {
 	createOrder(order: CreateOrderInput!): Order!
 	updateOrder(order: UpdateOrderInput!): Order!
 	deleteOrder(orderId: ID!): String!
+	payOrder(payment: OrderManagementInput!): String!
+	cancelOrder(payment: OrderManagementInput!): String!
 }

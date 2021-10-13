@@ -10,7 +10,7 @@ type User {
 type Address {
 	id: ID!
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String
@@ -55,7 +55,7 @@ input UpdateUserInput {
 
 input CreateAdressInput {
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String
@@ -67,7 +67,7 @@ input CreateAdressInput {
 input UpdateAdressInput {
 	addressId: ID!
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String

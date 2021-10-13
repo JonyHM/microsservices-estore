@@ -5,7 +5,6 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.gov.sp.fatec.kafka.producer.KafkaTopicProducer;
 import br.gov.sp.fatec.model.Contact;
 import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
 import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
@@ -18,12 +17,9 @@ public class ContactMutationResolver implements GraphQLMutationResolver {
 	@Autowired
 	private ContactService service;
 	
-	@Autowired
-	private KafkaTopicProducer producer;
 
 	public Contact createContact(CreateContactDto contact) {
 		Contact contactModel =  service.createContact(contact);
-		this.sendContactCreatedEvent(contactModel);
 		return contactModel;
 	}
 	
@@ -35,8 +31,4 @@ public class ContactMutationResolver implements GraphQLMutationResolver {
 		return service.deleteContact(contactId);
 	}
 	
-	private void sendContactCreatedEvent(Contact contact) {
-		CreateContactDto dto = new CreateContactDto(contact);
-		producer.sendContactCreated(dto);
-	}
 }

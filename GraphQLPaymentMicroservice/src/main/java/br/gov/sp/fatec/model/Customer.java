@@ -19,6 +19,7 @@ import org.hibernate.annotations.Type;
 
 import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
 import br.gov.sp.fatec.model.dto.customer.UpdateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.UpdateKafkaCustomerDto;
 
 @Entity
 public class Customer {
@@ -161,6 +162,12 @@ public class Customer {
 	}
 	
 	public Customer updateEntity(UpdateCustomerDto dto) {
+		this.name = dto.getName() != "" ? dto.getName() : this.name;
+		this.cpf = dto.getCpf() != "" ? dto.getCpf() : this.cpf;
+		return this;
+	}
+	
+	public Customer updateEntity(UpdateKafkaCustomerDto dto) {
 		this.name = dto.getName() != "" ? dto.getName() : this.name;
 		this.cpf = dto.getCpf() != "" ? dto.getCpf() : this.cpf;
 		return this;

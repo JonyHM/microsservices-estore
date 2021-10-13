@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.model.dto;
+package br.gov.sp.fatec.model.dto.order;
 
 import java.util.Set;
 import java.util.UUID;

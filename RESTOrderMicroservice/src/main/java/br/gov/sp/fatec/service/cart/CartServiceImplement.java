@@ -15,15 +15,20 @@ import org.springframework.stereotype.Service;
 
 import br.gov.sp.fatec.exception.InvalidValueException;
 import br.gov.sp.fatec.exception.NotFoundException;
+import br.gov.sp.fatec.kafka.producer.OrderKafkaTopicProducer;
 import br.gov.sp.fatec.model.Cart;
 import br.gov.sp.fatec.model.OrderProduct;
 import br.gov.sp.fatec.model.Price;
 import br.gov.sp.fatec.model.dto.cart.AddProductDto;
+import br.gov.sp.fatec.model.dto.cart.BaseCartDto;
 import br.gov.sp.fatec.model.dto.cart.CreateCartDto;
 import br.gov.sp.fatec.model.dto.cart.RemoveProductDto;
 import br.gov.sp.fatec.model.dto.cart.UpdateCartDto;
+import br.gov.sp.fatec.model.dto.order.KafkaOrderDto;
+import br.gov.sp.fatec.model.dto.order.StartOrderDto;
 import br.gov.sp.fatec.model.dto.orderProduct.CreateOrderProductDto;
 import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
+import br.gov.sp.fatec.model.enums.CartStatus;
 import br.gov.sp.fatec.repository.CartRepository;
 import br.gov.sp.fatec.repository.OrderProductRepository;
 import br.gov.sp.fatec.repository.PriceRepository;
@@ -39,6 +44,9 @@ public class CartServiceImplement implements CartService {
 	
 	@Autowired
 	private PriceRepository priceRepository;
+	
+	@Autowired
+	private OrderKafkaTopicProducer producer;
 
 	@Override
 	public Set<Cart> findCarts() {
@@ -105,6 +113,8 @@ public class CartServiceImplement implements CartService {
 		cart.setTotalValue(price);
 		cart.setProducts(products);
 		cart = repository.save(cart);
+		
+		this.sendOrderStartedEvent(cart);
 		
 		return cart;
 	}
@@ -242,5 +252,51 @@ public class CartServiceImplement implements CartService {
 		
 		return repository.save(cart);
 	}
+	
+	@Override
+	public void updatePaidCart(KafkaOrderDto dto) {
+		UUID id = dto.getCartId();
+		Optional<Cart> optionalCart = repository.findById(id);
+		
+		if(optionalCart.isPresent()) {
+			Cart cart = optionalCart.get();
+			cart.setStatus(CartStatus.PAID);
+			cart = repository.save(cart);
+			this.sendCartPaidEvent(cart);
+			return;
+		}
+		
+		throw new NotFoundException(String.format("Could not find Cart with id '%s'", id));		
+	}
 
+	@Override
+	public void updateCanceledCart(KafkaOrderDto dto) {
+		UUID id = dto.getCartId();
+		Optional<Cart> optionalCart = repository.findById(id);
+		
+		if(optionalCart.isPresent()) {
+			Cart cart = optionalCart.get();
+			cart.setStatus(CartStatus.CANCELED);
+			cart = repository.save(cart);
+			this.sendCartCanceledEvent(cart);
+			return;
+		}
+		
+		throw new NotFoundException(String.format("Could not find Cart with id '%s'", id));
+	}
+	
+	private void sendOrderStartedEvent(Cart cart) {
+		StartOrderDto dto = new StartOrderDto(cart);
+		producer.sendOrderStarted(dto);
+	}
+	
+	private void sendCartPaidEvent(Cart cart) {
+		BaseCartDto dto = new BaseCartDto(cart);
+		producer.sendCartPaid(dto);
+	}
+	
+	private void sendCartCanceledEvent(Cart cart) {
+		BaseCartDto dto = new BaseCartDto(cart);
+		producer.sendCartCanceled(dto);
+	}
 }

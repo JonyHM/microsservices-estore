@@ -11,6 +11,7 @@ import br.gov.sp.fatec.exception.NotFoundException;
 import br.gov.sp.fatec.model.Customer;
 import br.gov.sp.fatec.model.dto.customer.CreateCustomerDto;
 import br.gov.sp.fatec.model.dto.customer.UpdateCustomerDto;
+import br.gov.sp.fatec.model.dto.customer.UpdateKafkaCustomerDto;
 import br.gov.sp.fatec.repository.CustomerRepository;
 
 @Service
@@ -72,6 +73,19 @@ public class CustomerServiceImplement implements CustomerService {
 		
 		throw new NotFoundException(String.format("Could not find Customer with id '%s'!", id));
 	}
+	
+	@Override
+	public Customer updateCustomer(UpdateKafkaCustomerDto dto) {
+		UUID id = dto.getUserId();
+		Optional<Customer> optionalCustomer = repository.findByUserId(id);
+		
+		if(optionalCustomer.isPresent()) {
+			Customer customer = optionalCustomer.get(); 
+			return repository.save(customer.updateEntity(dto));
+		}
+		
+		throw new NotFoundException(String.format("Could not find Customer with id '%s'!", id));
+	}
 
 	@Override
 	public String deleteCustomer(UUID id) {
@@ -84,6 +98,19 @@ public class CustomerServiceImplement implements CustomerService {
 			return String.format("Customer '%s' deleted successfully!", customer.getName());
 		}
 		throw new NotFoundException(String.format("Could not find Customer with id '%s'!", id));
+	}
+	
+	@Override
+	public String deleteCustomerByUserId(UUID id) {
+		Optional<Customer> optionalCustomer = repository.findByUserId(id);
+		
+		if(optionalCustomer.isPresent()) {
+			Customer customer = optionalCustomer.get();
+			repository.delete(customer);
+			
+			return String.format("Customer '%s' deleted successfully!", customer.getName());
+		}
+		throw new NotFoundException(String.format("Could not find Customer with user id '%s'!", id));
 	}
 
 }

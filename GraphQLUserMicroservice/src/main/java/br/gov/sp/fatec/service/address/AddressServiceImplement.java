@@ -11,10 +11,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.gov.sp.fatec.exception.NotFoundException;
+import br.gov.sp.fatec.kafka.producer.UserKafkaTopicProducer;
 import br.gov.sp.fatec.model.Address;
 import br.gov.sp.fatec.model.User;
 import br.gov.sp.fatec.model.dto.address.CreateAddressDto;
+import br.gov.sp.fatec.model.dto.address.CreateKafkaAddressDto;
 import br.gov.sp.fatec.model.dto.address.UpdateAddressDto;
+import br.gov.sp.fatec.model.dto.address.UpdateKafkaAddressDto;
 import br.gov.sp.fatec.repository.AddressRepository;
 import br.gov.sp.fatec.repository.UserRepository;
 
@@ -26,6 +29,9 @@ public class AddressServiceImplement implements AddressService {
 	
 	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private UserKafkaTopicProducer producer;
 
 	@Override
 	public Set<Address> getAll() {
@@ -48,8 +54,10 @@ public class AddressServiceImplement implements AddressService {
 		userRepo.save(foundUser);
 		
 		newAddress.setUser(foundUser);
+		newAddress = repository.save(newAddress);
+		this.sendAddressCreatedEvent(newAddress);
 		
-		return repository.save(newAddress);
+		return newAddress;
 	}
 	
 	@Override
@@ -86,6 +94,8 @@ public class AddressServiceImplement implements AddressService {
 		Address address = optionalAddress.get();
 		address = address.updateEntity(dto);
 		address = repository.save(address);
+		
+		this.sendAddressUpdatedEvent(address);
 		return address;
 	}
 
@@ -99,7 +109,22 @@ public class AddressServiceImplement implements AddressService {
 		
 		Address address = optionalAddress.get();
 		repository.delete(address);
+		this.sendAddressDeletedEvent(address);
 		
 		return String.format("Address with id '%s' deleted successfully!", address.getId());
+	}
+	
+	private void sendAddressCreatedEvent(Address address) {
+		CreateKafkaAddressDto dto = new CreateKafkaAddressDto(address);
+		producer.sendAddressCreated(dto);
+	}
+	
+	private void sendAddressUpdatedEvent(Address address) {
+		UpdateKafkaAddressDto dto = new UpdateKafkaAddressDto(address);
+		producer.sendAddressUpdated(dto);
+	}
+	
+	private void sendAddressDeletedEvent(Address address) {
+		producer.sendAddressDeleted(address.getId());
 	}
 }

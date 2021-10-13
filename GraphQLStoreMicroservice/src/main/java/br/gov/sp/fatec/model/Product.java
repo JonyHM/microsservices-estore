@@ -141,6 +141,35 @@ public class Product {
 		this.unavailableQuantity = this.unavailableQuantity != null 
 				? this.unavailableQuantity + unavailableQuantity 
 				: unavailableQuantity;
+		
+		this.quantity = this.quantity != null 
+				? this.quantity >= unavailableQuantity 
+					? this.quantity - unavailableQuantity
+					: 0
+				: 0;
+	}
+	
+	public void updatePaidCartProduct(Long quantity) {
+		this.unavailableQuantity = this.unavailableQuantity != null 
+				? this.unavailableQuantity >= quantity 
+					? this.unavailableQuantity - quantity
+					: 0
+				: 0;
+	}
+	
+	public void updateCanceledCartProduct(Long quantity) {
+		
+		this.unavailableQuantity = this.unavailableQuantity != null 
+				? this.unavailableQuantity >= quantity 
+					? this.unavailableQuantity - quantity
+					: 0
+				: 0;
+		
+		this.quantity = this.quantity != null 
+				? this.quantity >= quantity 
+					? this.quantity + quantity
+					: 0
+				: 0;
 	}
 	
 	public Product updateEntity(UpdateProductDto dto) {

@@ -2,14 +2,14 @@ package br.gov.sp.fatec.model.dto.order;
 
 import java.util.UUID;
 
-public class KafkaTopicOrderDto {
+public class KafkaOrderDto {
 
 	private UUID cartId;
 	private UUID orderId;
 	
-	public KafkaTopicOrderDto() {}
+	public KafkaOrderDto() {}
 
-	public KafkaTopicOrderDto(
+	public KafkaOrderDto(
 			UUID cartId, 
 			UUID orderId) {
 		this.cartId = cartId;

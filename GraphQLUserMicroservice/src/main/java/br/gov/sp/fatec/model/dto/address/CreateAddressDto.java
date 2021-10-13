@@ -6,14 +6,14 @@ import br.gov.sp.fatec.model.Address;
 
 public class CreateAddressDto {
 
+	private UUID userId;
 	private String street; 
-	private Long number;
+	private String number;
 	private String district;
 	private String complement;
 	private String city;
 	private String state;
 	private String country;
-	private UUID userId;
 
 	public CreateAddressDto() {}
 	
@@ -25,18 +25,18 @@ public class CreateAddressDto {
 		this.city = address.getCity();
 		this.state = address.getState();
 		this.country = address.getCountry();
-		this.userId = address.getUser().getId();
 	}
 
 	public CreateAddressDto(
+			UUID userId,
 			String street, 
-			Long number, 
+			String number, 
 			String district, 
 			String complement, 
 			String city,
 			String state,
-			String country,
-			UUID userId) {
+			String country) {
+		this.userId = userId; 
 		this.street = street;
 		this.number = number;
 		this.district = district;
@@ -44,6 +44,13 @@ public class CreateAddressDto {
 		this.city = city;
 		this.state = state;
 		this.country = country;
+	}
+
+	public UUID getUserId() {
+		return userId;
+	}
+
+	public void setUserId(UUID userId) {
 		this.userId = userId;
 	}
 
@@ -55,11 +62,11 @@ public class CreateAddressDto {
 		this.street = street;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
@@ -103,24 +110,16 @@ public class CreateAddressDto {
 		this.country = country;
 	}
 
-	public UUID getUserId() {
-		return userId;
-	}
-
-	public void setUserId(UUID userId) {
-		this.userId = userId;
-	}
-
 	@Override
 	public String toString() {
-		return "CreateAddressDto [street=" + street + 
+		return "CreateAddressDto [userId" + userId +
+				", street=" + street +
 				", number=" + number + 
 				", district=" + district + 
 				", complement=" + complement + 
 				", city=" + city +
 				", state=" + state +
-				", country=" + country + 
-				", userId=" + userId + "]";
+				", country=" + country + "]";
 	}
 	
 }
