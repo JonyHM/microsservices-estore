@@ -7,7 +7,7 @@
 	http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
 	
 	<changeSet id="Create Schema" author="Jonathas H. Moraes">
-		<createTable tableName="User">
+		<createTable tableName="user">
 			<column name="id_user" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="user_id_pk" />
 			</column>
@@ -18,7 +18,7 @@
 			<column name="email" type="varchar(50)"></column>
 		</createTable>
 		
-		<createTable tableName="Address">
+		<createTable tableName="address">
 			<column name="id_address" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="address_id_pk" />
 			</column>
@@ -34,7 +34,7 @@
 			<column name="country" type="varchar(40)"/>
 		</createTable>
 		
-		<createTable tableName="Contact">
+		<createTable tableName="contact">
 			<column name="id_contact" type="varchar(255)">
 				<constraints nullable="false" primaryKey="true" primaryKeyName="contact_id_pk" />
 			</column>

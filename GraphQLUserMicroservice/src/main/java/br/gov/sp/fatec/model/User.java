@@ -11,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -20,6 +21,7 @@ import br.gov.sp.fatec.model.dto.user.CrateUserDto;
 import br.gov.sp.fatec.model.dto.user.UpdateUserDto;
 
 @Entity
+@Table(name = "user")
 public class User {
 
 	@Id
