@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GraphQlOrderMicroserviceApplication {
+public class RESTOrderMicroserviceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GraphQlOrderMicroserviceApplication.class, args);
+		SpringApplication.run(RESTOrderMicroserviceApplication.class, args);
 	}
 
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,6 +19,7 @@ import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
 import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
 
 @Entity
+@Table(name = "contact")
 public class Contact {
 
 	@Id
