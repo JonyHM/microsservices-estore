@@ -61,7 +61,7 @@ services:
       MYSQL_USER: username # change
       MYSQL_PASSWORD: passwd # change
     ports:
-      - 3306:3306
+      - 3307:3306
     logging:
       driver: local
     networks:
@@ -72,7 +72,7 @@ services:
   store:
     build: ./GraphQLStoreMicroservice 
     ports:
-      - "8080:8080"
+      - "8081:8080"
     restart: always
     depends_on: 
       - kafka
@@ -83,7 +83,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: passwd # change
       SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.mariadb.jdbc.Driver
       SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.MariaDBDialect
-      SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: kafka:9092
     links:
       - store_db:app_db
     networks: 
@@ -99,7 +99,7 @@ services:
       MYSQL_USER: username # change
       MYSQL_PASSWORD: passwd # change
     ports:
-      - 3306:3306
+      - 3308:3306
     logging:
       driver: local
     networks:
@@ -110,7 +110,7 @@ services:
   order:
     build: ./RESTOrderMicroservice 
     ports:
-      - "8080:8080"
+      - "8082:8080"
     restart: always
     depends_on: 
       - kafka
@@ -122,6 +122,7 @@ services:
       SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.mariadb.jdbc.Driver
       SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.MariaDBDialect
       SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: kafka:9092
     links:
       - order_db:app_db
     networks: 
@@ -137,7 +138,7 @@ services:
       MYSQL_USER: username # change
       MYSQL_PASSWORD: passwd # change
     ports:
-      - 3306:3306
+      - 3309:3306
     logging:
       driver: local
     networks:
@@ -148,7 +149,7 @@ services:
   payment:
     build: ./GraphQLPaymentMicroservice 
     ports:
-      - "8080:8080"
+      - "8083:8080"
     restart: always
     depends_on: 
       - kafka
@@ -160,6 +161,7 @@ services:
       SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.mariadb.jdbc.Driver
       SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.MariaDBDialect
       SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: kafka:9092
     links:
       - payment_db:app_db
     networks: 
@@ -175,7 +177,7 @@ services:
       MYSQL_USER: username # change
       MYSQL_PASSWORD: passwd # change
     ports:
-      - 3306:3306
+      - 3310:3306
     logging:
       driver: local
     networks:

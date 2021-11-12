@@ -1,5 +1,5 @@
 server:
- port: 8081
+ port: 8080
 graphql:
   servlet:
     mapping: /graphql
@@ -19,12 +19,16 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
-  kafka:    consumer:
-      group-id: "ECOMMERCE-PAYMENT"      bootstrap-servers:      - 127.0.0.1:9092
+  kafka:
+    consumer:
+      group-id: "ECOMMERCE-PAYMENT"
+      bootstrap-servers:
+      - 127.0.0.1:9092
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      properties:        spring.json.trusted.packages: "*"
+      properties:
+        spring.json.trusted.packages: "*"
     producer:
       bootstrap-servers:
       - 127.0.0.1:9092

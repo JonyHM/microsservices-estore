@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "graphql.client.url",
+    "type": "java.lang.String",
+    "description": "A description for 'graphql.client.url'"
+  },
+  {
+    "name": "graphql.user.url",
+    "type": "java.lang.String",
+    "description": "A description for 'graphql.user.url'"
+  },
+  {
+    "name": "graphql.payment.url",
+    "type": "java.lang.String",
+    "description": "A description for 'graphql.payment.url'"
+  }
+]}
