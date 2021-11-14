@@ -12,9 +12,9 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import br.gov.sp.fatec.model.BaseGraphQLReturn;
-import br.gov.sp.fatec.model.Constants;
-import br.gov.sp.fatec.model.QueryObject;
+import br.gov.sp.fatec.model.common.BaseGraphQLReturn;
+import br.gov.sp.fatec.model.common.Constants;
+import br.gov.sp.fatec.model.common.QueryObject;
 import br.gov.sp.fatec.model.userMicroservice.address.data.CreateAddressData;
 import br.gov.sp.fatec.model.userMicroservice.address.data.DeleteAddressData;
 import br.gov.sp.fatec.model.userMicroservice.address.data.GetAddressByIdData;

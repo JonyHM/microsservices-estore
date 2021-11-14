@@ -13,5 +13,5 @@ import br.gov.sp.fatec.model.Contact;
 public interface ContactRepository extends JpaRepository<Contact, UUID> {
 
 	Optional<List<Contact>> findByCustomerId(UUID customerId);
-	Optional<Contact> findByUserContactId(UUID customerId);
+	Optional<Contact> findByUserContactId(String customerId);
 }

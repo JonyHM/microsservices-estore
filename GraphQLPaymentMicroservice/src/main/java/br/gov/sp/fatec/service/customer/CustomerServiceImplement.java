@@ -52,7 +52,7 @@ public class CustomerServiceImplement implements CustomerService {
 	}
 
 	@Override
-	public Customer getByUserId(UUID userId) {
+	public Customer getByUserId(String userId) {
 		Optional<Customer> optionalCustomer = repository.findByUserId(userId);
 		
 		if(optionalCustomer.isPresent()) {
@@ -76,7 +76,7 @@ public class CustomerServiceImplement implements CustomerService {
 	
 	@Override
 	public Customer updateCustomer(UpdateKafkaCustomerDto dto) {
-		UUID id = dto.getUserId();
+		String id = dto.getUserId();
 		Optional<Customer> optionalCustomer = repository.findByUserId(id);
 		
 		if(optionalCustomer.isPresent()) {
@@ -101,7 +101,7 @@ public class CustomerServiceImplement implements CustomerService {
 	}
 	
 	@Override
-	public String deleteCustomerByUserId(UUID id) {
+	public String deleteCustomerByUserId(String id) {
 		Optional<Customer> optionalCustomer = repository.findByUserId(id);
 		
 		if(optionalCustomer.isPresent()) {

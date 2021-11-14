@@ -13,11 +13,11 @@ public interface CustomerService {
 	public List<Customer> getAll();
 	public Customer getById(UUID id);
 	public Customer getByCPF(String cpf);
-	public Customer getByUserId(UUID userId);
+	public Customer getByUserId(String userId);
 	public Customer createCustomer(CreateCustomerDto dto);
 	public Customer updateCustomer(UpdateKafkaCustomerDto dto);
 	public Customer updateCustomer(UpdateCustomerDto dto);
 	public String deleteCustomer(UUID id);
-	public String deleteCustomerByUserId(UUID id);
+	public String deleteCustomerByUserId(String id);
 }
 

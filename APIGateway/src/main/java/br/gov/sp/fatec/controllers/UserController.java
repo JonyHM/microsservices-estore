@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import br.gov.sp.fatec.model.BaseGraphQLReturn;
+import br.gov.sp.fatec.model.common.BaseGraphQLReturn;
 import br.gov.sp.fatec.model.userMicroservice.address.data.CreateAddressData;
 import br.gov.sp.fatec.model.userMicroservice.address.data.DeleteAddressData;
 import br.gov.sp.fatec.model.userMicroservice.address.data.GetAddressByIdData;

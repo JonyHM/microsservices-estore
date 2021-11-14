@@ -35,7 +35,7 @@ public class Address {
 	
 	@Type(type = "uuid-char")
 	@Column(name = "id_user_address")
-	private UUID userAddressId;
+	private String userAddressId;
 	
 	@Column(length = 50)
 	private String street;
@@ -65,7 +65,7 @@ public class Address {
 	public Address() {}
 
 	public Address(
-			UUID userAddressId,
+			String userAddressId,
 			String street, 
 			String number, 
 			String district, 
@@ -112,11 +112,11 @@ public class Address {
 		this.id = id;
 	}
 
-	public UUID getUserAddressId() {
+	public String getUserAddressId() {
 		return userAddressId;
 	}
 
-	public void setUserAddressId(UUID userId) {
+	public void setUserAddressId(String userId) {
 		this.userAddressId = userId;
 	}
 

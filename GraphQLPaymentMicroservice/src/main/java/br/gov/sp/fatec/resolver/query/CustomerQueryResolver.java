@@ -29,7 +29,7 @@ public class CustomerQueryResolver implements GraphQLQueryResolver {
 		return service.getByCPF(cpf);
 	}
 	
-	public Customer getCustomerByUserId(UUID userId) throws NotFoundException {
+	public Customer getCustomerByUserId(String userId) throws NotFoundException {
 		return service.getByUserId(userId);
 	}		
 }

@@ -35,7 +35,7 @@ public class Contact {
 	
 	@Type(type = "uuid-char")
 	@Column(name = "id_user_contact")
-	private UUID userContactId;
+	private String userContactId;
 	
 	@Column(length = 50)
 	private String title;
@@ -56,7 +56,7 @@ public class Contact {
 			String title, 
 			String type, 
 			String value,
-			UUID userContactId) {
+			String userContactId) {
 		this.title = title;
 		this.type = type;
 		this.value = value;
@@ -84,11 +84,11 @@ public class Contact {
 		this.id = id;
 	}
 
-	public UUID getUserContactId() {
+	public String getUserContactId() {
 		return userContactId;
 	}
 
-	public void setUserContactId(UUID userContactId) {
+	public void setUserContactId(String userContactId) {
 		this.userContactId = userContactId;
 	}
 

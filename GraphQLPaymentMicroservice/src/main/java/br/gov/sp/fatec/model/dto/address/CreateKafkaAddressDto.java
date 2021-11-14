@@ -1,11 +1,9 @@
 package br.gov.sp.fatec.model.dto.address;
 
-import java.util.UUID;
-
 public class CreateKafkaAddressDto {
 
-	private UUID userAddressId;
-	private UUID userId;
+	private String userAddressId;
+	private String userId;
 	private String street; 
 	private String number;
 	private String district;
@@ -17,8 +15,8 @@ public class CreateKafkaAddressDto {
 	public CreateKafkaAddressDto() {}
 
 	public CreateKafkaAddressDto(
-			UUID userAddressId,
-			UUID userId,
+			String userAddressId,
+			String userId,
 			String street, 
 			String number, 
 			String district, 
@@ -37,19 +35,19 @@ public class CreateKafkaAddressDto {
 		this.country = country;
 	}
 
-	public UUID getUserAddressId() {
+	public String getUserAddressId() {
 		return userAddressId;
 	}
 
-	public void setUserAddressId(UUID userAddressId) {
+	public void setUserAddressId(String userAddressId) {
 		this.userAddressId = userAddressId;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

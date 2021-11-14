@@ -5,7 +5,7 @@ import java.util.UUID;
 public class UpdateKafkaAddressDto {
 
 	private UUID userId;
-	private UUID userAddressId;
+	private String userAddressId;
 	private String street; 
 	private String number;
 	private String district;
@@ -18,7 +18,7 @@ public class UpdateKafkaAddressDto {
 
 	public UpdateKafkaAddressDto(
 			UUID userId,
-			UUID userAddressId,
+			String userAddressId,
 			String street, 
 			String number, 
 			String district, 
@@ -45,11 +45,11 @@ public class UpdateKafkaAddressDto {
 		this.userId = userId;
 	}
 
-	public UUID getUserAddressId() {
+	public String getUserAddressId() {
 		return userAddressId;
 	}
 
-	public void setUserAddressId(UUID userAddressId) {
+	public void setUserAddressId(String userAddressId) {
 		this.userAddressId = userAddressId;
 	}
 

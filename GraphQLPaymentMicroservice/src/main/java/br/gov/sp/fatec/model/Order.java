@@ -41,7 +41,7 @@ public class Order {
 	private UUID cartId;
 	
 	@Column(unique = true, name = "id_user")
-	private UUID userId;
+	private String userId;
 	
 	@Column(length = 255)
 	private String description;
@@ -62,7 +62,7 @@ public class Order {
 
 	public Order(
 			UUID cartId,
-			UUID userId,
+			String userId,
 			String description) {
 		this.cartId = cartId;
 		this.userId = userId;
@@ -100,11 +100,11 @@ public class Order {
 		this.cartId = cartId;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

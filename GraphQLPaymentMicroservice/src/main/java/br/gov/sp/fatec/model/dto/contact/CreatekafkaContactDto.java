@@ -1,11 +1,9 @@
 package br.gov.sp.fatec.model.dto.contact;
 
-import java.util.UUID;
-
 public class CreatekafkaContactDto {
 
-	private UUID userContactId;
-	private UUID userId;
+	private String userContactId;
+	private String userId;
 	private String title;
 	private String type;
 	private String value;
@@ -13,8 +11,8 @@ public class CreatekafkaContactDto {
 	public CreatekafkaContactDto() {}
 
 	public CreatekafkaContactDto(
-			UUID userContactId,
-			UUID userId,
+			String userContactId,
+			String userId,
 			String title, 
 			String type, 
 			String value) {
@@ -25,19 +23,19 @@ public class CreatekafkaContactDto {
 		this.value = value;
 	}
 
-	public UUID getUserContactId() {
+	public String getUserContactId() {
 		return userContactId;
 	}
 
-	public void setUserContactId(UUID userContactId) {
+	public void setUserContactId(String userContactId) {
 		this.userContactId = userContactId;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

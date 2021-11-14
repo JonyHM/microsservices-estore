@@ -1,6 +1,6 @@
 type Customer {
 	id: ID!
-  userId: ID!
+  userId: String
 	name: String
 	cpf: String
 	contacts: [Contact]
@@ -61,7 +61,7 @@ type Query {
 	getCustomers: [Customer]
 	getCustomerById(id: ID): Customer
   getCustomerByCPF(cpf: String): Customer
-  getCustomerByUserId(userId: ID): Customer
+  getCustomerByUserId(userId: String): Customer
 	
 	getContacts: [Contact]
 	getContactById(id: ID): Contact
@@ -85,7 +85,7 @@ type Query {
 }
 
 input CreateCustomerInput {
-  userId: ID!
+  userId: String
 	name: String
 	cpf: String
 }

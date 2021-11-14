@@ -12,7 +12,7 @@ public class CreateAddressDto {
 	private String state;
 	private String country;
 	private UUID customerId;
-	private UUID userId;
+	private String userId;
 
 	public CreateAddressDto() {}
 
@@ -25,7 +25,7 @@ public class CreateAddressDto {
 			String state,
 			String country,
 			UUID customerId,
-			UUID userId) {
+			String userId) {
 		this.street = street;
 		this.number = number;
 		this.district = district;
@@ -101,11 +101,11 @@ public class CreateAddressDto {
 		this.customerId = customerId;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

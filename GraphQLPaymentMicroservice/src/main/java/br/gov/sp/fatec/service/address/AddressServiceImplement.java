@@ -112,7 +112,7 @@ public class AddressServiceImplement implements AddressService {
 	
 	@Override
 	public Address updateKafkaAddress(UpdateKafkaAddressDto dto) {
-		UUID id = dto.getUserAddressId();
+		String id = dto.getUserAddressId();
 		Optional<Address> optionalAddress = repository.findByUserAddressId(id);
 		
 		if(optionalAddress.isPresent()) {
@@ -135,7 +135,7 @@ public class AddressServiceImplement implements AddressService {
 	}
 
 	@Override
-	public String deleteByUserAddressId(UUID id) {
+	public String deleteByUserAddressId(String id) {
 		Optional<Address> optionalAddress = repository.findByUserAddressId(id);
 		
 		if(optionalAddress.isPresent()) {

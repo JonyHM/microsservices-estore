@@ -36,7 +36,7 @@ public class Customer {
 	private UUID id;
 	
 	@Column(unique = true, name = "id_user")
-	private UUID userid;
+	private String userId;
 	
 	@Column(length = 40)
 	private String name;
@@ -83,16 +83,16 @@ public class Customer {
 	
 	public Customer() {}
 
-	public Customer(UUID userid, String name,
+	public Customer(String userId, String name,
 			@Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})", 
 			message = "formato de documento inválido") String cpf) {
-		this.userid = userid;
+		this.userId = userId;
 		this.name = name;
 		this.cpf = cpf;
 	}
 	
 	public Customer(CreateCustomerDto dto) {
-		this.userid = dto.getUserId();
+		this.userId = dto.getUserId();
 		this.name = dto.getName();
 		this.cpf = dto.getCpf();
 	}
@@ -105,12 +105,12 @@ public class Customer {
 		this.id = id;
 	}
 
-	public UUID getUserid() {
-		return userid;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUserid(UUID userid) {
-		this.userid = userid;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getName() {
@@ -176,7 +176,7 @@ public class Customer {
 	@Override
 	public String toString() {
 		return "Customer [id=" + id +
-				", user id=" + userid +
+				", user id=" + userId +
 				", name=" + name + 
 				", cpf=" + cpf + "]";
 	}
