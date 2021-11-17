@@ -183,5 +183,22 @@ services:
     networks:
       - backend
 
+  ####### API GATEWAY #######
+
+  gateway:
+    build: ./ApiGateway 
+    ports:
+      - "8079:8079"
+    restart: always
+    depends_on: 
+      - kafka
+    environment: 
+      SERVICE_USER_URL: user:8080/graphql
+      SERVICE_STORE_URL: store:8081/graphql
+      SERVICE_ORDER_URL: order:8082
+      SERVICE_PAYMENT_URL: payment:8083/graphql
+    networks: 
+      - backend
+
 networks:
   backend:

@@ -6,7 +6,7 @@ import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
 
 public class UpdateOrderProductDto {
 
-	private UUID productId;
+	private UUID id;
 	private String name;
 	private String description;
 	private Long quantity;
@@ -15,24 +15,24 @@ public class UpdateOrderProductDto {
 	public UpdateOrderProductDto() {}
 
 	public UpdateOrderProductDto(
-			UUID productId, 
+			UUID id, 
 			String name, 
 			String description, 
 			Long quantity, 
 			CreatePriceDto price) {
-		this.productId = productId;
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.quantity = quantity;
 		this.price = price;
 	}
 
-	public UUID getProductId() {
-		return productId;
+	public UUID getId() {
+		return id;
 	}
 
-	public void setProductId(UUID productId) {
-		this.productId = productId;
+	public void setId(UUID id) {
+		this.id = id;
 	}
 
 	public String getName() {
@@ -69,7 +69,7 @@ public class UpdateOrderProductDto {
 
 	@Override
 	public String toString() {
-		return "UpdateOrderProductDto [productId=" + productId + 
+		return "UpdateOrderProductDto [id=" + id + 
 				", name=" + name + 
 				", description=" + description + 
 				", quantity=" + quantity + "]";

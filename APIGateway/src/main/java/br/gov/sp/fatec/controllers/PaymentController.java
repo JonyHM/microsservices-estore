@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import br.gov.sp.fatec.exceptions.AlreadyFinishedCart;
 import br.gov.sp.fatec.exceptions.BadGraphQLRequest;
 import br.gov.sp.fatec.model.common.BaseGraphQLReturn;
@@ -83,43 +81,43 @@ public class PaymentController {
 	/** CUSTOMER **/
 
 	@GetMapping(value = "customer")
-    public ResponseEntity<BaseGraphQLReturn<GetCustomersData>> getCustomers() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetCustomersData>> getCustomers() { 
     	ResponseEntity<BaseGraphQLReturn<GetCustomersData>> response = service.getCustomers();
     	return response;
     }
     
     @GetMapping(value = "customer/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetCustomerByIdData>> getCustomerById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetCustomerByIdData>> getCustomerById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetCustomerByIdData>> response = service.getCustomerById(id);
     	return response;
     }
     
     @GetMapping(value = "customer/cpf/{cpf}")
-    public ResponseEntity<BaseGraphQLReturn<GetCustomerByCPFData>> getCustomerByCpf(@PathVariable String cpf) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetCustomerByCPFData>> getCustomerByCpf(@PathVariable String cpf) { 
     	ResponseEntity<BaseGraphQLReturn<GetCustomerByCPFData>> response = service.getCustomerByCpf(cpf);
     	return response;
     }
     
     @GetMapping(value = "customer/by-user/{userId}")
-    public ResponseEntity<BaseGraphQLReturn<GetCustomerByUserIdData>> getCustomerByUserId(@PathVariable String userId) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetCustomerByUserIdData>> getCustomerByUserId(@PathVariable String userId) { 
     	ResponseEntity<BaseGraphQLReturn<GetCustomerByUserIdData>> response = service.getCustomerByUserId(userId);
     	return response;
     }
     
     @PostMapping(value = "customer")
-    public ResponseEntity<BaseGraphQLReturn<CreateCustomerData>> createCustomer(@RequestBody CreateCustomerDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateCustomerData>> createCustomer(@RequestBody CreateCustomerDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateCustomerData>> response = service.createCustomer(dto);
     	return response;
     }
     
     @PatchMapping(value = "customer")
-    public ResponseEntity<BaseGraphQLReturn<UpdateCustomerData>> updateCustomer(@RequestBody UpdateCustomerDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateCustomerData>> updateCustomer(@RequestBody UpdateCustomerDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateCustomerData>> response = service.updateCustomer(dto);
     	return response;
     }
     
     @DeleteMapping(value = "customer/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeleteCustomerData>> deleteCustomer(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeleteCustomerData>> deleteCustomer(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeleteCustomerData>> response = service.deleteCustomer(id);
     	return response;
     }
@@ -127,56 +125,56 @@ public class PaymentController {
     /** ADDRESS **/
     
     @GetMapping(value = "address")
-    public ResponseEntity<BaseGraphQLReturn<GetAddressesData>> getAddresses() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetAddressesData>> getAddresses() { 
     	ResponseEntity<BaseGraphQLReturn<GetAddressesData>> response = service.getAddresses();
     	return response;
     }
     
     @GetMapping(value = "/address/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> getAddressesById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> getAddressesById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> response = service.getAddressById(id);
     	return response;
     }
     
     @GetMapping(value = "/address/by-customer/{customerId}")
-    public ResponseEntity<BaseGraphQLReturn<GetAddressesByCustomerIdData>> getAddressesByCustomerId(@PathVariable UUID customerId) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetAddressesByCustomerIdData>> getAddressesByCustomerId(@PathVariable UUID customerId) { 
     	ResponseEntity<BaseGraphQLReturn<GetAddressesByCustomerIdData>> response = service.getAddressesByCustomerId(customerId);
     	return response;
     }
     
     
     @PostMapping(value = "/address")
-    public ResponseEntity<BaseGraphQLReturn<CreateAddressData>> createAddress(@RequestBody CreateAddressDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateAddressData>> createAddress(@RequestBody CreateAddressDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateAddressData>> response = service.createAddress(dto);
     	return response;
     }
     
     @PatchMapping(value = "address")
-    public ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> updateAddress(@RequestBody UpdateAddressDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> updateAddress(@RequestBody UpdateAddressDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> response = service.updateAddress(dto);
     	return response;
     }
     
     @DeleteMapping(value = "/address/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> deleteAddress(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> deleteAddress(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> response = service.deleteAddress(id);
     	return response;
     }
     
     @GetMapping(value = "/contact")
-    public ResponseEntity<BaseGraphQLReturn<GetContactsData>> getContacts() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetContactsData>> getContacts() { 
     	ResponseEntity<BaseGraphQLReturn<GetContactsData>> response = service.getContacts();
     	return response;
     }
     
     @GetMapping(value = "/contact/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> getContactById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> getContactById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> response = service.getContactById(id);
     	return response;
     }
     
     @GetMapping(value = "/contact/by-customer/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetContactsByCustomerIdData>> getContactsByCustomerId(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetContactsByCustomerIdData>> getContactsByCustomerId(@PathVariable UUID id) { 
 		ResponseEntity<BaseGraphQLReturn<GetContactsByCustomerIdData>> response = service.getContactsByCustomerId(id);
 		
 		if(response.getBody().getData() == null) {
@@ -187,19 +185,19 @@ public class PaymentController {
     }
     
     @PostMapping(value = "/contact")
-    public ResponseEntity<BaseGraphQLReturn<CreateContactData>> createContact(@RequestBody CreateContactDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateContactData>> createContact(@RequestBody CreateContactDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateContactData>> response = service.createContact(dto);
     	return response;
     }
     
     @PatchMapping(value = "contact")
-    public ResponseEntity<BaseGraphQLReturn<UpdateContactData>> updateContact(@RequestBody UpdateContactDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateContactData>> updateContact(@RequestBody UpdateContactDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateContactData>> response = service.updateContact(dto);
     	return response;
     }
     
     @DeleteMapping(value = "/contact/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeleteContactData>> deleteContact(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeleteContactData>> deleteContact(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeleteContactData>> response = service.deleteContact(id);
     	return response;
     }
@@ -207,37 +205,37 @@ public class PaymentController {
     /** CARDS **/
     
     @GetMapping(value = "card")
-    public ResponseEntity<BaseGraphQLReturn<GetCardsData>> getCards() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetCardsData>> getCards() { 
     	ResponseEntity<BaseGraphQLReturn<GetCardsData>> response = service.getCards();
     	return response;
     }
     
     @GetMapping(value = "card/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetCardByIdData>> getCardById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetCardByIdData>> getCardById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetCardByIdData>> response = service.getCardById(id);
     	return response;
     }
     
     @GetMapping(value = "card/by-customer/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetCardsByCustomerIdData>> getCardsByCustomerId(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetCardsByCustomerIdData>> getCardsByCustomerId(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetCardsByCustomerIdData>> response = service.getCardsByCustomerId(id);
     	return response;
     }
     
     @PostMapping(value = "card")
-    public ResponseEntity<BaseGraphQLReturn<CreateCardData>> createCard(@RequestBody CreateCardDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateCardData>> createCard(@RequestBody CreateCardDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateCardData>> response = service.createCard(dto);
     	return response;
     }
     
     @PatchMapping(value = "card")
-    public ResponseEntity<BaseGraphQLReturn<UpdateCardData>> updateCard(@RequestBody UpdateCardDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateCardData>> updateCard(@RequestBody UpdateCardDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateCardData>> response = service.updateCard(dto);
     	return response;
     }
     
     @DeleteMapping(value = "/card/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeleteCardData>> deleteCard(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeleteCardData>> deleteCard(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeleteCardData>> response = service.deleteCard(id);
     	return response;
     }
@@ -245,31 +243,31 @@ public class PaymentController {
     /** ORDERS **/
     
     @GetMapping(value = "order")
-    public ResponseEntity<BaseGraphQLReturn<GetOrdersData>> getOrders() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetOrdersData>> getOrders() { 
     	ResponseEntity<BaseGraphQLReturn<GetOrdersData>> response = service.getOrders();
     	return response;
     }
     
     @GetMapping(value = "order/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetOrderByIdData>> getOrderById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetOrderByIdData>> getOrderById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetOrderByIdData>> response = service.getOrderById(id);
     	return response;
     }
     
     @GetMapping(value = "order/by-customer/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetOrdersByCustomerIdData>> getOrdersByCustomerId(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetOrdersByCustomerIdData>> getOrdersByCustomerId(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetOrdersByCustomerIdData>> response = service.getOrdersByCustomerId(id);
     	return response;
     }
     
     @PostMapping(value = "order")
-    public ResponseEntity<BaseGraphQLReturn<CreateOrderData>> createOrder(@RequestBody CreateOrderDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateOrderData>> createOrder(@RequestBody CreateOrderDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateOrderData>> response = service.createOrder(dto);
     	return response;
     }
     
     @PatchMapping(value = "order")
-    public ResponseEntity<BaseGraphQLReturn<UpdateOrderData>> updateOrder(@RequestBody UpdateOrderDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateOrderData>> updateOrder(@RequestBody UpdateOrderDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateOrderData>> response = service.updateOrder(dto);
     	return response;
     }
@@ -278,7 +276,7 @@ public class PaymentController {
     public ResponseEntity<BaseGraphQLReturn<PayOrderData>> payOrder(
     		@PathVariable UUID id, 
     		@RequestParam UUID cardId, 
-    		@RequestParam UUID cartId) throws JsonProcessingException { 
+    		@RequestParam UUID cartId) { 
     	ResponseEntity<BaseGraphQLReturn<PayOrderData>> response = service.payOrder(id, cardId, cartId);
     	
     	if(response.getBody().getData() == null) {
@@ -292,7 +290,7 @@ public class PaymentController {
     public ResponseEntity<BaseGraphQLReturn<CancelOrderData>> cancelOrder(
     		@PathVariable UUID id, 
     		@RequestParam UUID cardId, 
-    		@RequestParam UUID cartId) throws JsonProcessingException { 
+    		@RequestParam UUID cartId) { 
     	ResponseEntity<BaseGraphQLReturn<CancelOrderData>> response = service.cancelOrder(id, cardId, cartId);
 
     	if(response.getBody().getData() == null) {
@@ -305,37 +303,37 @@ public class PaymentController {
     /** PRICE **/
     
     @GetMapping(value = "price")
-    public ResponseEntity<BaseGraphQLReturn<GetPricesData>> getPrices() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetPricesData>> getPrices() { 
     	ResponseEntity<BaseGraphQLReturn<GetPricesData>> response = service.getPrices();
     	return response;
     }
     
     @GetMapping(value = "price/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetPriceByIdData>> getPriceById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetPriceByIdData>> getPriceById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetPriceByIdData>> response = service.getPriceById(id);
     	return response;
     }
     
     @GetMapping(value = "price/by-order/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetPriceByOrderIdData>> getPriceByOrderId(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetPriceByOrderIdData>> getPriceByOrderId(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetPriceByOrderIdData>> response = service.getPriceByOrderId(id);
     	return response;
     }
     
     @PostMapping(value = "price")
-    public ResponseEntity<BaseGraphQLReturn<CreatePriceData>> createPrice(@RequestBody CreatePriceDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreatePriceData>> createPrice(@RequestBody CreatePriceDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreatePriceData>> response = service.createPrice(dto);
     	return response;
     }
     
     @PatchMapping(value = "price")
-    public ResponseEntity<BaseGraphQLReturn<UpdatePriceData>> updatePrice(@RequestBody UpdatePriceDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdatePriceData>> updatePrice(@RequestBody UpdatePriceDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdatePriceData>> response = service.updatePrice(dto);
     	return response;
     }
     
     @DeleteMapping(value = "price/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeletePriceData>> deletePrice(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeletePriceData>> deletePrice(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeletePriceData>> response = service.deletePrice(id);
     	return response;
     }

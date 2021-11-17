@@ -2,15 +2,10 @@ package br.gov.sp.fatec.service;
 
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.gov.sp.fatec.model.common.BaseGraphQLReturn;
 import br.gov.sp.fatec.model.common.Constants;
@@ -65,108 +60,83 @@ import br.gov.sp.fatec.model.userMicroservice.contact.data.GetContactByIdData;
 import br.gov.sp.fatec.model.userMicroservice.contact.data.GetContactsData;
 import br.gov.sp.fatec.model.userMicroservice.contact.data.UpdateContactData;
 import br.gov.sp.fatec.model.userMicroservice.contact.dto.UpdateContactDto;
+import br.gov.sp.fatec.service.manager.RequestManager;
 
 @Service
 public class PaymentService {
 
-	@Value("${graphql.payment.url}")
+	@Value("${service.payment.url}")
 	private String urlString;
-	private RestTemplate restTemplate = new RestTemplate();
-	private HttpHeaders headers = new HttpHeaders();    
+	
+	@Autowired
+	private RequestManager manager;
    
-    public ResponseEntity<BaseGraphQLReturn<GetCustomersData>> getCustomers() throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetCustomersData>> getCustomers() {
     	String payload = String.format("{ getCustomers { %s, contacts %s, addresses %s } }", 
     			Constants.CUSTOMER_QUERY, 
     			Constants.CONTACTS_QUERY, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
-    	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetCustomersData.class)
-        		);
+    	
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetCustomersData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetCustomerByIdData>> getCustomerById(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetCustomerByIdData>> getCustomerById(UUID id) {
     	String payload = String.format("{ getCustomerById(id: \"%s\") { %s, contacts %s, addresses %s } }", 
     			id, 
     			Constants.CUSTOMER_QUERY, 
     			Constants.CONTACTS_QUERY, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetCustomerByIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetCustomerByIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetCustomerByCPFData>> getCustomerByCpf(String cpf) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetCustomerByCPFData>> getCustomerByCpf(String cpf) {
     	String payload = String.format("{ getCustomerByCPF(cpf: \"%s\") { %s, contacts %s, addresses %s } }", 
     			cpf, 
     			Constants.CUSTOMER_QUERY, 
     			Constants.CONTACTS_QUERY, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetCustomerByCPFData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetCustomerByCPFData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetCustomerByUserIdData>> getCustomerByUserId(String userId) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetCustomerByUserIdData>> getCustomerByUserId(String userId) {
     	String payload = String.format("{ getCustomerByUserId(userId: \"%s\") { %s, contacts %s, addresses %s } }", 
     			userId, 
     			Constants.CUSTOMER_QUERY, 
     			Constants.CONTACTS_QUERY, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetCustomerByUserIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetCustomerByUserIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<CreateCustomerData>> createCustomer(CreateCustomerDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<CreateCustomerData>> createCustomer(CreateCustomerDto dto) {
     	String body = String.format("{ userId: \"%s\", name: \"%s\", cpf: \"%s\" }", dto.getUserId(), dto.getName(), dto.getCpf());
     	String payload = String.format("mutation { createCustomer(customer: %s)  { %s, contacts %s, addresses %s } }", 
     			body, 
     			Constants.CUSTOMER_QUERY, 
     			Constants.CONTACTS_QUERY, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(CreateCustomerData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(CreateCustomerData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<UpdateCustomerData>> updateCustomer(UpdateCustomerDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<UpdateCustomerData>> updateCustomer(UpdateCustomerDto dto) {
     	String body = String.format("{ customerId: \"%s\", name: \"%s\", cpf: \"%s\" }", 
     			dto.getCustomerId(), 
     			dto.getName(), 
@@ -176,80 +146,55 @@ public class PaymentService {
     			Constants.CUSTOMER_QUERY, 
     			Constants.CONTACTS_QUERY, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(UpdateCustomerData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(UpdateCustomerData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<DeleteCustomerData>> deleteCustomer(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<DeleteCustomerData>> deleteCustomer(UUID id) {
     	String payload = String.format("mutation { deleteCustomer(customerId: \"%s\") }", id);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(DeleteCustomerData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(DeleteCustomerData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetAddressesData>> getAddresses() throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetAddressesData>> getAddresses() {
     	String payload = String.format("{ getAddresses %s }", 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetAddressesData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetAddressesData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> getAddressById(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> getAddressById(UUID id) {
     	String payload = String.format("{ getAddressById(id: \"%s\") %s }", 
     			id, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetAddressByIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetAddressByIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetAddressesByCustomerIdData>> getAddressesByCustomerId(UUID customerId) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetAddressesByCustomerIdData>> getAddressesByCustomerId(UUID customerId) {
     	String payload = String.format("{ getAddressesByCustomerId(customerId: \"%s\") %s }", 
     			customerId, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetAddressesByCustomerIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetAddressesByCustomerIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<CreateAddressData>> createAddress(CreateAddressDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<CreateAddressData>> createAddress(CreateAddressDto dto) {
     	String body = String.format("{ street: \"%s\", number: \"%s\", district: \"%s\", complement: \"%s\", "
     			+ "city: \"%s\", state: \"%s\", country: \"%s\", customerId: \"%s\" }", 
     			dto.getStreet(), 
@@ -264,19 +209,14 @@ public class PaymentService {
     	String payload = String.format("mutation { createAddress(address: %s) %s }", 
     			body, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(CreateAddressData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(CreateAddressData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> updateAddress(UpdateAddressDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> updateAddress(UpdateAddressDto dto) {
     	String body = String.format("{ street: \"%s\", number: \"%s\", district: \"%s\", complement: \"%s\", "
     			+ "city: \"%s\", state: \"%s\", country: \"%s\", addressId: \"%s\" }", 
     			dto.getStreet(), 
@@ -291,80 +231,55 @@ public class PaymentService {
     	String payload = String.format("mutation { updateAddress(address: %s) %s }", 
     			body, 
     			Constants.PAYMENT_ADDRESS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(UpdateAddressData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(UpdateAddressData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> deleteAddress(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> deleteAddress(UUID id) {
     	String payload = String.format("mutation { deleteAddress(addressId: \"%s\") }", id);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(DeleteAddressData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(DeleteAddressData.class), 
+    			new QueryObject(payload));
     }
    
-    public ResponseEntity<BaseGraphQLReturn<GetContactsData>> getContacts() throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetContactsData>> getContacts() {
     	String payload = String.format("{ getContacts %s }", 
     			Constants.PAYMENT_CONTACTS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetContactsData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetContactsData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> getContactById(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> getContactById(UUID id) {
     	String payload = String.format("{ getContactById(id: \"%s\") %s }", 
     			id, 
     			Constants.PAYMENT_CONTACTS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetContactByIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetContactByIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetContactsByCustomerIdData>> getContactsByCustomerId(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetContactsByCustomerIdData>> getContactsByCustomerId(UUID id) {
     	String payload = String.format("{ getContactsByCustomerId(customerId: \"%s\") %s }", 
     			id, 
     			Constants.PAYMENT_CONTACTS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
-    	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetContactsByCustomerIdData.class)
-        		);
+    	
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetContactsByCustomerIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<CreateContactData>> createContact(CreateContactDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<CreateContactData>> createContact(CreateContactDto dto) {
     	String body = String.format("{ title: \"%s\", type: \"%s\", value: \"%s\", customerId: \"%s\"}", 
     			dto.getTitle(), 
     			dto.getType(), 
@@ -374,19 +289,14 @@ public class PaymentService {
     	String payload = String.format("mutation { createContact(contact: %s) %s }", 
     			body, 
     			Constants.PAYMENT_CONTACTS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(CreateContactData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(CreateContactData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<UpdateContactData>> updateContact(UpdateContactDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<UpdateContactData>> updateContact(UpdateContactDto dto) {
     	String body = String.format("{ title: \"%s\", type: \"%s\", value: \"%s\", contactId: \"%s\"}", 
     			dto.getTitle(), 
     			dto.getType(), 
@@ -396,83 +306,57 @@ public class PaymentService {
     	String payload = String.format("mutation { updateContact(contact: %s) %s }", 
     			body, 
     			Constants.PAYMENT_CONTACTS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(UpdateContactData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(UpdateContactData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<DeleteContactData>> deleteContact(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<DeleteContactData>> deleteContact(UUID id) {
     	String payload = String.format("mutation { deleteContact(contactId: \"%s\") }", id);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(DeleteContactData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(DeleteContactData.class), 
+    			new QueryObject(payload));
     }
     
     /** CARDS **/
     
-    public ResponseEntity<BaseGraphQLReturn<GetCardsData>> getCards() throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetCardsData>> getCards() {
     	String payload = String.format("{ getCards %s }", 
     			Constants.CARDS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetCardsData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetCardsData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetCardByIdData>> getCardById(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetCardByIdData>> getCardById(UUID id) {
     	String payload = String.format("{ getCardById(id: \"%s\") %s }", 
     			id,
     			Constants.CARDS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetCardByIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetCardByIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetCardsByCustomerIdData>> getCardsByCustomerId(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetCardsByCustomerIdData>> getCardsByCustomerId(UUID id) {
     	String payload = String.format("{ getCardsByCustomerId(customerId: \"%s\") %s }", 
     			id,
     			Constants.CARDS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetCardsByCustomerIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetCardsByCustomerIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<CreateCardData>> createCard(CreateCardDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");  
-    	
-    	
+    public ResponseEntity<BaseGraphQLReturn<CreateCardData>> createCard(CreateCardDto dto) {
     	String body = String.format("{ nickname: \"%s\", holderName: \"%s\", number: \"%s\", "
     			+ "cvv: \"%s\", expirationDate: \"%s\", holderId: \"%s\"}", 
     			dto.getNickname(),
@@ -485,19 +369,14 @@ public class PaymentService {
     	String payload = String.format("mutation { createCard(card: %s) %s }", 
     			body, 
     			Constants.CARDS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(CreateCardData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(CreateCardData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<UpdateCardData>> updateCard(UpdateCardDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<UpdateCardData>> updateCard(UpdateCardDto dto) {
     	String body = String.format("{ nickname: \"%s\", holderName: \"%s\", number: \"%s\", "
     			+ "cvv: \"%s\", expirationDate: \"%s\", cardId: \"%s\"}", 
     			dto.getNickname(),
@@ -510,82 +389,57 @@ public class PaymentService {
     	String payload = String.format("mutation { updateContact(contact: %s) %s }", 
     			body, 
     			Constants.CARDS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(UpdateCardData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(UpdateCardData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<DeleteCardData>> deleteCard(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<DeleteCardData>> deleteCard(UUID id) {
     	String payload = String.format("mutation { deleteCard(cardId: \"%s\") }", id);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(DeleteCardData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(DeleteCardData.class), 
+    			new QueryObject(payload));
     }
     
     /** ORDERS **/
     
-    public ResponseEntity<BaseGraphQLReturn<GetOrdersData>> getOrders() throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetOrdersData>> getOrders() {
     	String payload = String.format("{ getOrders %s }", 
     			Constants.ORDERS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetOrdersData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetOrdersData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetOrderByIdData>> getOrderById(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetOrderByIdData>> getOrderById(UUID id) {
     	String payload = String.format("{ getOrderById(id: \"%s\") %s }", 
     			id,
     			Constants.ORDERS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetOrderByIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetOrderByIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetOrdersByCustomerIdData>> getOrdersByCustomerId(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetOrdersByCustomerIdData>> getOrdersByCustomerId(UUID id) {
     	String payload = String.format("{ getOrdersByCustomerId(customerId: \"%s\") %s }", 
     			id,
     			Constants.ORDERS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetOrdersByCustomerIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetOrdersByCustomerIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<CreateOrderData>> createOrder(CreateOrderDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");  
-    	
+    public ResponseEntity<BaseGraphQLReturn<CreateOrderData>> createOrder(CreateOrderDto dto) {
     	String priceBody = String.format("{ currency: \"%s\", amount: %s }", 
     			dto.getPrice().getCurrency(),
     			dto.getPrice().getAmount());
@@ -600,19 +454,14 @@ public class PaymentService {
     	String payload = String.format("mutation { createOrder(order: %s) %s }", 
     			body, 
     			Constants.ORDERS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(CreateOrderData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(CreateOrderData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<UpdateOrderData>> updateOrder(UpdateOrderDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");  
-    	
+    public ResponseEntity<BaseGraphQLReturn<UpdateOrderData>> updateOrder(UpdateOrderDto dto) {
     	String body = String.format("{ orderId: \"%s\", description: \"%s\" }", 
     			dto.getOrderId(),
     			dto.getDescription());
@@ -620,106 +469,76 @@ public class PaymentService {
     	String payload = String.format("mutation { updateOrder(order: %s) %s }", 
     			body, 
     			Constants.ORDERS_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(UpdateOrderData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(UpdateOrderData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<PayOrderData>> payOrder(UUID id, UUID cardId, UUID cartId) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-
+    public ResponseEntity<BaseGraphQLReturn<PayOrderData>> payOrder(UUID id, UUID cardId, UUID cartId) {
     	String payment = String.format("{ orderId: \"%s\", cardId: \"%s\", "
     			+ "cartId: \"%s\" }", 
     			id, 
     			cardId, 
     			cartId);
     	String payload = String.format("mutation { payOrder(payment: %s) }", payment);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(PayOrderData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(PayOrderData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<CancelOrderData>> cancelOrder(UUID id, UUID cardId, UUID cartId) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-
+    public ResponseEntity<BaseGraphQLReturn<CancelOrderData>> cancelOrder(UUID id, UUID cardId, UUID cartId) {
     	String payment = String.format("{ orderId: \"%s\", cardId: \"%s\", "
     			+ "cartId: \"%s\" }", 
     			id, 
     			cardId, 
     			cartId);
     	String payload = String.format("mutation { cancelOrder(payment: %s) }", payment);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
-    	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(CancelOrderData.class)
-        		);
+
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(CancelOrderData.class), 
+    			new QueryObject(payload));
     }
     
     /** PRICE **/
     
-    public ResponseEntity<BaseGraphQLReturn<GetPricesData>> getPrices() throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetPricesData>> getPrices() {
     	String payload = String.format("{ getPrices %s }", 
     			Constants.PRICE_DETAIL_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetPricesData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetPricesData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetPriceByIdData>> getPriceById(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetPriceByIdData>> getPriceById(UUID id) {
     	String payload = String.format("{ getPriceById(id: \"%s\") %s }",
     			id,
     			Constants.PRICE_DETAIL_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetPriceByIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetPriceByIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<GetPriceByOrderIdData>> getPriceByOrderId(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");
-    	
+    public ResponseEntity<BaseGraphQLReturn<GetPriceByOrderIdData>> getPriceByOrderId(UUID id) {
     	String payload = String.format("{ getPriceByOrderId(orderId: \"%s\") %s }",
     			id,
     			Constants.PRICE_DETAIL_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(GetPriceByOrderIdData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(GetPriceByOrderIdData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<CreatePriceData>> createPrice(CreatePriceDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");  
-    	
+    public ResponseEntity<BaseGraphQLReturn<CreatePriceData>> createPrice(CreatePriceDto dto) {
     	String body = String.format("{ currency: \"%s\", amount: %s, orderId: \"%s\" }", 
     			dto.getCurrency(),
     			dto.getAmount(),
@@ -728,19 +547,14 @@ public class PaymentService {
     	String payload = String.format("mutation { createPrice(price: %s) %s }", 
     			body, 
     			Constants.PRICE_DETAIL_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(CreatePriceData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(CreatePriceData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<UpdatePriceData>> updatePrice(UpdatePriceDto dto) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");  
-    	
+    public ResponseEntity<BaseGraphQLReturn<UpdatePriceData>> updatePrice(UpdatePriceDto dto) {
     	String body = String.format("{ currency: \"%s\", amount: %s, priceId: \"%s\" }", 
     			dto.getCurrency(),
     			dto.getAmount(),
@@ -749,27 +563,19 @@ public class PaymentService {
     	String payload = String.format("mutation { updatePrice(price: %s) %s }", 
     			body, 
     			Constants.PRICE_DETAIL_QUERY);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(UpdatePriceData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(UpdatePriceData.class), 
+    			new QueryObject(payload));
     }
     
-    public ResponseEntity<BaseGraphQLReturn<DeletePriceData>> deletePrice(UUID id) throws JsonProcessingException {
-    	headers.add("Content-type", "application/json");   	
-    	
+    public ResponseEntity<BaseGraphQLReturn<DeletePriceData>> deletePrice(UUID id) {
     	String payload = String.format("mutation { deletePrice(priceId: \"%s\") }", id);
-    	String query = new ObjectMapper().writeValueAsString(new QueryObject(payload));
     	    	
-        return restTemplate
-        		.postForEntity(
-        				urlString, 
-        				new HttpEntity<>(query, headers), 
-        				BaseGraphQLReturn.of(DeletePriceData.class)
-        		);
+    	return manager.doPOST(
+    			urlString, 
+    			BaseGraphQLReturn.of(DeletePriceData.class), 
+    			new QueryObject(payload));
     }
 }

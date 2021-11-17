@@ -10,5 +10,5 @@ import br.gov.sp.fatec.model.Cart;
 
 public interface CartRepository extends JpaRepository<Cart, UUID> {
 
-	Optional<Set<Cart>> findByUserId(UUID userId);
+	Optional<Set<Cart>> findByUserId(String userId);
 }

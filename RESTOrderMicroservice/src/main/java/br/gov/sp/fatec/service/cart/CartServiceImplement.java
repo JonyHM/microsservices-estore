@@ -55,7 +55,7 @@ public class CartServiceImplement implements CartService {
 	}
 
 	@Override
-	public Set<Cart> findCartsForUserId(UUID userId) {
+	public Set<Cart> findCartsForUserId(String userId) {
 		Optional<Set<Cart>> carts = repository.findByUserId(userId);
 		return carts.orElseThrow(
 				() -> new NotFoundException(
@@ -87,8 +87,8 @@ public class CartServiceImplement implements CartService {
 			Price price = new Price(v);
 			price = priceRepository.save(price);
 			
-			UUID prodId = k.getProductId();
-			Optional<OrderProduct> optionalProduct = productRepository.findById(prodId);
+			String prodId = k.getProductId();
+			Optional<OrderProduct> optionalProduct = productRepository.findByProductId(prodId);
 			OrderProduct product = optionalProduct.orElse(new OrderProduct(k));	
 			
 			productsPrice.setCurrency(price.getCurrency());
@@ -139,8 +139,8 @@ public class CartServiceImplement implements CartService {
 			Price price = new Price(v);
 			price = priceRepository.save(price);
 			
-			UUID prodId = k.getProductId();
-			Optional<OrderProduct> optionalProduct = productRepository.findById(prodId);
+			String prodId = k.getProductId();
+			Optional<OrderProduct> optionalProduct = productRepository.findByProductId(prodId);
 			OrderProduct product = optionalProduct.orElse(new OrderProduct(k));	
 			
 			productsPrice.setCurrency(price.getCurrency());
@@ -201,6 +201,7 @@ public class CartServiceImplement implements CartService {
 			
 			Price oldPrice = product.getPrice();
 			oldPrice.setAmount(productPrice.getAmount());
+			oldPrice.setCurrency(productPrice.getCurrency());
 			productPrice = priceRepository.save(oldPrice);
 		} else {
 			product = new OrderProduct(dto.getProduct());

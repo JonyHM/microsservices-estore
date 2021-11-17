@@ -10,7 +10,7 @@ import br.gov.sp.fatec.model.dto.orderProduct.UpdateOrderProductDto;
 public interface OrderProductService {
 
 	public Set<OrderProduct> findOrderProducts();
-	public OrderProduct findOrderProductForProductId(UUID productId);
+	public OrderProduct findOrderProductForProductId(String productId);
 	public OrderProduct findOrderProduct(UUID id);
 	public OrderProduct createOrderProduct(CreateOrderProductDto dto);
 	public OrderProduct updateOrderProduct(UpdateOrderProductDto dto);

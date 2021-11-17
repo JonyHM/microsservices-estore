@@ -9,14 +9,14 @@ import br.gov.sp.fatec.model.dto.orderProduct.ProductDto;
 
 public class BaseCartDto {
 	
-	private UUID userId;
+	private String userId;
 	private UUID cartId;
 	private Set<ProductDto> products;
 	
 	public BaseCartDto() {}
 
 	public BaseCartDto(
-			UUID userId, 
+			String userId, 
 			UUID cartId, 
 			Set<ProductDto> products) {
 		this.userId = userId;
@@ -30,11 +30,11 @@ public class BaseCartDto {
 		this.products = cart.getProducts().stream().map(ProductDto::new).collect(Collectors.toSet());
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

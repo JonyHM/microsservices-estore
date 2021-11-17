@@ -13,5 +13,35 @@
     "name": "graphql.payment.url",
     "type": "java.lang.String",
     "description": "A description for 'graphql.payment.url'"
+  },
+  {
+    "name": "graphql.store.url",
+    "type": "java.lang.String",
+    "description": "A description for 'graphql.store.url'"
+  },
+  {
+    "name": "graphql.order.url",
+    "type": "java.lang.String",
+    "description": "A description for 'graphql.order.url'"
+  },
+  {
+    "name": "service.user.url",
+    "type": "java.lang.String",
+    "description": "A description for 'service.user.url'"
+  },
+  {
+    "name": "service.payment.url",
+    "type": "java.lang.String",
+    "description": "A description for 'service.payment.url'"
+  },
+  {
+    "name": "service.store.url",
+    "type": "java.lang.String",
+    "description": "A description for 'service.store.url'"
+  },
+  {
+    "name": "service.order.url",
+    "type": "java.lang.String",
+    "description": "A description for 'service.order.url'"
   }
 ]}

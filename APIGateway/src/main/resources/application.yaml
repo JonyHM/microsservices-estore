@@ -1,8 +1,12 @@
 server:
   port: 8079
   
-graphql:
+service:
   user:
     url: http://localhost:8080/graphql
   payment:
     url: http://localhost:8083/graphql
+  store:
+    url: http://localhost:8081/graphql
+  order:
+    url: http://localhost:8082

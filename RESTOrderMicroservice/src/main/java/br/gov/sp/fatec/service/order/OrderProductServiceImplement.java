@@ -33,7 +33,7 @@ public class OrderProductServiceImplement implements OrderProductService {
 	}
 
 	@Override
-	public OrderProduct findOrderProductForProductId(UUID productId) {
+	public OrderProduct findOrderProductForProductId(String productId) {
 		Optional<OrderProduct> optionalProduct = repository.findByProductId(productId);
 		return optionalProduct.orElseThrow(
 			() -> new NotFoundException(
@@ -63,7 +63,7 @@ public class OrderProductServiceImplement implements OrderProductService {
 
 	@Override
 	public OrderProduct updateOrderProduct(UpdateOrderProductDto dto) {
-		UUID id = dto.getProductId();
+		UUID id = dto.getId();
 		Optional<OrderProduct> optionalProduct = repository.findById(id);
 		
 		if(!optionalProduct.isPresent()) {

@@ -43,7 +43,7 @@ public class OrderProductController {
 	
 	@GetMapping(value = "/findByProductId/{id}")
 	@JsonView(value = View.Product.class)
-	public ResponseEntity<OrderProduct> findOrderProductForProductId(@PathVariable UUID id) {
+	public ResponseEntity<OrderProduct> findOrderProductForProductId(@PathVariable String id) {
 		OrderProduct orderProduct = service.findOrderProductForProductId(id);
 		return ResponseEntity.ok(orderProduct);
 	}

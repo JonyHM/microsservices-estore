@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-
 import br.gov.sp.fatec.model.common.BaseGraphQLReturn;
 import br.gov.sp.fatec.model.userMicroservice.address.data.CreateAddressData;
 import br.gov.sp.fatec.model.userMicroservice.address.data.DeleteAddressData;
@@ -49,91 +47,91 @@ public class UserController {
     private UserService service;
 
     @GetMapping
-    public ResponseEntity<BaseGraphQLReturn<GetUsersData>> getUsers() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetUsersData>> getUsers() { 
     	ResponseEntity<BaseGraphQLReturn<GetUsersData>> response = service.getUsers();
     	return response;
     }
     
     @GetMapping(value = "/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetUserByIdData>> getUsersById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetUserByIdData>> getUsersById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetUserByIdData>> response = service.getUserById(id);
     	return response;
     }
     
     @PostMapping
-    public ResponseEntity<BaseGraphQLReturn<CreateUserData>> createUser(@RequestBody CreateUserDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateUserData>> createUser(@RequestBody CreateUserDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateUserData>> response = service.createUser(dto);
     	return response;
     }
     
     @PatchMapping
-    public ResponseEntity<BaseGraphQLReturn<UpdateUserData>> updateUser(@RequestBody UpdateUserDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateUserData>> updateUser(@RequestBody UpdateUserDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateUserData>> response = service.updateUser(dto);
     	return response;
     }
     
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeleteUserData>> deleteUser(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeleteUserData>> deleteUser(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeleteUserData>> response = service.deleteUser(id);
     	return response;
     }
     
     @GetMapping(value = "/address")
-    public ResponseEntity<BaseGraphQLReturn<GetAddressesData>> getAddresses() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetAddressesData>> getAddresses() { 
     	ResponseEntity<BaseGraphQLReturn<GetAddressesData>> response = service.getAddresses();
     	return response;
     }
     
     @GetMapping(value = "/address/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> getAddressesById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> getAddressesById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetAddressByIdData>> response = service.getAddressById(id);
     	return response;
     }
     
     @PostMapping(value = "/address")
-    public ResponseEntity<BaseGraphQLReturn<CreateAddressData>> createAddress(@RequestBody CreateAddressDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateAddressData>> createAddress(@RequestBody CreateAddressDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateAddressData>> response = service.createAddress(dto);
     	return response;
     }
     
     @PatchMapping(value = "address")
-    public ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> updateAddress(@RequestBody UpdateAddressDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> updateAddress(@RequestBody UpdateAddressDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateAddressData>> response = service.updateAddress(dto);
     	return response;
     }
     
     @DeleteMapping(value = "/address/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> deleteAddress(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> deleteAddress(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeleteAddressData>> response = service.deleteAddress(id);
     	return response;
     }
     
     @GetMapping(value = "/contact")
-    public ResponseEntity<BaseGraphQLReturn<GetContactsData>> getContacts() throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetContactsData>> getContacts() { 
     	ResponseEntity<BaseGraphQLReturn<GetContactsData>> response = service.getContacts();
     	return response;
     }
     
     @GetMapping(value = "/contact/{id}")
-    public ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> getContactById(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> getContactById(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<GetContactByIdData>> response = service.getContactById(id);
     	return response;
     }
     
     @PostMapping(value = "/contact")
-    public ResponseEntity<BaseGraphQLReturn<CreateContactData>> createContact(@RequestBody CreateContactDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<CreateContactData>> createContact(@RequestBody CreateContactDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<CreateContactData>> response = service.createContact(dto);
     	return response;
     }
     
     @PatchMapping(value = "contact")
-    public ResponseEntity<BaseGraphQLReturn<UpdateContactData>> updateContact(@RequestBody UpdateContactDto dto) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<UpdateContactData>> updateContact(@RequestBody UpdateContactDto dto) { 
     	ResponseEntity<BaseGraphQLReturn<UpdateContactData>> response = service.updateContact(dto);
     	return response;
     }
     
     @DeleteMapping(value = "/contact/{id}")
-    public ResponseEntity<BaseGraphQLReturn<DeleteContactData>> deleteContact(@PathVariable UUID id) throws JsonProcessingException { 
+    public ResponseEntity<BaseGraphQLReturn<DeleteContactData>> deleteContact(@PathVariable UUID id) { 
     	ResponseEntity<BaseGraphQLReturn<DeleteContactData>> response = service.deleteContact(id);
     	return response;
     }

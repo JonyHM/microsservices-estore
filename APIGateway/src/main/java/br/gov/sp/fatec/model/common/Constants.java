@@ -77,4 +77,16 @@ public final class Constants {
 													+ " amount, "
 													+ " currency "
 												+ "}";
+  
+  public static final String PRODUCT_QUERY = " id,"
+											+ " name, "
+											+ " description, "
+											+ " quantity, "
+											+ " unavailableQuantity ";
+ 
+  public static final String ATTRIBUTE_QUERY = " { "
+											  	+ " id,"
+												+ " name, "
+												+ " value "
+											+ "}";
 }

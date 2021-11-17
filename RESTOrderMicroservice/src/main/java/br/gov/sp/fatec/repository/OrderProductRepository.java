@@ -9,5 +9,5 @@ import br.gov.sp.fatec.model.OrderProduct;
 
 public interface OrderProductRepository extends JpaRepository<OrderProduct, UUID> {
 
-	Optional<OrderProduct> findByProductId(UUID productId);
+	Optional<OrderProduct> findByProductId(String productId);
 }

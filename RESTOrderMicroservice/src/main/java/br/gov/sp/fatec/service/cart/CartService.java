@@ -13,7 +13,7 @@ import br.gov.sp.fatec.model.dto.order.KafkaOrderDto;
 public interface CartService {
 
 	public Set<Cart> findCarts();
-	public Set<Cart> findCartsForUserId(UUID userId);
+	public Set<Cart> findCartsForUserId(String userId);
 	public Cart findCart(UUID id);
 	public Cart createCart(CreateCartDto dto);
 	public Cart updateCart(UpdateCartDto dto);
