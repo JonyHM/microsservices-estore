@@ -232,8 +232,8 @@ public class CartServiceImplement implements CartService {
 			throw new NotFoundException(String.format("Could not find order Product with id '%s'", id));
 		}
 		
-		id = dto.getCartId();
-		Optional<Cart> optionalCart = repository.findById(id);
+		UUID cartId = dto.getCartId();
+		Optional<Cart> optionalCart = repository.findById(cartId);
 		
 		if(!optionalCart.isPresent()) {
 			throw new NotFoundException(String.format("Could not find Cart with id '%s'", id));

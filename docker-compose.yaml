@@ -194,9 +194,9 @@ services:
       - kafka
     environment: 
       SERVICE_USER_URL: user:8080/graphql
-      SERVICE_STORE_URL: store:8081/graphql
-      SERVICE_ORDER_URL: order:8082
-      SERVICE_PAYMENT_URL: payment:8083/graphql
+      SERVICE_STORE_URL: store:8080/graphql
+      SERVICE_ORDER_URL: order:8080
+      SERVICE_PAYMENT_URL: payment:8080/graphql
     networks: 
       - backend
 

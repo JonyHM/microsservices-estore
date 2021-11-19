@@ -4,23 +4,23 @@ import java.util.UUID;
 
 public class KafkaOrderDto {
 
-	private UUID cartId;
+	private String cartId;
 	private UUID orderId;
 	
 	public KafkaOrderDto() {}
 
 	public KafkaOrderDto(
-			UUID cartId, 
+			String cartId, 
 			UUID orderId) {
 		this.cartId = cartId;
 		this.orderId = orderId;
 	}
 
-	public UUID getCartId() {
+	public String getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(UUID cartId) {
+	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
 

@@ -33,7 +33,6 @@ public class Contact {
 	@Type(type = "uuid-char")
 	private UUID id;
 	
-	@Type(type = "uuid-char")
 	@Column(name = "id_user_contact")
 	private String userContactId;
 	

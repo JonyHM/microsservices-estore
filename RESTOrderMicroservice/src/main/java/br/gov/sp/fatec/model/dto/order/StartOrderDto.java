@@ -1,7 +1,6 @@
 package br.gov.sp.fatec.model.dto.order;
 
 import java.util.Set;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 import br.gov.sp.fatec.model.Cart;
@@ -11,7 +10,7 @@ import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
 public class StartOrderDto {
 
 	private String userId;
-	private UUID cartId;
+	private String cartId;
 	private Set<ProductDto> products;
 	private String description;
 	private CreatePriceDto price;
@@ -20,7 +19,7 @@ public class StartOrderDto {
 	
 	public StartOrderDto(Cart cart) {
 		this.userId = cart.getUserId();
-		this.cartId = cart.getId();
+		this.cartId = cart.getId().toString();
 		this.description = String.format("Cart created at %s", cart.getCreatedDate());
 		this.products = cart.getProducts().stream().map(ProductDto::new).collect(Collectors.toSet());
 		this.price = new CreatePriceDto(cart.getTotalValue());
@@ -28,7 +27,7 @@ public class StartOrderDto {
 
 	public StartOrderDto(
 			String userId, 
-			UUID cartId,
+			String cartId,
 			String description, 
 			Set<ProductDto> products,
 			CreatePriceDto price) {
@@ -47,11 +46,11 @@ public class StartOrderDto {
 		this.userId = userId;
 	}
 
-	public UUID getCartId() {
+	public String getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(UUID cartId) {
+	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
 
