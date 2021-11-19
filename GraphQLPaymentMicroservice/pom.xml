@@ -52,6 +52,10 @@
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<dependency>
+		  <groupId>org.mariadb.jdbc</groupId>
+		  <artifactId>mariadb-java-client</artifactId>
+		</dependency>
 		
 		<!-- Hibernate -->
 		<dependency>

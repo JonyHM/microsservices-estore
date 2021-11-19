@@ -45,7 +45,7 @@ public class CartController {
 	
 	@GetMapping(value = "/findByUserId/{id}")
 	@JsonView(value = View.Cart.class)
-	public ResponseEntity<Set<Cart>> findCartsForUserId(@PathVariable UUID id) {
+	public ResponseEntity<Set<Cart>> findCartsForUserId(@PathVariable String id) {
 		Set<Cart> carts = service.findCartsForUserId(id);
 		return ResponseEntity.ok(carts);
 	}

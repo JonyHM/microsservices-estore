@@ -38,10 +38,10 @@ public class Order {
 	private UUID id;
 	
 	@Column(unique = true, name = "id_cart")
-	private UUID cartId;
+	private String cartId;
 	
 	@Column(unique = true, name = "id_user")
-	private UUID userId;
+	private String userId;
 	
 	@Column(length = 255)
 	private String description;
@@ -61,8 +61,8 @@ public class Order {
 	public Order() {}
 
 	public Order(
-			UUID cartId,
-			UUID userId,
+			String cartId,
+			String userId,
 			String description) {
 		this.cartId = cartId;
 		this.userId = userId;
@@ -92,19 +92,19 @@ public class Order {
 		this.id = id;
 	}
 
-	public UUID getCartId() {
+	public String getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(UUID cartId) {
+	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

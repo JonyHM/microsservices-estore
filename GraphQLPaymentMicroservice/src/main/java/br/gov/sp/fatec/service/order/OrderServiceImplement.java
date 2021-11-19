@@ -119,7 +119,9 @@ public class OrderServiceImplement implements OrderService {
 		
 		if(optionalCustomer.isPresent()) {
 			Customer customer = optionalCustomer.get();
+			System.out.println(dto);
 			Order order = new Order(dto);
+			System.out.println(order);
 			order.setCustomer(customer);
 			order.setPrice(price);
 			repository.save(order);
@@ -145,6 +147,7 @@ public class OrderServiceImplement implements OrderService {
 			throw new NotFoundException(String.format("Could not find card with id '%s'!", dto.getCardId()));
 		}
         
+		System.out.println(order);
 		order.setStatus(OrderStatus.PAID);
 		repository.save(order);
 		this.sendOrderPaidEvent(dto.getCartId(), dto.getOrderId());
@@ -176,13 +179,13 @@ public class OrderServiceImplement implements OrderService {
 		return String.format("Order '%s' canceled successfully!", dto.getOrderId());
 	}
 	
-	private void sendOrderPaidEvent(UUID cartId, UUID orderId) {
+	private void sendOrderPaidEvent(String cartId, UUID orderId) {
 		KafkaOrderDto dto = new KafkaOrderDto(cartId, orderId);
 		System.out.println("DTO -> " + dto);
 		producer.sendOrderPaid(dto);
 	}
 	
-	private void sendOrderCanceledEvent(UUID cartId, UUID orderId) {
+	private void sendOrderCanceledEvent(String cartId, UUID orderId) {
 		KafkaOrderDto dto = new KafkaOrderDto(cartId, orderId);
 		System.out.println("DTO -> " + dto);
 		producer.sendOrderCanceled(dto);

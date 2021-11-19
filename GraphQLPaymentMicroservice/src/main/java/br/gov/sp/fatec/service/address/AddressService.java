@@ -19,5 +19,5 @@ public interface AddressService {
 	public Address updateAddress(UpdateAddressDto dto);
 	public Address updateKafkaAddress(UpdateKafkaAddressDto dto);
 	public String deleteAddress(UUID id);
-	public String deleteByUserAddressId(UUID id);
+	public String deleteByUserAddressId(String id);
 }

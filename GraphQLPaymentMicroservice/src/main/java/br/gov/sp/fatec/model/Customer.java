@@ -36,7 +36,7 @@ public class Customer {
 	private UUID id;
 	
 	@Column(unique = true, name = "id_user")
-	private UUID userId;
+	private String userId;
 	
 	@Column(length = 40)
 	private String name;
@@ -83,7 +83,7 @@ public class Customer {
 	
 	public Customer() {}
 
-	public Customer(UUID userId, String name,
+	public Customer(String userId, String name,
 			@Pattern(regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})", 
 			message = "formato de documento inválido") String cpf) {
 		this.userId = userId;
@@ -105,11 +105,11 @@ public class Customer {
 		this.id = id;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

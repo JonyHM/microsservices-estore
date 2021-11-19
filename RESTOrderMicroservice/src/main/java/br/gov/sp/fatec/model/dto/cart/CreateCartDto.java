@@ -2,7 +2,6 @@ package br.gov.sp.fatec.model.dto.cart;
 
 import java.sql.Timestamp;
 import java.util.Set;
-import java.util.UUID;
 
 import br.gov.sp.fatec.model.dto.orderProduct.CreateOrderProductDto;
 import br.gov.sp.fatec.model.dto.price.CreatePriceDto;
@@ -13,7 +12,7 @@ public class CreateCartDto {
 	private Timestamp createdDate;
 	private Timestamp updatedDate;
 	private CreatePriceDto totalValue;
-	private UUID userId;
+	private String userId;
 	
 	public CreateCartDto() {}
 
@@ -22,7 +21,7 @@ public class CreateCartDto {
 			Timestamp createdDate, 
 			Timestamp updatedDate,
 			CreatePriceDto totalValue,
-			UUID userId) {
+			String userId) {
 		this.products = products;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
@@ -62,11 +61,11 @@ public class CreateCartDto {
 		this.totalValue = totalValue;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

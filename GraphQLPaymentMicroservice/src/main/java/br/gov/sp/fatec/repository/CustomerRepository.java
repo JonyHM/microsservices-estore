@@ -12,5 +12,5 @@ import br.gov.sp.fatec.model.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
 	Optional<Customer> findByCpf(String cpf);
-	Optional<Customer> findByUserId(UUID userId);
+	Optional<Customer> findByUserId(String userId);
 }

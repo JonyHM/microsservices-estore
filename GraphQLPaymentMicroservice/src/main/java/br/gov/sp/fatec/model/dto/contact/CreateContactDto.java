@@ -8,7 +8,7 @@ public class CreateContactDto {
 	private String type;
 	private String value;
 	private UUID customerId;
-	private UUID userId;
+	private String userId;
 	
 	public CreateContactDto() {}
 
@@ -55,11 +55,11 @@ public class CreateContactDto {
 		this.customerId = customerId;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

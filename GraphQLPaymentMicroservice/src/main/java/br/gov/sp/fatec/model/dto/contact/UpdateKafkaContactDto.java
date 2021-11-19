@@ -5,7 +5,7 @@ import java.util.UUID;
 public class UpdateKafkaContactDto {
 
 	private UUID userId;
-	private UUID userContactId;
+	private String userContactId;
 	private String title;
 	private String type;
 	private String value;
@@ -14,7 +14,7 @@ public class UpdateKafkaContactDto {
 
 	public UpdateKafkaContactDto(
 			UUID userId, 
-			UUID userContactId,
+			String userContactId,
 			String title, 
 			String type, 
 			String value) {
@@ -33,11 +33,11 @@ public class UpdateKafkaContactDto {
 		this.userId = userId;
 	}
 
-	public UUID getUserContactId() {
+	public String getUserContactId() {
 		return userContactId;
 	}
 
-	public void setUserContactId(UUID userContactId) {
+	public void setUserContactId(String userContactId) {
 		this.userContactId = userContactId;
 	}
 

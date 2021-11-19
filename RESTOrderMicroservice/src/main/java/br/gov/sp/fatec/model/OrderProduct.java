@@ -46,7 +46,7 @@ public class OrderProduct {
 		View.Cart.class,
 		View.Product.class
 	})
-	private UUID productId;
+	private String productId;
 	
 	@Column(length = 50, nullable = false)
 	@JsonView(value = {
@@ -91,7 +91,7 @@ public class OrderProduct {
 	}
 
 	public OrderProduct(
-			UUID productId,
+			String productId,
 			String name, 
 			String description, 
 			Long quantity, 
@@ -111,11 +111,11 @@ public class OrderProduct {
 		this.id = id;
 	}
 
-	public UUID getProductId() {
+	public String getProductId() {
 		return productId;
 	}
 
-	public void setProductId(UUID productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 

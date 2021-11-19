@@ -25,7 +25,7 @@
 				<constraints nullable="false" primaryKey="true" primaryKeyName="cart_id_pk" />
 			</column>
 			<column name="id_user" type="varchar(255)">
-				<constraints nullable="false" unique="true" uniqueConstraintName="cart_user_id_uk" />
+				<constraints nullable="false"/>
 			</column>
 			<column name="id_cart_price" type="varchar(255)">
 				<constraints nullable="false" foreignKeyName="cart_price_fk" references="Price(id_price)"/>
@@ -43,7 +43,7 @@
 		
 		<createTable tableName="order_product">
 			<column name="id_order_product" type="varchar(255)">
-				<constraints nullable="false" primaryKey="true" primaryKeyName="card_id_pk" />
+				<constraints nullable="false" primaryKey="true" primaryKeyName="order_id_pk" />
 			</column>
 			<column name="id_product" type="varchar(255)">
 				<constraints nullable="false"/>

@@ -5,14 +5,14 @@ import java.util.UUID;
 public class OrderManagementDto {
 
 	private UUID orderId;
-	private UUID cartId;
+	private String cartId;
 	private UUID cardId;
 	
 	public OrderManagementDto() {}
 
 	public OrderManagementDto(
 			UUID orderId,
-			UUID cartId,
+			String cartId,
 			UUID cardId) {
 		this.orderId = orderId;
 		this.cartId = cartId;
@@ -27,11 +27,11 @@ public class OrderManagementDto {
 		this.orderId = orderId;
 	}
 
-	public UUID getCartId() {
+	public String getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(UUID cartId) {
+	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
 

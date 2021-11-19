@@ -1,12 +1,10 @@
 package br.gov.sp.fatec.model.dto.orderProduct;
 
-import java.util.UUID;
-
 import br.gov.sp.fatec.model.OrderProduct;
 
 public class ProductDto {
 
-	private UUID productId;
+	private String productId;
 	private Long quantity;
 	
 	public ProductDto() {}
@@ -16,16 +14,16 @@ public class ProductDto {
 		this.quantity = product.getQuantity();
 	}
 
-	public ProductDto(UUID productId, Long quantity) {
+	public ProductDto(String productId, Long quantity) {
 		this.productId = productId;
 		this.quantity = quantity;
 	}
 
-	public UUID getProductId() {
+	public String getProductId() {
 		return productId;
 	}
 
-	public void setProductId(UUID productId) {
+	public void setProductId(String productId) {
 		this.productId = productId;
 	}
 
@@ -39,7 +37,8 @@ public class ProductDto {
 
 	@Override
 	public String toString() {
-		return "ProductDto [productId=" + productId + ", quantity=" + quantity + "]";
+		return "ProductDto [productId=" + productId + 
+				", quantity=" + quantity + "]";
 	}
 		
 }

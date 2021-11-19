@@ -1,13 +1,11 @@
 package br.gov.sp.fatec.model.dto.customer;
 
-import java.util.UUID;
-
 import javax.validation.constraints.Pattern;
 
 public class CreateCustomerDto {
 
 	private String name;
-	private UUID userId;
+	private String userId;
 	
 	@Pattern(
 		regexp = "([0-9]{2}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})", 
@@ -17,7 +15,7 @@ public class CreateCustomerDto {
 	
 	public CreateCustomerDto() {}
 
-	public CreateCustomerDto(String name, UUID userId, String cpf) {
+	public CreateCustomerDto(String name, String userId, String cpf) {
 		this.name = name;
 		this.userId = userId;
 		this.cpf = cpf;
@@ -31,11 +29,11 @@ public class CreateCustomerDto {
 		this.name = name;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

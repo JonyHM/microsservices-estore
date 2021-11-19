@@ -19,5 +19,5 @@ public interface ContactService {
 	public Contact updateContact(UpdateContactDto dto);
 	public Contact updateKafkaContact(UpdateKafkaContactDto dto);
 	public String deleteContact(UUID id);
-	public String deleteByUserContactId(UUID id);
+	public String deleteByUserContactId(String id);
 }

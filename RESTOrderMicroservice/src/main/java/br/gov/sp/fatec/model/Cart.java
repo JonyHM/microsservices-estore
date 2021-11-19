@@ -50,7 +50,7 @@ public class Cart {
 		View.Cart.class,
 		View.Product.class
 	})
-	private UUID userId;
+	private String userId;
 	
 	@ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -104,7 +104,7 @@ public class Cart {
 			Set<OrderProduct> products, 
 			Timestamp createdDate, 
 			Timestamp updatedDate, 
-			UUID userId,
+			String userId,
 			Price totalValue) {
 		this.products = products;
 		this.createdDate = createdDate;
@@ -122,11 +122,11 @@ public class Cart {
 		this.id = id;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

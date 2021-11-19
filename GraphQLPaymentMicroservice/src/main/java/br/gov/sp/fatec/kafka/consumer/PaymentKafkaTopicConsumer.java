@@ -1,7 +1,6 @@
 package br.gov.sp.fatec.kafka.consumer;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -49,7 +48,7 @@ public class PaymentKafkaTopicConsumer {
     }
 	
 	@KafkaListener(topics = Topic.userDeleted)
-    public void consumeUserDeleted(@Payload UUID id) throws IOException {
+    public void consumeUserDeleted(@Payload String id) throws IOException {
 		this.logTopicMessage(Topic.userDeleted, id);
 		customerService.deleteCustomerByUserId(id);
     }
@@ -67,7 +66,7 @@ public class PaymentKafkaTopicConsumer {
     }
 	
 	@KafkaListener(topics = Topic.addressDeleted)
-    public void consumeAddressDeleted(@Payload UUID id) throws IOException {
+    public void consumeAddressDeleted(@Payload String id) throws IOException {
 		this.logTopicMessage(Topic.addressDeleted, id);
 		addressService.deleteByUserAddressId(id);
     }
@@ -85,7 +84,7 @@ public class PaymentKafkaTopicConsumer {
     }
 	
 	@KafkaListener(topics = Topic.contactDeleted)
-    public void consumeContactDeleted(@Payload UUID id) throws IOException {
+    public void consumeContactDeleted(@Payload String id) throws IOException {
 		this.logTopicMessage(Topic.contactDeleted, id);
 		contactService.deleteByUserContactId(id);
     }

@@ -1,21 +1,19 @@
 package br.gov.sp.fatec.model.dto.order;
 
-import java.util.UUID;
-
 import br.gov.sp.fatec.model.dto.price.CreateOrderPriceDto;
 
 public class CreateOrderDto {
 
-	private UUID cartId;	
-	private UUID userId;	
+	private String cartId;	
+	private String userId;	
 	private String description;
 	private CreateOrderPriceDto price;
 	
 	public CreateOrderDto() {}
 
 	public CreateOrderDto(
-			UUID cartId, 
-			UUID userId,
+			String cartId, 
+			String userId,
 			String description,
 			CreateOrderPriceDto price) {
 		this.cartId = cartId;
@@ -24,19 +22,19 @@ public class CreateOrderDto {
 		this.price = price;
 	}
 
-	public UUID getCartId() {
+	public String getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(UUID cartId) {
+	public void setCartId(String cartId) {
 		this.cartId = cartId;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

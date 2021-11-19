@@ -1,10 +1,8 @@
 package br.gov.sp.fatec.model.dto.customer;
 
-import java.util.UUID;
-
 public class UpdateKafkaCustomerDto {
 
-	private UUID userId;
+	private String userId;
 	private String name;
 	private String email;
 	private String cpf;
@@ -12,7 +10,7 @@ public class UpdateKafkaCustomerDto {
 	public UpdateKafkaCustomerDto() {}
 
 	public UpdateKafkaCustomerDto(
-			UUID userId, 
+			String userId, 
 			String name, 
 			String email, 
 			String cpf) {
@@ -22,11 +20,11 @@ public class UpdateKafkaCustomerDto {
 		this.cpf = cpf;
 	}
 
-	public UUID getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(UUID userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 

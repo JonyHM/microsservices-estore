@@ -112,7 +112,7 @@ public class ContactServiceImplement implements ContactService {
 	
 	@Override
 	public Contact updateKafkaContact(UpdateKafkaContactDto dto) {
-		UUID id = dto.getUserContactId();
+		String id = dto.getUserContactId();
 		Optional<Contact> optionalContact = repository.findByUserContactId(id);
 		
 		if(optionalContact.isPresent()) {
@@ -135,7 +135,7 @@ public class ContactServiceImplement implements ContactService {
 	}
 
 	@Override
-	public String deleteByUserContactId(UUID id) {
+	public String deleteByUserContactId(String id) {
 		Optional<Contact> optionalContact = repository.findByUserContactId(id);
 		
 		if(optionalContact.isPresent()) {
