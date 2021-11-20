@@ -1,37 +1,49 @@
 package br.gov.sp.fatec.model;
 
-import java.rmi.server.UID;
+import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import br.gov.sp.fatec.model.dto.card.CreateCardDto;
+import br.gov.sp.fatec.model.dto.card.UpdateCardDto;
 
 @Entity
 public class Card {
 
 	@Id
-	@Column(name = "id_card")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private UID id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "id_card", updatable = false, nullable = false)
+	@ColumnDefault("random_uuid()")
+	@Type(type = "uuid-char")
+	private UUID id;
 	
 	@Column(length = 50)
 	private String nickname;
 	
-	@Column(length = 50, name = "holder_name")
+	@Column(length = 100, name = "holder_name")
 	private String holderName;
 	
-	@Column(length = 50)
-	private Long number;
+	@Column(length = 16)
+	private String number;
 	
-	@Column(length = 50)
-	private Long cvv;
+	@Column(length = 5)
+	private String cvv;
 	
-	@Column(length = 50, name = "expiration_date")
+	@Column(length = 10, name = "expiration_date")
 	private String expirationDate;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -40,14 +52,11 @@ public class Card {
 	
 	public Card() {}
 
-	public Card(UID id, 
-			String nickname, 
+	public Card(String nickname, 
 			String holderName, 
-			Long number, 
-			Long cvv, 
+			String number, 
+			String cvv, 
 			String expirationDate) {
-		super();
-		this.id = id;
 		this.nickname = nickname;
 		this.holderName = holderName;
 		this.number = number;
@@ -55,11 +64,19 @@ public class Card {
 		this.expirationDate = expirationDate;
 	}
 
-	public UID getId() {
+	public Card(CreateCardDto dto) {
+		this.nickname = dto.getNickname();
+		this.holderName = dto.getHolderName();
+		this.number = dto.getNumber();
+		this.cvv = dto.getCvv();
+		this.expirationDate = dto.getExpirationDate();
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(UID id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -79,19 +96,19 @@ public class Card {
 		this.holderName = holderName;
 	}
 
-	public Long getNumber() {
+	public String getNumber() {
 		return number;
 	}
 
-	public void setNumber(Long number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 
-	public Long getCvv() {
+	public String getCvv() {
 		return cvv;
 	}
 
-	public void setCvv(Long cvv) {
+	public void setCvv(String cvv) {
 		this.cvv = cvv;
 	}
 
@@ -109,6 +126,15 @@ public class Card {
 
 	public void setHolder(Customer holder) {
 		this.holder = holder;
+	}
+	
+	public Card updateEntity(UpdateCardDto dto) {
+		this.nickname = dto.getNickname() != "" ? dto.getNickname() : this.nickname;
+		this.holderName = dto.getHolderName() != "" ? dto.getHolderName() : this.holderName;
+		this.number = dto.getNumber();
+		this.cvv = dto.getCvv();
+		this.expirationDate = dto.getExpirationDate() != "" ? dto.getExpirationDate() : this.expirationDate;
+		return this;
 	}
 
 	@Override

@@ -1,0 +1,214 @@
+type Customer {
+	id: ID!
+  userId: String
+	name: String
+	cpf: String
+	contacts: [Contact]
+	addresses: [Address]
+  cards: [Card]
+  orders: [Order]
+}
+
+type Card {
+  id: ID!
+	nickname: String
+	holderName: String
+	number: String
+	cvv: String
+	expirationDate: String
+	holder: Customer!
+}
+
+type Address {
+	id: ID!
+	userAddressId: String
+	street: String
+	number: String
+	district: String
+	complement: String
+	city: String
+	state: String
+	country: String
+	customer: Customer
+}
+
+type Contact {
+	id: ID!
+	userContactId: String
+	title: String
+	type: String
+	value: String
+	customer: Customer
+}
+
+type Price {
+	id: ID!
+	currency: String!
+	amount: Float!
+}
+
+type Order {
+	id: ID!
+	cartId: String
+	userId: String
+	description: String
+	status: String
+	customer: Customer
+	price: Price
+}
+
+type Query {
+	getCustomers: [Customer]
+	getCustomerById(id: ID): Customer
+  getCustomerByCPF(cpf: String): Customer
+  getCustomerByUserId(userId: String): Customer
+	
+	getContacts: [Contact]
+	getContactById(id: ID): Contact
+	getContactsByCustomerId(customerId: ID): [Contact]
+	
+	getAddresses: [Address]
+	getAddressById(id: ID): Address
+	getAddressesByCustomerId(customerId: ID): [Address]
+
+  getCards: [Card]
+	getCardById(id: ID): Card
+	getCardsByCustomerId(customerId: ID): [Card]
+
+	getPrices: [Price]
+	getPriceById(id: ID): Price
+	getPriceByOrderId(orderId: ID): Price
+	
+	getOrders: [Order]
+	getOrderById(id: ID): Order
+	getOrdersByCustomerId(customerId: ID): [Order]
+}
+
+input CreateCustomerInput {
+  userId: String
+	name: String
+	cpf: String
+}
+
+input UpdateCustomerInput {
+	customerId: ID
+	name: String
+	cpf: String
+}
+
+input CreateCardInput {
+	nickname: String
+ 	holderName: String!
+  number: String!
+  cvv: String!
+  expirationDate: String!
+	holderId: ID!
+}
+
+input UpdateCardInput {
+	cardId: ID!
+	nickname: String
+ 	holderName: String!
+  number: String!
+  cvv: String!
+  expirationDate: String!
+}
+
+input CreateAdressInput {
+	street: String
+	number: String
+	district: String
+	complement: String
+	city: String
+	state: String
+	country: String
+  customerId: ID!
+}
+
+input UpdateAdressInput {
+	addressId: ID!
+	street: String
+	number: String
+	district: String
+	complement: String
+	city: String
+	state: String
+	country: String
+}
+
+input CreateContactInput {
+	title: String
+	type: String
+	value: String
+  customerId: ID!
+}
+
+input UpdateContactInput {
+	contactId: ID!
+	title: String
+	type: String
+	value: String
+}
+
+input CreatePriceInput {
+	currency: String!
+	amount: Float!
+	orderId: ID!
+}
+
+input UpdatePriceInput {
+	priceId: ID!
+	currency: String!
+	amount: Float!
+}
+
+input CreateOrderPriceInput {
+	currency: String!
+	amount: Float!
+}
+
+input CreateOrderInput {
+	cartId: String!
+	userId: String!
+	description: String
+	price: CreateOrderPriceInput!
+}
+
+input UpdateOrderInput {
+	orderId: ID!
+	description: String
+}
+
+input OrderManagementInput {
+	orderId: ID!
+	cardId: ID!
+	cartId: String!
+}
+
+type Mutation {
+	createCustomer(customer: CreateCustomerInput!): Customer!
+	updateCustomer(customer: UpdateCustomerInput!): Customer!
+	deleteCustomer(customerId: ID!): String!
+	
+  createCard(card: CreateCardInput!): Card!
+  updateCard(card: UpdateCardInput!): Card!
+  deleteCard(cardId: ID!): String!
+  
+	createAddress(address: CreateAdressInput!): Address!
+	updateAddress(address: UpdateAdressInput!): Address!
+	deleteAddress(addressId: ID!): String!
+	
+	createContact(contact: CreateContactInput!): Contact!
+	updateContact(contact: UpdateContactInput!): Contact!
+	deleteContact(contactId: ID!): String!
+	
+	createPrice(price: CreatePriceInput!): Price!
+	updatePrice(price: UpdatePriceInput!): Price!
+	deletePrice(priceId: ID!): String!
+	
+	createOrder(order: CreateOrderInput!): Order!
+	updateOrder(order: UpdateOrderInput!): Order!
+	deleteOrder(orderId: ID!): String!
+	payOrder(payment: OrderManagementInput!): String!
+	cancelOrder(payment: OrderManagementInput!): String!
+}

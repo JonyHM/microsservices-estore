@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+	http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+	
+	<changeSet id="Create Schema" author="Jonathas H. Moraes">
+	
+		<createTable tableName="Price">
+			<column name="id_price" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="price_id_pk" />
+			</column>
+			<column name="currency" type="varchar(3)"/>
+			<column name="amount" type="DECIMAL(10,2)"/>
+		</createTable>
+		
+		<createTable tableName="Product">
+			<column name="id_product" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="product_id_pk" />
+			</column>
+			<column name="id_product_price" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="product_price_fk" references="Price(id_price)"/>
+			</column>
+			<column name="name" type="varchar(50)"></column>
+			<column name="description" type="varchar(100)"></column>
+			<column name="quantity" type="bigint"></column>
+			<column name="unavailable_quantity" type="bigint"></column>
+		</createTable>
+		
+		<createTable tableName="Attribute">
+			<column name="id_attribute" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="attribute_id_pk" />
+			</column>
+			<column name="id_attribute_product" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="attribute_product_fk" references="Product(id_product)"/>
+			</column>
+			<column name="name" type="varchar(50)"/>
+			<column name="value" type="varchar(100)"/>
+		</createTable>
+		
+	</changeSet>
+</databaseChangeLog>

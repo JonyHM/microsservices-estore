@@ -1,21 +1,37 @@
 package br.gov.sp.fatec.model;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
+import br.gov.sp.fatec.model.dto.contact.CreateContactDto;
+import br.gov.sp.fatec.model.dto.contact.UpdateContactDto;
 
 @Entity
+@Table(name = "contact")
 public class Contact {
 
 	@Id
-	@Column(name = "id_contact")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	@GeneratedValue(generator = "UUID")
+	@GenericGenerator(
+		name = "UUID",
+		strategy = "org.hibernate.id.UUIDGenerator"
+	)
+	@Column(name = "id_contact", updatable = false, nullable = false)
+	@ColumnDefault("random_uuid()")
+	@Type(type = "uuid-char")
+	private UUID id;
 	
 	@Column(length = 50)
 	private String title;
@@ -31,19 +47,29 @@ public class Contact {
 	private User user;
 	
 	public Contact() {}
+	
+	public Contact(CreateContactDto dto) {
+		this.title = dto.getTitle();
+		this.type = dto.getType();
+		this.value = dto.getValue();
+	}
 
-	public Contact(String title, String type, String value, User user) {
+	public Contact(
+			String title, 
+			String type, 
+			String value, 
+			User user) {
 		this.title = title;
 		this.type = type;
 		this.value = value;
 		this.user = user;
 	}
 
-	public Long getId() {
+	public UUID getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(UUID id) {
 		this.id = id;
 	}
 
@@ -78,9 +104,19 @@ public class Contact {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public Contact updateEntity(UpdateContactDto dto) {
+		this.title = dto.getTitle();
+		this.type = dto.getType();
+		this.value = dto.getValue();
+		return this;
+	}
 
 	@Override
 	public String toString() {
-		return "Contact [id=" + id + ", title=" + title + ", type=" + type + ", value=" + value + "]";
+		return "Contact [id=" + id +
+				", title=" + title + 
+				", type=" + type + 
+				", value=" + value + "]";
 	}
 }

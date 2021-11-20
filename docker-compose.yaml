@@ -1,0 +1,204 @@
+version: "3.8"
+
+services:
+  ####### KAFKA #######
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - 2181:2181
+    networks: 
+      - backend
+  
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_LISTENERS: LISTENER_KFK://kafka:9092
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: LISTENER_KFK://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: LISTENER_KFK:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: LISTENER_KFK
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks: 
+      - backend
+
+  ####### USER SERVICE #######
+
+  user:
+    build: ./GraphQLUserMicroservice 
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on: 
+      - kafka
+      - user_db 
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mariadb://user_db:3306/db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: username # change
+      SPRING_DATASOURCE_PASSWORD: passwd # change
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.mariadb.jdbc.Driver
+      SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.MariaDBDialect
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+    links:
+      - user_db:app_db
+    networks: 
+      - backend
+  
+  user_db:
+    image: mariadb:10.2
+    command: --lower_case_table_names=1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd # change
+      MYSQL_DATABASE: db
+      MYSQL_USER: username # change
+      MYSQL_PASSWORD: passwd # change
+    ports:
+      - 3307:3306
+    logging:
+      driver: local
+    networks:
+      - backend
+
+  ####### STORE SERVICE #######
+  
+  store:
+    build: ./GraphQLStoreMicroservice 
+    ports:
+      - "8081:8080"
+    restart: always
+    depends_on: 
+      - kafka
+      - store_db 
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mariadb://store_db:3306/db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: username # change
+      SPRING_DATASOURCE_PASSWORD: passwd # change
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.mariadb.jdbc.Driver
+      SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.MariaDBDialect
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: kafka:9092
+    links:
+      - store_db:app_db
+    networks: 
+      - backend
+  
+  store_db:
+    image: mariadb:10.2
+    command: --lower_case_table_names=1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd # change
+      MYSQL_DATABASE: db
+      MYSQL_USER: username # change
+      MYSQL_PASSWORD: passwd # change
+    ports:
+      - 3308:3306
+    logging:
+      driver: local
+    networks:
+      - backend
+
+  ####### ORDER SERVICE #######
+
+  order:
+    build: ./RESTOrderMicroservice 
+    ports:
+      - "8082:8080"
+    restart: always
+    depends_on: 
+      - kafka
+      - order_db 
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mariadb://order_db:3306/db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: username # change
+      SPRING_DATASOURCE_PASSWORD: passwd # change
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.mariadb.jdbc.Driver
+      SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.MariaDBDialect
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: kafka:9092
+    links:
+      - order_db:app_db
+    networks: 
+      - backend
+  
+  order_db:
+    image: mariadb:10.2
+    command: --lower_case_table_names=1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd # change
+      MYSQL_DATABASE: db
+      MYSQL_USER: username # change
+      MYSQL_PASSWORD: passwd # change
+    ports:
+      - 3309:3306
+    logging:
+      driver: local
+    networks:
+      - backend
+
+  ####### PAYMENT SERVICE #######
+
+  payment:
+    build: ./GraphQLPaymentMicroservice 
+    ports:
+      - "8083:8080"
+    restart: always
+    depends_on: 
+      - kafka
+      - payment_db 
+    environment: 
+      SPRING_DATASOURCE_URL: jdbc:mariadb://payment_db:3306/db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: username # change
+      SPRING_DATASOURCE_PASSWORD: passwd # change
+      SPRING_DATASOURCE_DRIVER-CLASS-NAME: org.mariadb.jdbc.Driver
+      SPRING_JPA_DATABASE-PLATFORM: org.hibernate.dialect.MariaDBDialect
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP-SERVERS: kafka:9092
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP-SERVERS: kafka:9092
+    links:
+      - payment_db:app_db
+    networks: 
+      - backend
+
+  payment_db:
+    image: mariadb:10.2
+    command: --lower_case_table_names=1
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: passwd # change
+      MYSQL_DATABASE: db
+      MYSQL_USER: username # change
+      MYSQL_PASSWORD: passwd # change
+    ports:
+      - 3310:3306
+    logging:
+      driver: local
+    networks:
+      - backend
+
+  ####### API GATEWAY #######
+
+  gateway:
+    build: ./ApiGateway 
+    ports:
+      - "8079:8079"
+    restart: always
+    depends_on: 
+      - kafka
+    environment: 
+      SERVICE_USER_URL: user:8080/graphql
+      SERVICE_STORE_URL: store:8080/graphql
+      SERVICE_ORDER_URL: order:8080
+      SERVICE_PAYMENT_URL: payment:8080/graphql
+    networks: 
+      - backend
+
+networks:
+  backend:

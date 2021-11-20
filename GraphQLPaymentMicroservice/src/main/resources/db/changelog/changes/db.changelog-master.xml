@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+	http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+	
+	<changeSet id="Create Schema" author="Jonathas H. Moraes">
+		<createTable tableName="Price">
+			<column name="id_price" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="price_id_pk" />
+			</column>
+			<column name="currency" type="varchar(3)">
+				<constraints nullable="false" />
+			</column>
+			<column name="amount" type="DECIMAL(10,2)">
+				<constraints nullable="false" />
+			</column>
+		</createTable>
+	
+		<createTable tableName="Customer">
+			<column name="id_customer" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="customer_id_pk" />
+			</column>
+			<column name="id_user" type="varchar(255)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="customer_user_id_uk" />
+			</column>	
+			<column name="cpf" type="varchar(14)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="cpf_uk" />
+			</column>
+			<column name="name" type="varchar(40)"></column>
+		</createTable>
+		
+		<createTable tableName="Address">
+			<column name="id_address" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="address_id_pk" />
+			</column>
+			<column name="id_user_address" type="varchar(255)"/>
+			<column name="id_address_customer" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="address_customer_fk" references="Customer(id_customer)"/>
+			</column>
+			<column name="street" type="varchar(50)"/>
+			<column name="number" type="varchar(5)"/>
+			<column name="district" type="varchar(50)"/>
+			<column name="complement" type="varchar(200)"/>
+			<column name="city" type="varchar(40)"/>
+			<column name="state" type="varchar(2)"/>
+			<column name="country" type="varchar(40)"/>
+		</createTable>
+		
+		<createTable tableName="Contact">
+			<column name="id_contact" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="contact_id_pk" />
+			</column>
+			<column name="id_user_contact" type="varchar(255)"/>
+			<column name="id_contact_customer" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="contact_customer_fk" references="Customer(id_customer)"/>
+			</column>
+			<column name="title" type="varchar(50)"/>
+			<column name="type" type="varchar(10)"/>
+			<column name="value" type="varchar(50)"/>
+		</createTable>
+		
+		<createTable tableName="Card">
+			<column name="id_card" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="card_id_pk" />
+			</column>
+			<column name="id_card_customer" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="card_customer_fk" references="Customer(id_customer)"/>
+			</column>
+			<column name="nickname" type="varchar(50)"/>
+			<column name="holder_name" type="varchar(100)"/>
+			<column name="number" type="bigint"/>
+			<column name="cvv" type="bigint"/>
+			<column name="expiration_date" type="varchar(10)"/>
+		</createTable>
+		
+		<createTable tableName="Order_Cart">
+			<column name="id_order" type="varchar(255)">
+				<constraints nullable="false" primaryKey="true" primaryKeyName="order_id_pk" />
+			</column>
+			<column name="id_order_customer" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="order_customer_fk" references="Customer(id_customer)"/>
+			</column>
+			<column name="id_order_price" type="varchar(255)">
+				<constraints nullable="false" foreignKeyName="order_price_fk" references="Price(id_price)"/>
+			</column>
+			<column name="status" type="varchar(10)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="id_cart" type="varchar(255)">
+				<constraints nullable="false" unique="true" uniqueConstraintName="order_cart_id_uk" />
+			</column>
+			<column name="id_user" type="varchar(255)">
+				<constraints nullable="false"/>
+			</column>
+			<column name="description" type="varchar(255)"/>
+		</createTable>
+		
+	</changeSet>
+</databaseChangeLog>

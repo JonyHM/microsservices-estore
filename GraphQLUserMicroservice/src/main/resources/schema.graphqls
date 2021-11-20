@@ -10,10 +10,11 @@ type User {
 type Address {
 	id: ID!
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String
+	state: String
 	country: String
 	user: User
 }
@@ -28,40 +29,76 @@ type Contact {
 
 type Query {
 	getUsers: [User]
-	getUserById(id: Int): User
+	getUserById(id: ID): User
 	
 	getContacts: [Contact]
-	getContactById(id: Int): Contact
-	getContactByUserId(userId: Int): Contact
+	getContactById(id: ID): Contact
+	getContactsByUserId(userId: ID): [Contact]
 	
 	getAddresses: [Address]
-	getAddressById(id: Int): Address
-	getAddressByUserId(userId: Int): Address
+	getAddressById(id: ID): Address
+	getAddressesByUserId(userId: ID): [Address]
 }
 
-input UserInput {
+input CreateUserInput {
 	name: String
 	email: String
 	cpf: String
 }
 
-input AdressInput {
+input UpdateUserInput {
+	userId: ID!
+	name: String
+	email: String
+	cpf: String
+}
+
+input CreateAdressInput {
 	street: String
-	number: Int
+	number: String
 	district: String
 	complement: String
 	city: String
+	state: String
+	country: String
+	userId: ID!
+}
+
+input UpdateAdressInput {
+	addressId: ID!
+	street: String
+	number: String
+	district: String
+	complement: String
+	city: String
+	state: String
 	country: String
 }
 
-input ContactInput {
+input CreateContactInput {
+	title: String
+	type: String
+	value: String
+	userId: ID!
+}
+
+input UpdateContactInput {
+	contactId: ID!
 	title: String
 	type: String
 	value: String
 }
 
 type Mutation {
-	createUser(user: UserInput!): User!
-	createAddress(address: AdressInput!, userId: Int!): Address!
-	createContact(contact: ContactInput!, userId: Int!): Contact!
+	createUser(user: CreateUserInput!): User!
+	updateUser(user: UpdateUserInput!): User!
+	deleteUser(userId: ID!): String!
+	
+	createAddress(address: CreateAdressInput!): Address!
+	updateAddress(address: UpdateAdressInput!): Address!
+	deleteAddress(addressId: ID!): String!
+	
+	createContact(contact: CreateContactInput!): Contact!
+	updateContact(contact: UpdateContactInput!): Contact!
+	deleteContact(contactId: ID!): String!
 }

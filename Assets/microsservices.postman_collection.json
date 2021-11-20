@@ -1,0 +1,4624 @@
+{
+	"info": {
+		"_postman_id": "7c45c2bb-de7e-4868-b95a-51ee1239e24f",
+		"name": "TG",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "price",
+					"item": [
+						{
+							"name": "Get By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/price/c52c6f4f-50ac-4dc0-a1c7-685599dc6bde",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"price",
+										"c52c6f4f-50ac-4dc0-a1c7-685599dc6bde"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Prices",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/price",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"price"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"currency\": \"JPY\",\r\n    \"amount\": 13.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/price",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"price"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Price",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"c52c6f4f-50ac-4dc0-a1c7-685599dc6bde\",\r\n    \"currency\": \"JPY\",\r\n    \"amount\": 1533.00\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/price",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"price"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "product",
+					"item": [
+						{
+							"name": "Get Products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/orderProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"orderProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": \"024419c3-76cb-43ce-b86d-51dc76436471\",\r\n    \"name\": \"Novo Produto\",\r\n    \"description\": \"Novo Produto\",\r\n    \"quantity\": 9,\r\n    \"price\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 13.00\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/orderProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"orderProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find By Product ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/orderProduct/findByProductId/6cc2abe2-80b9-14c3-b815-4b23e28094c3",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"orderProduct",
+										"findByProductId",
+										"6cc2abe2-80b9-14c3-b815-4b23e28094c3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/orderProduct/117c332c-8548-4cf3-b3a9-be790034e196",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"orderProduct",
+										"117c332c-8548-4cf3-b3a9-be790034e196"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"productId\": \"f1e5f99d-a417-4d30-93aa-569210b2d215\",\r\n    \"name\": \"Novo Produto Novo\",\r\n    \"description\": \"Novo Produto Testando\",\r\n    \"quantity\": 99,\r\n    \"price\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 130.00\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/orderProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"orderProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/orderProduct/22c4bfff-9537-408a-b989-3fd09bb294b0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"orderProduct",
+										"22c4bfff-9537-408a-b989-3fd09bb294b0"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "cart",
+					"item": [
+						{
+							"name": "GetCarts",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Cart",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [ \r\n        {\r\n            \"productId\": \"64e54b53-83ba-4db5-85e5-beabd886f9f2\",\r\n\t        \"name\": \"Caderno 10 matérias\",\r\n\t        \"description\": \"Caderno 10 matérias diversas estampas\",\r\n\t        \"quantity\": 10,\r\n\t        \"price\": {\r\n                \"currency\": \"BRL\",\r\n\t            \"amount\": 30\r\n            }\r\n        },\r\n        {\r\n            \"productId\": \"bb8fe4cf-4d1b-4e43-ac6f-a4330904d152\",\r\n\t        \"name\": \"Lapiseira 05\",\r\n\t        \"description\": \"Lapiseira 05\",\r\n\t        \"quantity\": 15,\r\n\t        \"price\": {\r\n                \"currency\": \"BRL\",\r\n\t            \"amount\": 10\r\n            }\r\n        }\r\n    ],\r\n\t\"createdDate\": \"2021-09-25T10:11:34.196+0000\",\r\n\t\"updatedDate\": \"2021-09-25T10:11:34.196+0000\",\r\n\t\"totalValue\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 450.00\r\n    },\r\n\t\"userId\": \"8fb8c522-1084-440e-9c25-5d906b28a089\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cart By User ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/cart/findByUserId/c28fc2b8-c385-2210-e280-9e440ec59325",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart",
+										"findByUserId",
+										"c28fc2b8-c385-2210-e280-9e440ec59325"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/cart/59b45eee-3423-4d98-b848-d51318b66355",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart",
+										"59b45eee-3423-4d98-b848-d51318b66355"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Cart",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"products\": [\r\n        {\r\n            \"productId\": \"e452eb49-545d-40b0-947e-081bda1d82dc\",\r\n\t        \"name\": \"Lapis\",\r\n\t        \"description\": \"Lapis teste\",\r\n\t        \"quantity\": 5,\r\n\t        \"price\": {\r\n                \"currency\": \"BRL\",\r\n\t            \"amount\": 7.00\r\n            }\r\n        }\r\n    ],\r\n\t\"totalValue\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 925.00\r\n    },\r\n\t\"cartId\": \"59b45eee-3423-4d98-b848-d51318b66355\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/cart",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Add Product To Cart",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"product\": {\r\n        \"productId\": \"bb8fe4cf-4d1b-4e43-ac6f-a4330904d152\",\r\n        \"name\": \"Lapiseira 05\",\r\n        \"description\": \"Lapiseira 05\",\r\n        \"quantity\": 15,\r\n        \"price\": {\r\n            \"currency\": \"BRL\",\r\n            \"amount\": 10.0\r\n        }\r\n    },\r\n    \"cartId\": \"59b45eee-3423-4d98-b848-d51318b66355\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/cart/addProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart",
+										"addProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove Product From Cart",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cartId\": \"59b45eee-3423-4d98-b848-d51318b66355\",\r\n\t\"productId\": \"b7ac3ec9-78a7-4feb-b866-38a1da4aaa88\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/cart/removeProduct",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart",
+										"removeProduct"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Cart",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8082/cart/59b45eee-3423-4d98-b848-d51318b66355",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"cart",
+										"59b45eee-3423-4d98-b848-d51318b66355"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User",
+					"item": [
+						{
+							"name": "Create User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  createUser(user: {\r\n    name: \"Usuario Teste\",\r\n    email: \"teste@teste.com\",\r\n    cpf: \"479.333.973-94\",\r\n  }) {\r\n    id,\r\n    name,\r\n    email,\r\n    cpf\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  updateUser(user: {\r\n    userId: \"3378ba3b-149f-4d04-8dfb-49d2ba74aabd\",\r\n    name: \"Usuário Teste\",\r\n    email: \"test@test.cyz\",\r\n    cpf: \"479.333.973-93\",\r\n  }) {\r\n    name,\r\n    email,\r\n    cpf\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Users",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  getUsers {\r\n    id,\r\n    name,\r\n    email,\r\n    cpf\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get User By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"query\": \"{ getUserbyId(id: \\\"817afd5c-0bb7-4689-9b53-02402c47a0a4\\\")  {  id,  name,  email,  cpf,  contacts {  id,  title,  type,  value },  addresses {  id,  street,  number,  district,complement,  city,  state,  country }  } }\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete User",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  deleteUser(userId: \"88e92bba-5cc9-4539-a7a3-c52092121339\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Address",
+					"item": [
+						{
+							"name": "Create Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  createAddress(address: {\r\n    street: \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\tnumber: \"1350\",\r\n\tdistrict: \"Eugênio de Melo\",\r\n\tcomplement: \"\",\r\n\tcity: \"São José dos Campos\",\r\n    state: \"SP\",\r\n\tcountry: \"Brasil\",\r\n\tuserId: \"88e92bba-5cc9-4539-a7a3-c52092121339\"\r\n  }) {\r\n    id,\r\n\tstreet,\r\n\tnumber,\r\n\tdistrict,\r\n\tcomplement,\r\n\tcity,\r\n\tcountry\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  updateAddress(address: {\r\n    addressId: \"ad0fff11-661a-4223-a6cc-55a28965a294\",\r\n    street: \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\tnumber: \"1350\",\r\n\tdistrict: \"Eugênio de Melo\",\r\n\tcomplement: \"\",\r\n\tcity: \"São José dos Campos\",\r\n    country: \"Brasil\",\r\n    state: \"SP\"\r\n  }) {\r\n    id,\r\n\tstreet,\r\n\tnumber,\r\n\tdistrict,\r\n\tcomplement,\r\n\tcity,\r\n\tcountry,\r\n\tuser {\r\n        name,\r\n        cpf\r\n    }\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Addresses",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  getAddresses {\r\n    id,\r\n\tstreet,\r\n\tnumber,\r\n\tdistrict,\r\n\tcomplement,\r\n\tcity,\r\n\tcountry,\r\n\tuser {\r\n        name,\r\n        cpf\r\n    }\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Address By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  getAddressById(id: \"75c1fa91-273a-4a8d-9a2c-e973623bab3b\") {\r\n    id,\r\n\tstreet,\r\n\tnumber,\r\n\tdistrict,\r\n\tcomplement,\r\n\tcity,\r\n\tcountry,\r\n\tuser {\r\n        id,\r\n        name,\r\n        cpf\r\n    }\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Addresses By user Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  getAddressesByUserId(userId: \"e6433e71-d807-4204-b032-a31c64c7eb60\") {\r\n    id,\r\n\tstreet,\r\n\tnumber,\r\n\tdistrict,\r\n\tcomplement,\r\n\tcity,\r\n\tcountry,\r\n\tuser {\r\n        name,\r\n        cpf\r\n    }\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  deleteAddress(addressId: \"1cc6c3af-baa3-4572-a43f-f02cd80158e1\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Contact",
+					"item": [
+						{
+							"name": "Create Contact",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  createContact(contact: {\r\n    title: \"Residencial\",\r\n\ttype: \"Telefone\",\r\n\tvalue: \"(12) 3955-6555\",\r\n\tuserId:  \"bb391b55-3a50-4a72-8030-5c0db2c08190\"\r\n  }) {\r\n    id,\r\n    title,\r\n    type,\r\n    value\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Contact",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  updateContact(contact: {\r\n    contactId: \"274208a2-f091-4c75-8b85-cbb1306fe402\",\r\n    title: \"Meu Celular\",\r\n\ttype: \"Telefone\",\r\n\tvalue: \"(12) 99735-2432\"\r\n  }) {\r\n    id,\r\n    title,\r\n    type,\r\n    value,\r\n    user {\r\n        name,\r\n        email,\r\n            cpf\r\n    }\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Contacts",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getContacts {\r\n        id,\r\n        title,\r\n        type,\r\n        value,\r\n        user {\r\n            id\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Contact By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getContactById(id: \"6f19dc08-e287-42ec-bfb6-62260bd10bd3\") {\r\n        id,\r\n        title,\r\n        type,\r\n        value,\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Contact By User Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getContactByUserId(userId: \"2a2b348a-e33b-4447-a981-33074232815d\") {\r\n        id,\r\n        title,\r\n        type,\r\n        value,\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Contact",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n  deleteContact(contactId: \"bfed655f-6805-489b-affc-beaeec2b7bcf\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8080/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "Customer",
+					"item": [
+						{
+							"name": "Create Customer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createCustomer(customer: {\r\n        userId: \"1b137710-92c0-4eca-87d7-0461ea6ab742\",\r\n\t    name: \"Teste Para deletar\",\r\n\t    cpf: \"449.116.348-27\"\r\n    }) {\r\n        id,\r\n        userId,\r\n\t    name,\r\n\t    cpf\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Customer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateCustomer(customer: {\r\n        customerId: \"350b0bf3-5ddd-489a-8c51-feb5dd975313\",\r\n\t    name: \"Teste Atualizado\",\r\n\t    cpf: \"449.116.348-25\"\r\n    }) {\r\n        id,\r\n        userId,\r\n\t    name,\r\n\t    cpf\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customers",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n  getCustomers {\r\n    id,\r\n    userId,\r\n    name,\r\n    cpf,\r\n    contacts {\r\n        id\r\n    },\r\n    addresses {\r\n        id\r\n    }\r\n  }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getCustomerById(id: \"79b3b012-49d6-409d-bc56-44da56cc6e49\") {\r\n        id,\r\n        userId,\r\n        name,\r\n        cpf,\r\n        contacts {\r\n            id\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer By CPF",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getCustomerByCPF(cpf: \"449.116.348-27\") {\r\n        id,\r\n        userId,\r\n        name,\r\n        cpf,\r\n        contacts {\r\n            id\r\n        }\r\n    }\r\n}   ",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get By UserId",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getCustomerByUserId(userId: \"1b137710-92c0-4eca-87d7-0461ea6ab742\") {\r\n        id,\r\n        userId,\r\n        name,\r\n        cpf,\r\n        contacts {\r\n            id\r\n        }\r\n    }\r\n}   ",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Customer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteCustomer(customerId: \"ebf3edbd-3986-4052-a461-01a9b937d3f0\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Contact",
+					"item": [
+						{
+							"name": "Create Contact",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createContact(contact: {\r\n        title: \"Email FATEC\",\r\n\t    type: \"Email\",\r\n\t    value: \"jonathas.moraes@fatec.sp.gov.br\",\r\n        customerId: \"4de91470-62bb-4715-9f30-01fc3e3e9cd0\"\r\n    }) {\r\n        id,\r\n\t    title,\r\n\t    type,\r\n\t    value,\r\n\t    customer {\r\n            id\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Contact",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateContact(contact: {\r\n        contactId: \"f3797fbb-8771-4993-a63a-0a4ff17fbd6c\",\r\n        title: \"Celular\",\r\n\t    type: \"Telefone\",\r\n\t    value: \"(12) 98888-8888\"\r\n    }) {\r\n        id,\r\n\t    title,\r\n\t    type,\r\n\t    value,\r\n\t    customer {\r\n            id\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Contacts",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getContacts {\r\n        id,\r\n        userContactId,\r\n\t    title,\r\n\t    type,\r\n\t    value,\r\n\t    customer {\r\n            id\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Customer by id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getContactById(id: \"f3797fbb-8771-4993-a63a-0a4ff17fbd6c\") {\r\n        id,\r\n\t    title,\r\n\t    type,\r\n\t    value,\r\n\t    customer {\r\n            id,\r\n            name\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Contacts By Customer Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getContactsByCustomerId(customerId: \"4de91470-62bb-4715-9f30-01fc3e3e9cd0\") {\r\n        id,\r\n\t    title,\r\n\t    type,\r\n\t    value,\r\n\t    customer {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Contact",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteContact(contactId: \"5b57a2d4-88d0-4399-8e9b-84ed6b0538db\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Address",
+					"item": [
+						{
+							"name": "Create Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createAddress(address: {\r\n        street: \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\t    number: \"1350\",\r\n\t    district: \"Eugênio de Melo\",\r\n\t    complement: \"\",\r\n\t    city: \"São José dos Campos\",\r\n        state: \"SP\",\r\n\t    country: \"Brasil\",\r\n        customerId: \"60ea073e-eb3f-45c4-9155-8eed4be44a55\"\r\n    }) {\r\n        id,\r\n\t    street,\r\n\t    number,\r\n\t    district,\r\n\t    complement,\r\n\t    city,\r\n\t    country,\r\n\t    customer {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateAddress(address: {\r\n        addressId: \"e464be9a-c8fb-444d-a13c-9f56951bc23b\",\r\n        street: \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\t    number: \"1350\",\r\n\t    district: \"Eugênio de Melo\",\r\n\t    complement: \"\",\r\n\t    city: \"São José dos Campos\",\r\n        state: \"SP\",\r\n\t    country: \"Brasil\"\r\n    }) {\r\n        id,\r\n\t    street,\r\n\t    number,\r\n\t    district,\r\n\t    complement,\r\n\t    city,\r\n\t    country,\r\n\t    customer {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Addresses",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getAddresses {\r\n        id,\r\n        userAddressId,\r\n\t    street,\r\n\t    number,\r\n\t    district,\r\n\t    complement,\r\n\t    city,\r\n        state,\r\n\t    country,\r\n\t    customer {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ger Address By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getAddressById(id: \"e464be9a-c8fb-444d-a13c-9f56951bc23b\") {\r\n        id,\r\n\t    street,\r\n\t    number,\r\n\t    district,\r\n\t    complement,\r\n\t    city,\r\n\t    country,\r\n\t    customer {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Addresses By Customer Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getAddressesByCustomerId(customerId: \"4de91470-62bb-4715-9f30-01fc3e3e9cd0\") {\r\n        id,\r\n\t    street,\r\n\t    number,\r\n\t    district,\r\n\t    complement,\r\n\t    city,\r\n\t    country,\r\n\t    customer {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Address",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteAddress(addressId: \"f57d68fb-34a8-49b5-ba97-c58b65d07fc5\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Card",
+					"item": [
+						{
+							"name": "Create Card",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createCard(card: {\r\n        nickname: \"Inter\",\r\n \t    holderName: \"Eu dnv\"\r\n        number: \"52361275789668435\",\r\n        cvv: \"390\",\r\n        expirationDate: \"01/2023\",\r\n\t    holderId: \"73fc2023-755a-4dcf-9841-d4628698b96e\"\r\n    }) {\r\n        id,\r\n        nickname,\r\n        holder {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Card",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateCard(card: {\r\n        nickname: \"Nubank\",\r\n \t    holderName: \"JONATHAS H. MORAES\"\r\n        number: \"5236127578963544\",\r\n        cvv: \"141\",\r\n        expirationDate: \"01/2090\",\r\n\t    cardId: \"7ab75848-005c-4011-9f01-5bdfbf9a15c9\"\r\n    }) {\r\n        id,\r\n        nickname,\r\n        holder {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cards",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getCards {\r\n        id, \r\n        holderName,\r\n        nickname,\r\n        holder {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Card By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getCardById(id: \"1301d455-ef5b-45f5-a6d5-7267669ef0e2\") {\r\n        id, \r\n        holderName,\r\n        nickname,\r\n        number,  \r\n        cvv,  \r\n        expirationDate\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cards By Holder Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getCardsByCustomerId(customerId: \"d5974379-4235-4b35-b7be-46a44a00ed4f\") {\r\n        id, \r\n        holderName,\r\n        nickname,\r\n        holder {\r\n            id,\r\n            name,\r\n            cpf\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Card",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteCard(cardId: \"3800aa56-f199-4c64-bfd6-e0db832b8e4c\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Order",
+					"item": [
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createOrder(order: {\r\n        cartId: \"633826d7-0faa-45fa-830c-bc9cf6c8c65a\",\r\n\t    userId: \"0a10b9fc-1bdb-4924-b891-431353519fe1\",\r\n\t    description: \"Pedido criado no dia de hj mesmo\",\r\n        price: {\r\n            currency: \"BRL\",\r\n\t        amount: 266.55\r\n        }\r\n    }) {\r\n        id\r\n\t    cartId,\r\n\t    userId,\r\n\t    description,\r\n\t    customer {\r\n            id,\r\n            name\r\n        },\r\n        price {\r\n            amount\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateOrder(order: {\r\n        orderId: \"6044f6db-ab1a-4263-a104-0c0b7f082a24\",\r\n\t    description: \"Pedido criado e atualizado no dia de hj mesmo\"\r\n    }) {\r\n        id\r\n\t    cartId,\r\n\t    userId,\r\n\t    description,\r\n\t    customer {\r\n            id,\r\n            name\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Orders",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getOrders {\r\n        id\r\n\t    cartId,\r\n\t    userId,\r\n\t    description,\r\n        status,\r\n\t    customer {\r\n            id,\r\n            name\r\n        },\r\n        price {\r\n            id,\r\n            amount\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Order By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getOrderById(id: \"6044f6db-ab1a-4263-a104-0c0b7f082a24\") {\r\n        id\r\n\t    cartId,\r\n\t    userId,\r\n\t    description,\r\n\t    customer {\r\n            id,\r\n            name\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Orders By Customer Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getOrdersByCustomerId(customerId: \"60ea073e-eb3f-45c4-9155-8eed4be44a55\") {\r\n        id\r\n\t    cartId,\r\n\t    userId,\r\n\t    description,\r\n\t    customer {\r\n            id,\r\n            name\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pay Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    payOrder(payment: {\r\n        orderId: \"e1d5862d-5a36-49bf-9657-f12b50d4d701\",\r\n\t    cardId: \"48c080d2-a7b9-4422-ae21-5a45d8ebf6c2\",\r\n        cartId: \"48c080d2-a7b9-4422-ae21-5a45d8ebf6c2\"\r\n    })\r\n}\r\n",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel Order",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    cancelOrder(payment: {\r\n        orderId: \"a6c2f91d-ef8a-410d-81d8-a26e302370ca\",\r\n\t    cardId: \"309837d8-9cfc-43fe-92c8-f309868cb3e9\",\r\n        cartId: \"8085f6b6-0ccb-4ced-bfa1-dfe039739233\"\r\n    })\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Price",
+					"item": [
+						{
+							"name": "Create Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createPrice(price: {\r\n        currency: \"BRL\",\r\n        amount: 25299.72,\r\n        orderId: \"7017d66b-f686-451f-9408-f73da37bb4ae\"\r\n    }) {\r\n        currency\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Prices",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getPrices {\r\n        id\r\n        currency\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Price By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getPriceById(id: \"349af687-80fa-4083-bf2c-b8e5fb663454\") {\r\n        id\r\n        currency\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Price By Order Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getPriceByOrderId(orderId: \"594bbe36-4a7a-41f9-a47e-7df53f453a18\") {\r\n        id\r\n        currency\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updatePrice(price: {\r\n        currency: \"BRL\",\r\n        amount: 10.72,\r\n        priceId: \"db607000-2adf-4d68-a1a8-fe7797292300\"\r\n    }) {\r\n        currency\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deletePrice(priceId: \"db607000-2adf-4d68-a1a8-fe7797292300\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8083/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8083",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Create Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createProduct(product: {\r\n        name: \"Lapiseira 05\",\r\n\t    description: \"Lapiseira 05\",\r\n\t    quantity: 50,\r\n\t    unavailableQuantity: 0,\r\n        price: {\r\n            currency: \"BRL\",\r\n            amount: 10\r\n        }\r\n    }) {\r\n        id,\r\n\t    name,\r\n\t    description,\r\n\t    quantity,\r\n\t    unavailableQuantity,\r\n\t    price {\r\n            id,\r\n            currency,\r\n            amount\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateProduct(product: {\r\n        id: \"5b0a48c3-cf51-43e7-b7cd-04f7c8b139d5\",\r\n        name: \"Lapiseira 05\",\r\n\t    description: \"Lapiseira 05\",\r\n\t    quantity: 50,\r\n\t    unavailableQuantity: 0,\r\n        price: {\r\n            currency: \"BRL\",\r\n            amount: 10\r\n        }\r\n    }) {\r\n        id,\r\n\t    name,\r\n\t    description,\r\n\t    quantity,\r\n\t    unavailableQuantity,\r\n\t    price {\r\n            id,\r\n            currency,\r\n            amount\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Products",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getProducts {\r\n        id,\r\n\t    name,\r\n\t    description,\r\n\t    quantity,\r\n\t    unavailableQuantity,\r\n\t    price {\r\n            id,\r\n            currency,\r\n            amount\r\n        },\r\n        attributes {\r\n            id,\r\n            name, \r\n            value\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Product By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getProductById(id: \"5b4539ba-b59a-4448-a937-01709f3445d0\") {\r\n        id,\r\n\t    name,\r\n\t    description,\r\n\t    quantity,\r\n\t    unavailableQuantity,\r\n\t    price {\r\n            id,\r\n            currency,\r\n            amount\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Product",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteProduct(productId: \"04dad6ac-ad33-451a-9bd9-f8c7ca0aefb7\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Price",
+					"item": [
+						{
+							"name": "Create Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createPrice(price: {\r\n        currency: \"BRL\",\r\n        amount: 30080,\r\n        productId: \"b02ed3d4-6103-4181-97a2-76da30d4a8ae\"\r\n    }) {\r\n        id,\r\n        currency,\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updatePrice(price: {\r\n        priceId: \"2bb29f4e-7da8-4fc6-8eb9-13359a06822a\",\r\n        currency: \"BRL\",\r\n        amount: 50\r\n    }) {\r\n        id,\r\n        currency,\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Prices",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getPrices {\r\n        id,\r\n        currency,\r\n        amount,\r\n        product {\r\n            id\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Price By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getPriceById(id: \"1b7ccc8c-1185-45d5-9566-bf86f52744b5\") {\r\n        id,\r\n        currency,\r\n        amount        \r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ger Price By Product Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getPriceByProductId(productId: \"025679d9-8623-40e5-873e-fec376491ff4\") {\r\n        id,\r\n        currency,\r\n        amount\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Price",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deletePrice(priceId: \"1b7ccc8c-1185-45d5-9566-bf86f52744b5\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Attribute",
+					"item": [
+						{
+							"name": "Create Attribute",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    createAttribute(attribute: {\r\n        name: \"Cores\",\r\n\t    value: \"Vermelho, Amarelo, Azul\",\r\n\t    productId: \"b02ed3d4-6103-4181-97a2-76da30d4a8ae\"\r\n    }) {\r\n        id,\r\n\t    name,\r\n\t    value,  \r\n\t    product {\r\n            id,\r\n            name, \r\n            description\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Attribute",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    updateAttribute(attribute: {\r\n        name: \"Matérias\",\r\n\t    value: \"20\",\r\n\t    attributeId: \"eed332e8-3f6c-49d3-969a-b81a457b0107\",\r\n        productId: \"eed332e8-3f6c-49d3-969a-b81a457b0107\"\r\n    }) {\r\n        id,\r\n\t    name,\r\n\t    value,  \r\n\t    product {\r\n            id,\r\n            name, \r\n            description\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Attributes",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getAttributes {\r\n        id,\r\n\t    name,\r\n\t    value,  \r\n\t    product {\r\n            id,\r\n            name, \r\n            description\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Attribute By Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getAttributeById(id: \"eed332e8-3f6c-49d3-969a-b81a457b0107\") {\r\n        id,\r\n\t    name,\r\n\t    value,  \r\n\t    product {\r\n            id,\r\n            name, \r\n            description\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Attributes By Product Id",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "{\r\n    getAttributesByProductId(productId: \"b02ed3d4-6103-4181-97a2-76da30d4a8ae\") {\r\n        id,\r\n\t    name,\r\n\t    value,  \r\n\t    product {\r\n            id,\r\n            name, \r\n            description\r\n        }\r\n    }\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Attribute",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "graphql",
+									"graphql": {
+										"query": "mutation {\r\n    deleteAttribute(attributeId: \"fe679559-e635-4f54-afbe-99c794f8b129\")\r\n}",
+										"variables": ""
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8082/graphql",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8082",
+									"path": [
+										"graphql"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Gateway",
+			"item": [
+				{
+					"name": "UserService",
+					"item": [
+						{
+							"name": "User",
+							"item": [
+								{
+									"name": "GetUsers",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get User By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/817afd5c-0bb7-4689-9b53-02402c47a0a4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"817afd5c-0bb7-4689-9b53-02402c47a0a4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "CreateUser",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Test User\",\r\n    \"email\": \"test@user.com\",\r\n    \"cpf\": \"654.248.770-01\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/user",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update User",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"817afd5c-0bb7-4689-9b53-02402c47a0a4\",\r\n    \"name\": \"Usuario Teste a remover\",\r\n    \"email\": \"teste@teste.com\",\r\n    \"cpf\": \"479.333.973-94\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/user",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete user",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/817afd5c-0bb7-4689-9b53-02402c47a0a4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"817afd5c-0bb7-4689-9b53-02402c47a0a4"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Address",
+							"item": [
+								{
+									"name": "Get Addresses",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/address",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Address By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/address/e237c7f5-6d79-406d-8026-876ddd9d744f",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"address",
+												"e237c7f5-6d79-406d-8026-876ddd9d744f"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Address",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"street\": \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\t\"number\": \"1350\",\r\n\t\"district\": \"Eugênio de Melo\",\r\n\t\"complement\": \"\",\r\n\t\"city\": \"São José dos Campos\",\r\n    \"state\": \"SP\",\r\n\t\"country\": \"Brasil\",\r\n\t\"userId\": \"8b3686d5-d3be-4f2a-b13e-bd2d5ea23a17\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/user/address",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update Address",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"street\": \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\t\"number\": \"1350\",\r\n\t\"district\": \"Eugênio de Melo\",\r\n\t\"complement\": \"\",\r\n\t\"city\": \"São José dos Campos\",\r\n    \"state\": \"SP\",\r\n\t\"country\": \"Brasil\",\r\n\t\"addressId\": \"e237c7f5-6d79-406d-8026-876ddd9d744f\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/user/address",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Address",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/address/e237c7f5-6d79-406d-8026-876ddd9d744f",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"address",
+												"e237c7f5-6d79-406d-8026-876ddd9d744f"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Contact",
+							"item": [
+								{
+									"name": "Get Contacts",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/contact",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"contact"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Contact By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/contact/167e2dbc-f353-48b0-995d-daa369b1c277",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"contact",
+												"167e2dbc-f353-48b0-995d-daa369b1c277"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Contact",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\": \"Email FATEC\",\r\n    \"type\": \"Email\",\r\n    \"value\": \"jonathas.moraes@fatec.sp.gov.br\",\r\n    \"userId\": \"e99df3ba-2377-41d1-bb77-e730c0da5a84\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/user/contact",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"contact"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update Contact",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\": \"Tel pessoal\",\r\n    \"type\": \"Telefone\",\r\n    \"value\": \"(12) 98888-8888\",\r\n    \"contactId\": \"167e2dbc-f353-48b0-995d-daa369b1c277\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/user/contact",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"contact"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Contact",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/user/contact/167e2dbc-f353-48b0-995d-daa369b1c277",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"user",
+												"contact",
+												"167e2dbc-f353-48b0-995d-daa369b1c277"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "PaymentService",
+					"item": [
+						{
+							"name": "Customer",
+							"item": [
+								{
+									"name": "Get Customers",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/customer",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"customer"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Customer By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/customer/16113139-8d63-4776-b1cc-69216231f742",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"customer",
+												"16113139-8d63-4776-b1cc-69216231f742"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Customer By UserId [ARRUMAR!!]",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/customer/userId/c38be280-a0c3-83c2-a92b-c382c2ba5cc3",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"customer",
+												"userId",
+												"c38be280-a0c3-83c2-a92b-c382c2ba5cc3"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Customer By CPF",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/customer/cpf/654.248.770-01",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"customer",
+												"cpf",
+												"654.248.770-01"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Customer",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"userId\": \"1b137710-92c0-4eca-87d7-0461ea6ab742\",\r\n    \"name\": \"Teste Para deletar\",\r\n    \"cpf\": \"449.116.348-27\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/customer",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"customer"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update Customer",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"customerId\": \"60ea073e-eb3f-45c4-9155-8eed4be44a55\",\r\n\t\"name\": \"Usuário teste\",\r\n    \"cpf\": \"449.116.348-27\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/customer",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"customer"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Customer",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/customer/16113139-8d63-4776-b1cc-69216231f742",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"customer",
+												"16113139-8d63-4776-b1cc-69216231f742"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Address",
+							"item": [
+								{
+									"name": "Get Addresses",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/address",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Address By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/address/bb1093e0-7db4-4663-91c6-acc7387d4d01",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"address",
+												"bb1093e0-7db4-4663-91c6-acc7387d4d01"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Addresses by CustomerId",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/address/by-customer/60ea073e-eb3f-45c4-9155-8eed4be44a55",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"address",
+												"by-customer",
+												"60ea073e-eb3f-45c4-9155-8eed4be44a55"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Address",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"street\": \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\t\"number\": \"1350\",\r\n\t\"district\": \"Eugênio de Melo\",\r\n\t\"complement\": \"\",\r\n\t\"city\": \"São José dos Campos\",\r\n    \"state\": \"SP\",\r\n    \"country\": \"Brasil\",\r\n    \"customerId\": \"60ea073e-eb3f-45c4-9155-8eed4be44a55\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/address",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update address",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"addressId\": \"bb1093e0-7db4-4663-91c6-acc7387d4d01\",\r\n    \"street\": \"Avenida Cesare Monsueto Giulio Lattes\",\r\n\t\"number\": \"1350\",\r\n\t\"district\": \"Eugênio de Melo\",\r\n\t\"complement\": \"\",\r\n    \"city\": \"São José dos Campos\",\r\n    \"state\": \"SP\",\r\n    \"country\": \"Brasil\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/address",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"address"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete address",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/address/77232aa6-0187-4a28-966a-a1f15730cf16",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"address",
+												"77232aa6-0187-4a28-966a-a1f15730cf16"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Contact",
+							"item": [
+								{
+									"name": "Get contacts",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/contact",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"contact"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get contact by Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/contact/d52df3cf-11da-47b9-848e-a641b7096b05",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"contact",
+												"d52df3cf-11da-47b9-848e-a641b7096b05"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get contacts by customer id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/contact/by-customer/60ea073e-eb3f-45c4-9155-8eed4be44a55",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"contact",
+												"by-customer",
+												"60ea073e-eb3f-45c4-9155-8eed4be44a55"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Contact",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\": \"Celular\",\r\n    \"type\": \"PHONE\",\r\n    \"value\": \"(12) 98888-8888\",\r\n    \"customerId\": \"60ea073e-eb3f-45c4-9155-8eed4be44a55\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/contact",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"contact"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update contact",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"title\": \"Email FATEC\",\r\n    \"type\": \"EMAIL\",\r\n    \"value\": \"jonathas.moraes@fatec.sp.gov.br\",\r\n    \"contactId\": \"d52df3cf-11da-47b9-848e-a641b7096b05\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/contact",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"contact"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete contact",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/contact/78c5c13e-073a-48c5-9c93-bb83959592d8",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"contact",
+												"78c5c13e-073a-48c5-9c93-bb83959592d8"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Card",
+							"item": [
+								{
+									"name": "Get cards",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/card",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"card"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get card by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/card/a522c3f5-f85f-4ce7-99c7-ed8bf617df4e",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"card",
+												"a522c3f5-f85f-4ce7-99c7-ed8bf617df4e"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get cards by holder id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/card/by-customer/60ea073e-eb3f-45c4-9155-8eed4be44a55",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"card",
+												"by-customer",
+												"60ea073e-eb3f-45c4-9155-8eed4be44a55"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create card",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nickname\": \"Nubank\",\r\n    \"holderName\": \"Usuário teste\",\r\n    \"number\": \"52361275789663547\",\r\n    \"cvv\": \"143\",\r\n    \"expirationDate\": \"01/2029\",\r\n    \"holderId\": \"648f1132-2285-4fe0-8fd7-03eb5a825964\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/card",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"card"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update card",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"nickname\": \"Inter\",\r\n    \"holderName\": \"Usuário teste\",\r\n    \"number\": \"52361275789668435\",\r\n    \"cvv\": \"390\",\r\n    \"expirationDate\": \"01/2025\",\r\n    \"cardId\": \"1301d455-ef5b-45f5-a6d5-7267669ef0e2\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/card",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"card"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Card",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/card/1301d455-ef5b-45f5-a6d5-7267669ef0e2",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"card",
+												"1301d455-ef5b-45f5-a6d5-7267669ef0e2"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Order",
+							"item": [
+								{
+									"name": "Get orders",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/order",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"order"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Order by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/order/3719b98a-3868-4748-9824-d606ed23ad17",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"order",
+												"3719b98a-3868-4748-9824-d606ed23ad17"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Orders by customer id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/order/by-customer/60ea073e-eb3f-45c4-9155-8eed4be44a55",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"order",
+												"by-customer",
+												"60ea073e-eb3f-45c4-9155-8eed4be44a55"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"cartId\": \"9a4ab747-d509-49cb-bac0-42c74a70350b\",\r\n    \"userId\": \"1b137710-92c0-4eca-87d7-0461ea6ab742\",\r\n    \"description\": \"Pedido criado no dia de hj mesmo\",\r\n    \"price\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 270.00\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/order",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"order"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update order",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"orderId\": \"3719b98a-3868-4748-9824-d606ed23ad17\",\r\n    \"description\": \"Nova descrição\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/order",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"order"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Pay Order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/order/pay/a99d3e5b-f407-40e6-b927-d101bcc46fe1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"order",
+												"pay",
+												"a99d3e5b-f407-40e6-b927-d101bcc46fe1"
+											],
+											"query": [
+												{
+													"key": "cardId",
+													"value": "b213b49d-6c59-496d-a0a3-65e62c27f542",
+													"disabled": true
+												},
+												{
+													"key": "cartId",
+													"value": "fdb91453-af6d-440f-b00b-5c78724ca6b1",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Cancel order",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/order/cancel/a99d3e5b-f407-40e6-b927-d101bcc46fe1?cardId=b213b49d-6c59-496d-a0a3-65e62c27f542&cartId=fdb91453-af6d-440f-b00b-5c78724ca6b1",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"order",
+												"cancel",
+												"a99d3e5b-f407-40e6-b927-d101bcc46fe1"
+											],
+											"query": [
+												{
+													"key": "cardId",
+													"value": "b213b49d-6c59-496d-a0a3-65e62c27f542"
+												},
+												{
+													"key": "cartId",
+													"value": "fdb91453-af6d-440f-b00b-5c78724ca6b1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Price",
+							"item": [
+								{
+									"name": "Get prices",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get price by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/price/13e5e8f1-a04b-4faf-8114-69b6bbb0d385",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"price",
+												"13e5e8f1-a04b-4faf-8114-69b6bbb0d385"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Price by Order id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/price/by-order/3719b98a-3868-4748-9824-d606ed23ad17",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"price",
+												"by-order",
+												"3719b98a-3868-4748-9824-d606ed23ad17"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create price",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"currency\": \"BRL\",\r\n    \"amount\": 2539.72,\r\n    \"orderId\": \"8ad4e78c-2569-48e3-8eaa-7fa08d546fc0\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update price",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"currency\": \"BRL\",\r\n    \"amount\": 2700.00,\r\n    \"priceId\": \"3db5bd92-b223-4751-bcac-d3984bf3a316\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/payment/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Price",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/payment/price/3db5bd92-b223-4751-bcac-d3984bf3a316",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"payment",
+												"price",
+												"3db5bd92-b223-4751-bcac-d3984bf3a316"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "StoreService",
+					"item": [
+						{
+							"name": "Product",
+							"item": [
+								{
+									"name": "Get products",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Product By Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/product/6cab8b14-f815-4b23-97ea-edda64f47a5d",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"product",
+												"6cab8b14-f815-4b23-97ea-edda64f47a5d"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Product",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Caderno 10 matérias\",\r\n    \"description\": \"Caderno 10 matérias estampas diversas\",\r\n    \"quantity\": 70,\r\n    \"unavailableQuantity\": 0,\r\n    \"price\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 30\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/store/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update Product",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": \"6cab8b14-f815-4b23-97ea-edda64f47a5d\",\r\n    \"name\": \"Lapiseira\",\r\n    \"description\": \"Lapiseira diversas cores e modelos\",\r\n    \"quantity\": 50,\r\n    \"unavailableQuantity\": 0,\r\n    \"price\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 10\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/store/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Product",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/product/c382f309-6672-4b5c-aaf8-258f994eba47",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"product",
+												"c382f309-6672-4b5c-aaf8-258f994eba47"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Price",
+							"item": [
+								{
+									"name": "Get Prices",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get price by Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/price/9f694e1e-d42c-4d4c-8c21-67b6ba97f2fb",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"price",
+												"9f694e1e-d42c-4d4c-8c21-67b6ba97f2fb"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Price by product id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/price/by-product/6cab8b14-f815-4b23-97ea-edda64f47a5d",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"price",
+												"by-product",
+												"6cab8b14-f815-4b23-97ea-edda64f47a5d"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Price",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"currency\": \"BRL\",\r\n    \"amount\": 30,\r\n    \"productId\": \"6cab8b14-f815-4b23-97ea-edda64f47a5d\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/store/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update price",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"currency\": \"BRL\",\r\n    \"amount\": 10,\r\n    \"priceId\": \"9f694e1e-d42c-4d4c-8c21-67b6ba97f2fb\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/store/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Price",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/price/9f694e1e-d42c-4d4c-8c21-67b6ba97f2fb",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"price",
+												"9f694e1e-d42c-4d4c-8c21-67b6ba97f2fb"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Attribute",
+							"item": [
+								{
+									"name": "Get attributes",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/attribute",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"attribute"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Attribute by Id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/attribute/e7793efb-6c8d-4e7c-a362-8d5c44a802c4",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"attribute",
+												"e7793efb-6c8d-4e7c-a362-8d5c44a802c4"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Attributes by product id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/attribute/by-product/6cab8b14-f815-4b23-97ea-edda64f47a5d",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"attribute",
+												"by-product",
+												"6cab8b14-f815-4b23-97ea-edda64f47a5d"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create Attribute",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Modelos\",\r\n    \"value\": \"Grafite 05, Grafite 07\",\r\n    \"productId\": \"a2cd1793-597e-47ad-bb49-1649280a47c9\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/store/attribute",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"attribute"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update attribute",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Cores\",\r\n    \"value\": \"Vermelho, Amarelo, Azul, Preto, Verde\",\r\n    \"attributeId\": \"e7793efb-6c8d-4e7c-a362-8d5c44a802c4\",\r\n    \"productId\": \"6cab8b14-f815-4b23-97ea-edda64f47a5d\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/store/attribute",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"attribute"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete attribute",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/store/attribute/1aa08663-bcb3-486f-a753-30aa3bfdab75",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"store",
+												"attribute",
+												"1aa08663-bcb3-486f-a753-30aa3bfdab75"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "OrderService",
+					"item": [
+						{
+							"name": "Price",
+							"item": [
+								{
+									"name": "Get prices",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get price by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/price/1376213b-9e46-4262-84a9-bcf22434c599",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"price",
+												"1376213b-9e46-4262-84a9-bcf22434c599"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create price",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"currency\": \"BRL\",\r\n    \"amount\": 3270.00\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"price"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update price",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": \"1376213b-9e46-4262-84a9-bcf22434c599\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 371.0\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/price",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"price"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Product",
+							"item": [
+								{
+									"name": "Get products",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get product by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/product/0d8ea28a-38bd-4e35-bc61-910a4b14979d",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"product",
+												"0d8ea28a-38bd-4e35-bc61-910a4b14979d"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get product by PID",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/product/by-pid/6cab8b14-f815-4b23-97ea-edda64f47a5d",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"product",
+												"by-pid",
+												"6cab8b14-f815-4b23-97ea-edda64f47a5d"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create product",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"productId\": \"024419c3-76cb-43ce-b86d-51dc76436471\",\r\n\t\"name\": \"Caderno\",\r\n    \"description\": \"Caderno estampas diversas\",\r\n    \"quantity\": 150,\r\n    \"price\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 23.00\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update product",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": \"0d8ea28a-38bd-4e35-bc61-910a4b14979d\",\r\n\t\"name\": \"Lapiseira\",\r\n    \"description\": \"Lapiseira cores diversas\",\r\n    \"quantity\": 50,\r\n    \"price\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 15.00\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete Product",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/product/f8191e97-c846-452d-abc8-0fd554b639f9",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"product",
+												"f8191e97-c846-452d-abc8-0fd554b639f9"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Cart",
+							"item": [
+								{
+									"name": "Get carts",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/cart",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get cart by id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/cart/a53f507b-a6b5-4898-954d-4cf7c1a9c141",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart",
+												"a53f507b-a6b5-4898-954d-4cf7c1a9c141"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get cart by user id",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/cart/by-user/8fb8c522-1084-440e-9c25-5d906b28a089",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart",
+												"by-user",
+												"8fb8c522-1084-440e-9c25-5d906b28a089"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Create cart",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"products\": [ \r\n        {\r\n            \"productId\": \"db666a7f-9181-4b62-8eb7-123b916dd57e\",\r\n\t        \"name\": \"Caderno 10 matérias\",\r\n\t        \"description\": \"Caderno 10 matérias diversas estampas\",\r\n\t        \"quantity\": 10,\r\n\t        \"price\": {\r\n                \"currency\": \"BRL\",\r\n\t            \"amount\": 30\r\n            }\r\n        },\r\n        {\r\n            \"productId\": \"d399d652-bf7a-497d-b667-d85723b5637b\",\r\n\t        \"name\": \"Lapiseira\",\r\n            \"description\": \"Lapiseira diversas cores e modelos\",\r\n            \"quantity\": 50,\r\n            \"price\": {\r\n                \"currency\": \"BRL\",\r\n                \"amount\": 10.0\r\n            }\r\n        }\r\n    ],\r\n\t\"totalValue\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 800.00\r\n    },\r\n\t\"userId\": \"1fc3d23f-3af9-4e32-b90c-60f65845035c\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/cart",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update cart",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"products\": [ \r\n        {\r\n            \"productId\": \"64e54b53-83ba-4db5-85e5-beabd886f9f2\",\r\n\t        \"name\": \"Caderno 10 matérias\",\r\n\t        \"description\": \"Caderno 10 matérias diversas estampas\",\r\n\t        \"quantity\": 10,\r\n\t        \"price\": {\r\n                \"currency\": \"BRL\",\r\n\t            \"amount\": 40\r\n            }\r\n        },\r\n        {\r\n            \"productId\": \"6cab8b14-f815-4b23-97ea-edda64f47a5d\",\r\n\t        \"name\": \"Lapiseira\",\r\n            \"description\": \"Lapiseira cores diversas\",\r\n            \"quantity\": 50,\r\n            \"price\": {\r\n                \"currency\": \"BRL\",\r\n                \"amount\": 15.0\r\n            }\r\n        }\r\n    ],\r\n\t\"totalValue\": {\r\n        \"currency\": \"BRL\",\r\n        \"amount\": 1150.00\r\n    },\r\n\t\"cartId\": \"a53f507b-a6b5-4898-954d-4cf7c1a9c141\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/cart",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Add Product to cart",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"product\": {\r\n        \"productId\": \"04bf8042-9147-4b09-b797-571485c77924\",\r\n        \"name\": \"Lapis\",\r\n        \"description\": \"Lapis teste\",\r\n        \"quantity\": 5,\r\n        \"price\": {\r\n            \"currency\": \"USD\",\r\n            \"amount\": 7.00\r\n        }\r\n    },\r\n    \"cartId\": \"a53f507b-a6b5-4898-954d-4cf7c1a9c141\"\r\n}\r\n",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/cart/add-product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart",
+												"add-product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Remove product to cart",
+									"request": {
+										"method": "PATCH",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"cartId\": \"a53f507b-a6b5-4898-954d-4cf7c1a9c141\",\r\n\t\"productId\": \"84341c8b-1f54-4c0b-9d83-ceba8c688a7c\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:8079/order/cart/remove-product",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart",
+												"remove-product"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete cart",
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "http://localhost:8079/order/cart/a53f507b-a6b5-4898-954d-4cf7c1a9c141",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "8079",
+											"path": [
+												"order",
+												"cart",
+												"a53f507b-a6b5-4898-954d-4cf7c1a9c141"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

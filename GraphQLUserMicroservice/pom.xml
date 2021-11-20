@@ -14,7 +14,7 @@
 
 	<artifactId>GraphQLUserMicroservice</artifactId>
 	
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	
 	<name>GraphQLUserMicroservice</name>
 	
@@ -51,6 +51,10 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+		  <groupId>org.mariadb.jdbc</groupId>
+		  <artifactId>mariadb-java-client</artifactId>
 		</dependency>
 		
 		<!-- Hibernate -->

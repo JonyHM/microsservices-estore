@@ -1,0 +1,96 @@
+type Product {
+	id: ID!
+	name: String!
+	description: String!
+	quantity: Int!
+	unavailableQuantity: Int!
+	price: Price!
+	attributes: [Attribute]
+}
+
+type Price {
+	id: ID!
+	currency: String!
+	amount: Float!
+	product: Product!
+}
+
+type Attribute {
+	id: ID!
+	name: String!
+	value: String!
+	product: Product!
+}
+
+type Query {
+	getProducts: [Product]
+	getProductById(id: ID): Product
+	
+	getPrices: [Price]
+	getPriceById(id: ID): Price
+	getPriceByProductId(productId: ID): Price
+	
+	getAttributes: [Attribute]
+	getAttributeById(id: ID): Attribute
+	getAttributesByProductId(productId: ID): [Attribute]
+}
+
+input CreateProductInput {
+	name: String!
+	description: String
+	quantity: Int!
+	unavailableQuantity: Int!
+	price: CreateItemPriceInput!
+}
+
+input UpdateProductInput {
+	id: ID!
+	name: String!
+	description: String
+	quantity: Int!
+	unavailableQuantity: Int!
+	price: CreateItemPriceInput!
+}
+
+input CreateItemPriceInput {
+	currency: String!
+	amount: Float!
+}
+
+input CreatePriceInput {
+	currency: String!
+	amount: Float!
+	productId: ID!
+}
+
+input UpdatePriceInput {
+	priceId: ID!
+	currency: String!
+	amount: Float!
+}
+
+input CreateAttributeInput {
+	name: String!
+	value: String!
+	productId: ID!
+}
+
+input UpdateAttributeInput {
+	attributeId: ID!
+	name: String!
+	value: String!
+}
+
+type Mutation {
+	createProduct(product: CreateProductInput!): Product!
+	updateProduct(product: UpdateProductInput!): Product!
+	deleteProduct(productId: ID!): String!
+	
+	createPrice(price: CreatePriceInput!): Price!
+	updatePrice(price: UpdatePriceInput!): Price!
+	deletePrice(priceId: ID!): String!
+	
+	createAttribute(attribute: CreateAttributeInput!): Attribute!
+	updateAttribute(attribute: UpdateAttributeInput!): Attribute!
+	deleteAttribute(attributeId: ID!): String!
+}
