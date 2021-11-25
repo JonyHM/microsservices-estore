@@ -117,6 +117,10 @@ Uma janela com opções se abrirá. Clique em "Upload Files" e escolha o  [arqui
 
 A seguir estão alguns exemplos de interações dos eventos Kafka com os serviços que compõem o sistema.
 
+#### Criação de usuário
+
+Após criação de um usuário, o serviço de usuários envia uma mensagem para o tópico Kafka "USER_CREATED". 
+
 - Criando usuário:
 
 ![Criando usuário](./Assets/gifs/create_user.gif)
@@ -124,6 +128,8 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 - Enviando evento "USER_CREATED":
 
 ![Envio do evento kafka de criação de usuário](./Assets/gifs/SENDING_USER_CREATED.gif)
+
+O evento é recebido pelo serviço de pagamentos e os dados criados no usuário são replicados para a entidadee chamada *customer*.
 
 - Recebendo evento "USER_CREATED":
 
@@ -133,6 +139,10 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 
 ![Customer criado por evento kafka](./Assets/gifs/customer_query.gif)
 
+#### Criação de endereço
+
+Na criação do endereço, é seguido o mesmo comportamento. O evento "ADDRESS_CREATED" é enviado pelo serviço de usuário.
+
 - Criando Endereço:
 
 ![Criando endereço](./Assets/gifs/create_address.gif)
@@ -140,6 +150,8 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 - Enviando evento "ADDRESS_CREATED":
 
 ![Envio do evento kafka de criação de endereço](./Assets/gifs/ADDRESS_CREATED.gif)
+
+O evento é recebido pelo serviço de pagamentos e o endereço é replicado para o *customer* previamente cadastrado.
 
 - Recebendo evento "ADDRESS_CREATED":
 
@@ -149,6 +161,10 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 
 ![Endereço criado por evento kafka](./Assets/gifs/address_data_replication.gif)
 
+#### Exclusão de endereço
+
+A exclusão dos dados também envia uma mensagem para o kafka. O serviço de usuário envia o id do endereço excluído para o tópico kafka "ADDRESS_DELETED".
+
 - Excluíndo endereço e validando dados excluidos pelo evento "ADDRESS_DELETED":
 
 ![Excluíndo endereço](./Assets/gifs/address_deletion.gif)
@@ -157,9 +173,15 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 
 ![Envio do evento kafka de exclusão de endereço](./Assets/gifs/ADDRESS_DELETED_sent.gif)
 
+Assim que a mensagem é consumida, o serviço de pagamentos exclui também o endereço previamente cadastrado.
+
 - Recebendo evento de exclusão de endereço "ADDRESS_DELETED":
 
 ![Recebimento do evento kafka de exclusão de endereço](./Assets/gifs/ADDRESS_DELETED_received.gif)
+
+#### Compra de produtos
+
+Para a exemplificar uma compra no sitema, alguns produtos são cadastrados e um carrinho de compras é criado. Após criação do carrinho, o serviço de pedido envia uma mensagem ao tópico kafka "ORDER_STARTED".
 
 - Criando produtos:
 
@@ -173,6 +195,8 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 
 ![Enviando evento ORDER_STARTED](./Assets/gifs/ORDER_STARTED_sent.gif)
 
+O serviço de loja recebe a mensagem do tópico "ORDER_STARTED" e altera a quantidade disponível dos produtos contidos no carrinho de compras iniciado, indisponibilizando parte dos produtos até que o pagamento da compra seja efetivado.
+
 - Recebendo evento "ORDER_STARTED" na loja:
 
 ![Recebendo evento ORDER_STARTED na loja](./Assets/gifs/ORDER_STARTED_received_store.gif)
@@ -180,6 +204,8 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 - Dados alterados pelo evento "ORDER_STARTED" na loja:
 
 ![Dados alterados pelo evento "ORDER_STARTED" na loja](./Assets/gifs/ORDER_STARTED_store_data.gif)
+
+O serviço de pagamento recebe a mensagem do tópico "ORDER_STARTED" e replica as informações contidas no carrinho iniciado para um novo pedido a ser pago.
 
 - Recebendo evento "ORDER_STARTED" no pagamento:
 
@@ -189,9 +215,15 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 
 ![Dados replicados no pagamento](./Assets/gifs/ORDER_STARTED_payment_data.gif)
 
+#### Pagamento dos itens
+
+Neste momento, um cartão é criado para pagamento do pedido.
+
 - Criando cartão para pagamentos:
 
 ![Criando cartão](./Assets/gifs/create_card.gif)
+
+Após criação do método de pagamento, o pedido é pago e uma mensagem é enviada ao tópico "ORDER_PAID" pelo serviço de pagamentos.
 
 - Pagando pedido:
 
@@ -201,18 +233,26 @@ A seguir estão alguns exemplos de interações dos eventos Kafka com os serviç
 
 ![Enviando evento ORDER_PAID](./Assets/gifs/ORDER_PAID_sent.gif)
 
-- Recebendo evento "ORDER_PAID" e enviando evento "CART_PAID" no OrderService:
+O serviço de pedidos recebe a mensagem do tópico "ORDER_PAID" e envia uma mensagem no tópico "CART_PAID" para alterações no estoque do serviço de loja.
+
+- Recebendo evento "ORDER_PAID" e enviando evento "CART_PAID" no serviço de pedidos:
 
 ![Recebendo evento "ORDER_PAID" e enviando evento "CART_PAID"](./Assets/gifs/ORDER_PAID_received_and_CART_PAID_sent.gif)
 
-- Evento "ORDER_PAID" replicando para OrderService, mudando status:
+- Pedido pago e com status alterado no serviço de pagamentos:
 
-![Evento "ORDER_PAID" mudando status no OrderService](./Assets/gifs/ORDER_PAID_received.gif)
+![Pedido pago e com status alterado no serviço de pagamentos](./Assets/gifs/ORDER_PAID_payment_data.gif)
 
-- Recebendo evento "CART_PAID" no StoreService:
+- Evento "ORDER_PAID" replicando para o serviço de pedidos, mudando status do carrinho de compras previamente criado:
+
+![Evento "ORDER_PAID" mudando status no OrderService](./Assets/gifs/order_cart_data.gif)
+
+A mensagem do tópico "CART_PAID" é recebida pelo serviço de loja e o serviço remove a quantidade disponível dos produtos do carrinho, efetivando a remoção deles no estoque da loja.
+
+- Recebendo mensagem do tópico "CART_PAID" no serviço de loja:
 
 ![Recebendo evento "CART_PAID" no StoreService](./Assets/gifs/CART_PAID_received.gif)
 
-- Dados alterados pelo evento "CART_PAID" no StoreService:
+- Dados alterados pelo evento "CART_PAID" no serviço de loja:
 
 ![Dados alterados pelo evento "CART_PAID"](./Assets/gifs/CART_PAID_data_changed.gif)
